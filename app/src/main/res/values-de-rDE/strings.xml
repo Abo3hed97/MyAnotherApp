@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyAnotherApp</string>
+    <string name="open">Öffnen</string>
+    <string name="close">Schließen</string>
+    <string name="date_dailyLog">Datum</string>
+    <string name="daily_Log">Daily Log</string>
+    <string name="dashboard">dashboard</string>
+    <string name="settings">Einstellungen</string>
+    <string name="username_Login">Nutzername</string>
+    <string name="password_Login">Passwort</string>
+    <string name="login">Anmeldung</string>
+    <string name="register_here">registrierung</string>
+</resources>
