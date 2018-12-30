@@ -11,4 +11,6 @@
     <string name="password_Login">Passwort</string>
     <string name="login">Anmeldung</string>
     <string name="register_here">registrierung</string>
+    <string name="ForwardButton">Forward</string>
+    <string name="BackwordButton">Backward</string>
 </resources>
