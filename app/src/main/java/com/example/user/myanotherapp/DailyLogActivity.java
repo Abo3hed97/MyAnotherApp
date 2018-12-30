@@ -81,17 +81,7 @@ public class DailyLogActivity extends AppCompatActivity {
         String future=DateFormat.getDateInstance().format(calender.getTime());
         textViewDate.setText("Today: "+currentDate+"\n" + "Future: "+future);*/
 
-
-
-
-
-
-
-
-
-
-
-    }
+         }
 
 
 
