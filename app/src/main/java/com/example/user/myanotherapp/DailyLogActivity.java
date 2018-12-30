@@ -55,6 +55,7 @@ public class DailyLogActivity extends AppCompatActivity {
 
         ListView weekdays=(ListView) findViewById(R.id.weekList);
         ArrayList<String> days=new ArrayList<String>();
+        days.add(currentDate);
         for(int i=1;i<7;i++)
         {
             calender.add(Calendar.DATE,1);
