@@ -21,7 +21,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="sans-serif"
             android:text="@string/daily_Log"
             android:textColor="@color/darkgray"
             android:textSize="40sp"
