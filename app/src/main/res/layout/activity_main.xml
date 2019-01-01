@@ -95,6 +95,7 @@
         android:textColor="#D2842D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/edlogo"
@@ -123,4 +124,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo2" />
 
+=======
+        app:layout_constraintHorizontal_bias="0.607"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edlogo"
+        app:layout_constraintVertical_bias="0.931" />
+>>>>>>> 69ef59ca5c6c8c08c6b4665cbadb3243b13b84f5
 </android.support.constraint.ConstraintLayout>

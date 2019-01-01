@@ -10,4 +10,6 @@
     <string name="password_Login">password</string>
     <string name="login">Login</string>
     <string name="register_here">register</string>
+    <string name="ForwardButton">Forward</string>
+    <string name="BackwordButton">Backward</string>
 </resources>
