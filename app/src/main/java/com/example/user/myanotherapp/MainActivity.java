@@ -11,6 +11,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private Button loginB;
+    private Button test;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +20,15 @@ public class MainActivity extends AppCompatActivity {
         loginB=(Button) findViewById(R.id.BLogin);
         Activity dailyLog=new DailyLogActivity();
         Onclick(loginB,dailyLog);
+        test = findViewById(R.id.test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                opentest();
+
+            }
+        });
+
     }
 
     public void Onclick(Button b, final Activity activity)
@@ -35,4 +46,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this,activity.getClass());
         startActivity(intent);
     }
+    //only Test
+    public void opentest()
+    {
+        Intent intent = new Intent(this, New_Bullet.class);
+        startActivity(intent);
+    }
+
 }

@@ -12,4 +12,10 @@
     <string name="register_here">register</string>
     <string name="ForwardButton">Forward</string>
     <string name="BackwordButton">Backward</string>
+    <string-array name="type">
+        <item>event</item>
+        <item>termin</item>
+        <item>not</item>
+    </string-array>
+    <string name="title_activity_list_of_notes">listOfNotes</string>
 </resources>

@@ -16,7 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DailyLogActivity"></activity>
+        <activity android:name=".DailyLogActivity" />
+        <activity android:name=".New_Bullet" />
+        <activity
+            android:name=".listOfNotes"
+            android:label="@string/title_activity_list_of_notes"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
