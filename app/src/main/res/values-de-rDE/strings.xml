@@ -13,4 +13,9 @@
     <string name="register_here">registrierung</string>
     <string name="ForwardButton">Forward</string>
     <string name="BackwordButton">Backward</string>
+    <string name="navView">navView</string>
+    <string name="LogingB">LogingB</string>
+    <string name="settingsF">Settings</string>
+    <string name="ActivitySettings">Activtysettings</string>
+    <string name="title_activity_list_of_notes">list of notes</string>
 </resources>
