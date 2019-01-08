@@ -72,6 +72,7 @@ public class DailyLogActivity extends AppCompatActivity {
         });
 
 
+
     }
 
 
