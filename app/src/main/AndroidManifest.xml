@@ -22,7 +22,8 @@
             android:name=".listOfNotes"
             android:label="@string/title_activity_list_of_notes"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Settings"></activity>
+        <activity android:name=".Settings" />
+        <activity android:name=".RegisterActivity" />
     </application>
 
 </manifest>

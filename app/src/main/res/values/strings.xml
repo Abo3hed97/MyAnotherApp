@@ -8,7 +8,7 @@
     <string name="settings">Settings</string>
     <string name="username_Login">username</string>
     <string name="password_Login">password</string>
-    <string name="register_here">register</string>
+    <string name="register_here">No account yet? Create One</string>
     <string name="ForwardButton">Forward</string>
     <string name="BackwordButton">Backward</string>
     <string name="login">Log in</string>
