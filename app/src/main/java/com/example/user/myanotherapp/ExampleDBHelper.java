@@ -14,6 +14,33 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
     public static final String INPUT_COLUMN_ID = "_id";
     public static final String INPUT_COLUMN_Title = "title";
     public static final String INPUT_COLUMN_Text = "text";
+    public static final String INPUT_COLUMN_DateFrom = "dateFrom";
+    public static final String INPUT_COLUMN_DateTo = "dateTo";
+    public static final String INPUT_COLUMN_TimeFrom = "timeFrom";
+    public static final String INPUT_COLUMN_TimeTo = "timeTo";
+    public static final String INPUT_COLUMN_Type = "type";
+
+   /* public static final String CREATE_TABLE =
+   "CREATE TABLE"+INPUT_TABLE_NAME +
+            "("+
+            INPUT_COLUMN_ID + "INTEGER PRIMARY KEY, "+
+            INPUT_COLUMN_Title +"TEXT, "+
+            INPUT_COLUMN_Text + "TEXT, "+
+            INPUT_COLUMN_DateFrom + "TEXT, "+
+            INPUT_COLUMN_DateTo + "TEXT ";
+            + ")";*/
+    private static final String TABLE_CREATE =
+            "CREATE TABLE " + INPUT_TABLE_NAME + "(" +
+                    INPUT_COLUMN_ID + " INTEGER PRIMARY KEY, " +
+                    INPUT_COLUMN_Title + " TEXT, " +
+                    INPUT_COLUMN_DateFrom + " TEXT, " +
+                    INPUT_COLUMN_DateTo + " TEXT, " +
+                    INPUT_COLUMN_TimeFrom + " TEXT, " +
+                    INPUT_COLUMN_TimeTo + " TEXT, " +
+                    INPUT_COLUMN_Type + " TEXT, " +
+                    INPUT_COLUMN_Text + " TEXT " +
+                    ")"
+           ;
 
     public ExampleDBHelper(Context context) {
         super(context, DATABASE_NAME , null, DATABASE_VERSION);
@@ -21,11 +48,7 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + INPUT_TABLE_NAME + "(" +
-                INPUT_COLUMN_ID + " INTEGER PRIMARY KEY, " +
-                INPUT_COLUMN_Title + " TEXT, " +
-                INPUT_COLUMN_Text + " TEXT )"
-        );
+        db.execSQL(TABLE_CREATE);
     }
 
 
@@ -38,15 +61,21 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean insertPerson(String title,String text) {
-
+    public boolean insertPerson(String title,String text,String dateFrom,String dateTo,String timeFrom,String timeTo,String type)
+    {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(INPUT_COLUMN_Title, title);
-        contentValues.put(INPUT_COLUMN_Text, text);
-        // Convenience method for inserting a row into the database.
+        contentValues.put(INPUT_COLUMN_Title,title);
+        contentValues.put(INPUT_COLUMN_Text,text);
+        contentValues.put(INPUT_COLUMN_DateFrom,dateFrom);
+        contentValues.put(INPUT_COLUMN_DateTo,dateTo);
+        contentValues.put(INPUT_COLUMN_TimeFrom,timeFrom);
+        contentValues.put(INPUT_COLUMN_TimeTo,timeTo);
+        contentValues.put(INPUT_COLUMN_Type,type);
         db.insert(INPUT_TABLE_NAME, null, contentValues);
+
         return true;
+
     }
 
 
@@ -69,7 +98,6 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(INPUT_TABLE_NAME, INPUT_COLUMN_ID + "=?", new String[]{id});
-//KEY_NAME is a column name
     }
 
 

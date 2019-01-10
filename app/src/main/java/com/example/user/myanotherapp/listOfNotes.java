@@ -19,6 +19,9 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,7 +41,7 @@ public class listOfNotes extends AppCompatActivity {
         setContentView(R.layout.activity_list_of_notes);
         mydb = new ExampleDBHelper(getApplicationContext());
         mobile_list = (ListView) findViewById(R.id.mobile_list);
-        loadData();
+        //loadData();
     }
 
     @Override
@@ -73,7 +76,7 @@ public class listOfNotes extends AppCompatActivity {
 
         NoticeAdapter adapter = new NoticeAdapter(listOfNotes.this, dataList);
         mobile_list.setAdapter(adapter);
-        //Showingthe Notes
+        //Showing the Notes
         /*mobile_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {

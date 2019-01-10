@@ -26,7 +26,6 @@ public class New_Bullet extends FragmentActivity {
     Spinner type;
     TextView displayTextView;
     String spinnerType;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     DialogFragment TimeFragment = new TimePickerFragment();
     DialogFragment DateFragment = new DatePickerFragment();
     ListView mobile_list;
@@ -35,7 +34,7 @@ public class New_Bullet extends FragmentActivity {
     ExampleDBHelper db;
     EditText n_title;
     EditText n_text;
-    String title,text;
+    String title,text,dateFrom,dateTo,timeFrom,timeTo,typ;
     public static SharedPreferences pref;
 
     @Override
@@ -104,6 +103,12 @@ public class New_Bullet extends FragmentActivity {
             public void onClick(View v) {
                 title = n_title.getText().toString();
                 text = n_text.getText().toString();
+                dateFrom = DateEdit_From.getText().toString();
+                dateTo = DateEdit_To.getText().toString();
+                timeFrom = TimeEdit_From.getText().toString();
+                timeTo = TimeEdit_To.getText().toString();
+                typ=type.getSelectedItem().toString();
+
 
 
 
@@ -113,7 +118,7 @@ public class New_Bullet extends FragmentActivity {
                 }
                 else
                 {
-                    db.insertPerson(title,text);
+                    db.insertPerson(title,text,dateFrom,dateTo,timeFrom,timeTo,typ);
                     Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_LONG).show();
                     opentestListView();
                 }
