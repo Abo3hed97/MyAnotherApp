@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.user.myanotherapp.listOfNotes.INPUT_COLUMN_Title;
+
 public class ExampleDBHelper extends SQLiteOpenHelper {
 
 
@@ -248,6 +250,35 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
         }
 
         return false;
+    }
+
+
+    public String[] getData(ArrayList<String> d) {
+        String[] a = new String[7];
+        for (int i = 0; i < d.size(); i++) {
+            Cursor cursor = this.getAllPersons();
+            if (cursor.moveToFirst()) {
+                while (cursor.isAfterLast() == false) {
+
+                  /*  HashMap<String, String> map = new HashMap<String, String>();
+                    map.put(INPUT_COLUMN_ID, cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_ID)));
+                    map.put(INPUT_COLUMN_Title, cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title)));
+                    map.put(INPUT_COLUMN_Text, cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Text)));
+                    map.put(INPUT_COLUMN_DateFrom,cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom)));*/
+
+                    String check = cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom));
+                    if (d.get(i).equals(check)) {
+                        a[i] += cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title));
+                    }
+                }
+
+                cursor.moveToNext();
+
+
+            }
+        }
+        return a;
+
     }
 
 

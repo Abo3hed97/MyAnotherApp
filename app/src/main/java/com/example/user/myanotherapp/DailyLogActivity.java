@@ -60,7 +60,14 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     private ActionBarDrawerToggle mToggle;
 
 
+    private Button toGoAddb;
 
+    CustomAdapter ca;
+
+
+    String[]retrieve=new String[7];
+
+    ExampleDBHelper edbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,16 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toGoAddb=(Button)findViewById(R.id.btogotoAddBullet);
+        toGoAddb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeActoNewB();
+            }
+        });
+
+        edbh=new ExampleDBHelper(getApplicationContext());
 
 
 
@@ -187,8 +204,8 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
             days.add(future);
         }
 
-        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days);
-        weekdays.setAdapter(arrayAdapter);
+        //ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days);
+      //  weekdays.setAdapter(arrayAdapter);
     }
 
 
@@ -214,8 +231,8 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
             days.add(future);
         }
 
-        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days);
-        weekdays.setAdapter(arrayAdapter);
+       // ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days);
+       // weekdays.setAdapter(arrayAdapter);
     }
 
 
@@ -241,7 +258,9 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         }
         weekdays = (ListView) findViewById(R.id.weekList);
         // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, days);
-        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days);
+
+        retrieve=edbh.getData(days);
+        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,retrieve);
         weekdays.setAdapter(arrayAdapter);
 
     }
@@ -252,6 +271,13 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     public void  change(){
 
         Intent intent=new Intent(this,Settings.class);
+        startActivity(intent);
+    }
+
+
+    public void changeActoNewB()
+    {
+        Intent intent=new Intent(this,New_Bullet.class);
         startActivity(intent);
     }
 

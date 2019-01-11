@@ -31,6 +31,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="133dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="304dp"
+            android:text="@string/date_dailyLog"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.574"
+            app:layout_constraintStart_toStartOf="parent" />
         <ListView
             android:id="@+id/weekList"
             android:layout_width="324dp"
@@ -45,20 +58,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="133dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="304dp"
-            android:text="@string/date_dailyLog"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.574"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/ForwardButton"
@@ -96,6 +95,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.178" />
+
+        <Button
+            android:id="@+id/btogotoAddBullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.395" />
 
     </android.support.constraint.ConstraintLayout>
 
