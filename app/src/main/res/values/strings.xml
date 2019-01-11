@@ -18,8 +18,8 @@
     <string name="ActivitySettings">ListView</string>
     <string-array name="type">
         <item>event</item>
-        <item>termin</item>
-        <item>not</item>
+        <item>appointment</item>
+        <item>note</item>
     </string-array>
     <string name="title_activity_list_of_notes">listOfNotes</string>
     <string name="btoAddBullet">Button</string>
