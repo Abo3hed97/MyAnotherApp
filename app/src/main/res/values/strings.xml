@@ -22,6 +22,8 @@
         <item>not</item>
     </string-array>
     <string name="title_activity_list_of_notes">listOfNotes</string>
+    <string name="btoAddBullet">Button</string>
+    <string name="d">TextView</string>
 
 
 </resources>
