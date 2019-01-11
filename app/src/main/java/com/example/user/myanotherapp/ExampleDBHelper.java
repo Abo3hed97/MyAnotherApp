@@ -270,9 +270,10 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
                     if (d.get(i).equals(check)) {
                         a[i] += cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title));
                     }
+                    cursor.moveToNext();
                 }
 
-                cursor.moveToNext();
+
 
 
             }
