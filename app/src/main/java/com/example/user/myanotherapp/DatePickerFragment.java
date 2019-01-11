@@ -32,7 +32,6 @@ public class DatePickerFragment extends  DialogFragment implements
         dayV = String.valueOf(day);
 
 
-
         // Create a new instance of DatePickerDialog and return it
         return new DatePickerDialog(getActivity(), this, year, month, day);
 
@@ -42,12 +41,10 @@ public class DatePickerFragment extends  DialogFragment implements
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
-        DateEdit.setText(day + "." + (month + 1) + "." + year);
+        DateEdit.setText(day + "." + "0" + (month + 1) + "." + year);
+
 
     }
-
-
-
 
 
 }

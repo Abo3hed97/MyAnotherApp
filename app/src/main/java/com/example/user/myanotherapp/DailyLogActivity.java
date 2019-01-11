@@ -204,6 +204,12 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
             days.add(future);
         }
 
+        clear(retrieve);
+
+        retrieve=edbh.getData(days);
+        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,retrieve);
+        weekdays.setAdapter(arrayAdapter);
+
         //ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days);
       //  weekdays.setAdapter(arrayAdapter);
     }
@@ -279,6 +285,19 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     {
         Intent intent=new Intent(this,New_Bullet.class);
         startActivity(intent);
+    }
+
+
+    public String[] clear(String[]t)
+    {
+        for(int i=0;i<t.length;i++)
+        {
+            if(t[i]!=null)
+            {
+                t[i]=null;
+            }
+        }
+        return t;
     }
 
 
