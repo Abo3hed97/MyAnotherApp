@@ -120,7 +120,8 @@ public class New_Bullet extends FragmentActivity {
                 {
                     db.insertPerson(title,text,dateFrom,dateTo,timeFrom,timeTo,typ);
                     Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_LONG).show();
-                    opentestListView();
+                    Intent intentRegister = new Intent(getApplicationContext(), DailyLogActivity.class);
+                    startActivity(intentRegister);
                 }
             }
         });
