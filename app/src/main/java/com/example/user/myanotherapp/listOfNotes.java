@@ -65,8 +65,6 @@ public class listOfNotes extends AppCompatActivity {
                 map.put(INPUT_COLUMN_ID, cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_ID)));
                 map.put(INPUT_COLUMN_Title, cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title)));
                 map.put(INPUT_COLUMN_Text, cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Text)));
-
-
                 dataList.add(map);
 
                 cursor.moveToNext();
