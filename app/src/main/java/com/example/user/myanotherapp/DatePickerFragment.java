@@ -7,7 +7,11 @@ import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class DatePickerFragment extends  DialogFragment implements
@@ -41,7 +45,17 @@ public class DatePickerFragment extends  DialogFragment implements
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
-        DateEdit.setText(day + "." + "0" + (month + 1) + "." + year);
+       // DateEdit.setText(day + "." + (month + 1) + "." + year);
+       String c=day+"."+(month+1)+"."+year;
+       DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        Date date = null;
+        try {
+            date = (Date)formatter.parse(c);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String finalString = formatter.format(date);
+        DateEdit.setText(finalString);
 
 
     }

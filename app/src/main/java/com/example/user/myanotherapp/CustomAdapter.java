@@ -44,8 +44,9 @@ class CustomAdapter extends ArrayAdapter<String> {
 
 
         e=(TextView) customView.findViewById(R.id.dd);
-        e.setText(b[position]);
-
+        if(b[position]!=null) {
+            e.setText(b[position]);
+        }
 
         return customView;
     }
