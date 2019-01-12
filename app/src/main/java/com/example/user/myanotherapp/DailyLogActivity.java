@@ -1,6 +1,7 @@
 package com.example.user.myanotherapp;
 
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -21,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import static java.text.DateFormat.FULL;
@@ -65,7 +67,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     CustomAdapter ca;
 
 
-    String[]retrieve=new String[7];
+    ArrayList<ArrayList<String>>retrieve=new ArrayList<>();
 
     ExampleDBHelper edbh;
 
@@ -204,12 +206,10 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
             days.add(future);
         }
 
-        clear(retrieve);
-
         retrieve=edbh.getData(days);
-        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,retrieve);
+        ArrayList<ArrayAdapter<String>> h= getArrayAd(retrieve);
+        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,h);
         weekdays.setAdapter(arrayAdapter);
-
         //ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days);
       //  weekdays.setAdapter(arrayAdapter);
     }
@@ -237,10 +237,9 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
             days.add(future);
         }
 
-        clear(retrieve);
-
         retrieve=edbh.getData(days);
-        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,retrieve);
+        ArrayList<ArrayAdapter<String>> h= getArrayAd(retrieve);
+        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,h);
         weekdays.setAdapter(arrayAdapter);
 
        // ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days);
@@ -272,7 +271,8 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, days);
 
         retrieve=edbh.getData(days);
-        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,retrieve);
+        ArrayList<ArrayAdapter<String>> h= getArrayAd(retrieve);
+        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,h);
         weekdays.setAdapter(arrayAdapter);
 
     }
@@ -307,9 +307,26 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     }
 
 
+    public ArrayList<ArrayAdapter<String>> getArrayAd(ArrayList<ArrayList<String>> d)
+    {
+        ArrayList<ArrayAdapter<String>> n=new ArrayList<>();
+        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(0)));
+        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(1)));
+        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(2)));
+        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(3)));
+        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(4)));
+        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(5)));
+        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(6)));
+        return n;
+    }
+
+
+
+
 
 
 }
+
 
 
 
