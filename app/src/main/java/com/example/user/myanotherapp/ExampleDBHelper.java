@@ -253,10 +253,12 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
     }
 
 
-    public String[] getData(ArrayList<String> d) {
-        String[] a = new String[7];
-        int count=0;
+    public ArrayList<ArrayList<String>> getData(ArrayList<String> d) {
+       ArrayList<ArrayList<String>> b=new ArrayList<>();
+
+
         for (int i = 0; i < d.size(); i++) {
+            ArrayList<String> k=new ArrayList<>();
             Cursor cursor = this.getAllPersons();
             if (cursor.moveToFirst()) {
                 while (cursor.isAfterLast() == false) {
@@ -269,22 +271,20 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
                     String check = cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom));
                     if (d.get(i).equals(check)) {
-                        count++;
-                        a[i]+=count+".";
-                        a[i] += cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title));
-                        a[i]+="\n";
-                        a[i]=delete(a[i]);
+
+                        //b.get(i).add(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title)));
+                        k.add(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title)));
                     }
 
                     cursor.moveToNext();
                 }
-                count=0;
-
-
-
             }
+            b.add(k);
+
         }
-        return a;
+
+
+        return b;
 
     }
 
@@ -299,3 +299,4 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
 
 }
+
