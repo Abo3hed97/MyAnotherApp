@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.List;
 
 import static com.example.user.myanotherapp.ExampleDBHelper.INPUT_COLUMN_DateFrom;
 import static com.example.user.myanotherapp.ExampleDBHelper.INPUT_COLUMN_ID;
@@ -20,20 +22,23 @@ import static com.example.user.myanotherapp.listOfNotes.INPUT_COLUMN_Title;
 
 class CustomAdapter extends ArrayAdapter<String> {
 
-    String[]b=new String[7];
-    public CustomAdapter(Context context, ArrayList<String> days,String[] da) {
+    ArrayList<ArrayAdapter<String>>b=new ArrayList<>();
+    public CustomAdapter(Context context, ArrayList<String> days,ArrayList<ArrayAdapter<String>> h) {
         super(context, R.layout.custom_row, days);
-        this.b=da;
+        this.b=h;
     }
 
 
 
 
-    TextView e;
+    ListView e;
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater abdulinflator = LayoutInflater.from(getContext());
         View customView = abdulinflator.inflate(R.layout.custom_row, parent, false);
+
+
 
         String day = getItem(position);
         TextView dayDate = (TextView) customView.findViewById(R.id.CustomDate);
@@ -43,10 +48,10 @@ class CustomAdapter extends ArrayAdapter<String> {
 
 
 
-        e=(TextView) customView.findViewById(R.id.dd);
-        if(b[position]!=null) {
-            e.setText(b[position]);
-        }
+        e=(ListView) customView.findViewById(R.id.lida);
+        e.setAdapter(b.get(position));
+
+
 
         return customView;
     }
