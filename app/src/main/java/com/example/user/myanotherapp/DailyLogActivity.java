@@ -1,4 +1,4 @@
-package com.example.user.myanotherapp;
+ackage com.example.user.myanotherapp;
 
 import android.content.Intent;
 import android.provider.Settings;
@@ -178,96 +178,26 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     }
 
 
-
-
-
-
-
-
-
-
-
-         /*
-        calender.add(Calendar.DATE,1);
-        calender.add(Calendar.MONTH,0);
-        calender.add(Calendar.YEAR,0);
-        //Date future =calender.getTime();
-        String future=DateFormat.getDateInstance().format(calender.getTime());
-        textViewDate.setText("Today: "+currentDate+"\n" + "Future: "+future);*/
-
-
+    /**
+     * when the User click on the forwardsButton it will be lead
+     * to the next week from the current week
+     * @throws ParseException
+     */
     public void forwards() throws ParseException {
-        DateFormat formatter ;
-        formatter= new SimpleDateFormat("dd.MM.yyyy");
-        Date date=(Date)formatter.parse(days.get(6));
-        Calendar cal=Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(Calendar.DATE,1);
-        cal.add(Calendar.MONTH, 0);
-        cal.add(Calendar.YEAR, 0);
-        String currentDate = formatter.format(cal.getTime());
-        days.clear();
-        days.add(currentDate);
-
-
-        for (int i = 1; i < 7; i++) {
-            cal.add(Calendar.DATE, 1);
-            cal.add(Calendar.MONTH, 0);
-            cal.add(Calendar.YEAR, 0);
-            String future = formatter.format(cal.getTime());
-            days.add(future);
-        }
-
-        retrieve=edbh.getData(days);
-        ArrayList<ArrayAdapter<String>> h= getArrayAd(retrieve);
-        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,h);
-        weekdays.setAdapter(arrayAdapter);
-        //ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days);
-      //  weekdays.setAdapter(arrayAdapter);
+      addDays(6,1);
     }
 
 
+    /**
+     * when the User click on the backword button it
+     * will be lead to the prevoius week from the current week
+     * @param lastDay
+     * @throws ParseException
+     *
+     */
     public void Backwards(Calendar lastDay) throws ParseException {
-        DateFormat formatter ;
-        formatter= new SimpleDateFormat("dd.MM.yyyy");
-        Date date=(Date)formatter.parse(days.get(0));
-        Calendar cal=Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(Calendar.DATE,-7);
-        cal.add(Calendar.MONTH, 0);
-        cal.add(Calendar.YEAR, 0);
-        String currentDate = formatter.format(cal.getTime());
-        days.clear();
-        days.add(currentDate);
-
-
-        for (int i = 1; i < 7; i++) {
-            cal.add(Calendar.DATE, 1);
-            cal.add(Calendar.MONTH, 0);
-            cal.add(Calendar.YEAR, 0);
-            String future = formatter.format(cal.getTime());
-            days.add(future);
-        }
-
-        retrieve=edbh.getData(days);
-        ArrayList<ArrayAdapter<String>> h= getArrayAd(retrieve);
-        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,h);
-        weekdays.setAdapter(arrayAdapter);
-
-       // ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days);
-       // weekdays.setAdapter(arrayAdapter);
+       addDays(0,-7);
     }
-
-
-    public void changeActivity() {
-
-        Intent intent1 = new Intent(this, this.getClass());
-        startActivity(intent1);
-    }
-
-
-
-
 
 
 
@@ -293,13 +223,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
             days.add(currentDate);
         }
         weekdays = (ListView) findViewById(R.id.weekList);
-        // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, days);
-
-        retrieve=edbh.getData(days);
-        ArrayList<ArrayAdapter<String>> h= getArrayAd(retrieve);
-        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,h);
-        weekdays.setAdapter(arrayAdapter);
-
+        setArrayAdapter();
     }
 
 
@@ -321,22 +245,6 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         startActivity(intent);
     }
 
-   /*
-    public String[] clear(String[]t)
-    {
-        for(int i=0;i<t.length;i++)
-        {
-            if(t[i]!=null)
-            {
-                t[i]=null;
-            }
-        }
-        return t;
-    }*/
-
-
-
-
 
 
    /**
@@ -346,20 +254,64 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     */
     public ArrayList<ArrayAdapter<String>> getArrayAd(ArrayList<ArrayList<String>> d)
     {
-        ArrayList<ArrayAdapter<String>> n=new ArrayList<>();
+        ArrayList<ArrayAdapter<String>> listOfArrayAdapter=new ArrayList<>();
         for(int i=0;i<7;i++) {
-            n.add(new ArrayAdapter(this, android.R.layout.simple_list_item_1, d.get(i)));
+            listOfArrayAdapter.add(new ArrayAdapter(this, android.R.layout.simple_list_item_1, d.get(i)));
         }
-        return n;
+        return listOfArrayAdapter;
+    }
+
+
+    /**
+     * this method will assign the ArrayList(retrieve) all the data for the days,which are found in
+     * the (days) ArrayList.
+     * and then will create an instance of the Class(CustomAdapter)
+     * and at the End will call the method(setAdapter).
+     */
+    public void setArrayAdapter()
+    {
+        retrieve=edbh.getData(days);
+        ArrayList<ArrayAdapter<String>> h= getArrayAd(retrieve);
+        ArrayAdapter<String> arrayAdapter = new CustomAdapter(this, days,h);
+        weekdays.setAdapter(arrayAdapter);
+
     }
 
 
 
 
 
+    public void addDays(int day,int anotherDay) throws ParseException {
+        DateFormat formatter ;
+        formatter= new SimpleDateFormat("dd.MM.yyyy");
+        Date date=(Date)formatter.parse(days.get(day));
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE,anotherDay);
+        cal.add(Calendar.MONTH, 0);
+        cal.add(Calendar.YEAR, 0);
+        String currentDate = formatter.format(cal.getTime());
+        days.clear();
+        days.add(currentDate);
 
-}
+
+        for (int i = 1; i < 7; i++) {
+            cal.add(Calendar.DATE, 1);
+            cal.add(Calendar.MONTH, 0);
+            cal.add(Calendar.YEAR, 0);
+            String future = formatter.format(cal.getTime());
+            days.add(future);
+        }
+
+        setArrayAdapter();
 
 
+    }
+
+
+
+
+
+}//End of the Class
 
 
