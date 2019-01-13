@@ -61,14 +61,26 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
      */
     private ActionBarDrawerToggle mToggle;
 
+    /**
+     * is a Button on we click on it we get taken to the
+     * addBullet Activity
+     */
+    private Button toGoAddB;
 
-    private Button toGoAddb;
-
+    /**
+     * is an Single CustomAdapter Object
+     */
     CustomAdapter ca;
 
 
+    /**
+     * is an ArrayList of Strings to store all the data of all Days
+     */
     ArrayList<ArrayList<String>>retrieve=new ArrayList<>();
 
+    /**
+     * is an Object of the ExampleDBHelper Class
+     */
     ExampleDBHelper edbh;
 
     @Override
@@ -81,8 +93,8 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        toGoAddb=(Button)findViewById(R.id.btogotoAddBullet);
-        toGoAddb.setOnClickListener(new View.OnClickListener() {
+        toGoAddB=(Button)findViewById(R.id.btogotoAddBullet);
+        toGoAddB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 changeActoNewB();
@@ -254,6 +266,20 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     }
 
 
+
+
+
+
+
+
+    /**
+     * with help of this method we can retrieve the days of the current week
+     * and then convert them to string, so we can print them out
+     * and for every day we get the data from the database and for
+     * every day we create an arrayadapter and add it to the arrayList of arrayadapter
+     * and then we pass the ArrayList to the class CustomAdapter,so we can
+     * print out the information for every day.
+     */
     public void weeks() {
         Calendar cal = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance().format(cal.getTime());
@@ -261,7 +287,6 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         textViewDate = findViewById(R.id.date);
         textViewDate.setText(currentDate);
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        // cal.set(Calendar.WEEK_OF_MONTH,2);
         for (int i = Calendar.SUNDAY; i <= Calendar.SATURDAY; i++) {
             cal.set(Calendar.DAY_OF_WEEK, i);
             currentDate = sdf.format(cal.getTime());
@@ -278,22 +303,25 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     }
 
 
-
-
+    /**
+     * is a method to take us to the Settings Activity on we click on it.
+     */
     public void  change(){
 
         Intent intent=new Intent(this,Settings.class);
         startActivity(intent);
     }
 
-
+    /**
+     * is an is a method to take us to the NewBullet Activity when we call it.
+     */
     public void changeActoNewB()
     {
         Intent intent=new Intent(this,New_Bullet.class);
         startActivity(intent);
     }
 
-
+   /*
     public String[] clear(String[]t)
     {
         for(int i=0;i<t.length;i++)
@@ -304,19 +332,24 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
             }
         }
         return t;
-    }
+    }*/
 
 
+
+
+
+
+   /**
+    * with help of this method we create an ArrayList of arrayadapter and we add for every
+    * single day an Arrayadapter and in that way we make sure that all the Data
+    * for all days will be printed out.
+    */
     public ArrayList<ArrayAdapter<String>> getArrayAd(ArrayList<ArrayList<String>> d)
     {
         ArrayList<ArrayAdapter<String>> n=new ArrayList<>();
-        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(0)));
-        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(1)));
-        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(2)));
-        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(3)));
-        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(4)));
-        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(5)));
-        n.add(new ArrayAdapter(this,android.R.layout.simple_list_item_1,d.get(6)));
+        for(int i=0;i<7;i++) {
+            n.add(new ArrayAdapter(this, android.R.layout.simple_list_item_1, d.get(i)));
+        }
         return n;
     }
 
