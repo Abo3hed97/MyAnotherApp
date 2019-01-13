@@ -1,4 +1,4 @@
-ackage com.example.user.myanotherapp;
+package com.example.user.myanotherapp;
 
 import android.content.Intent;
 import android.provider.Settings;
