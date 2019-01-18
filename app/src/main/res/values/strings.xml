@@ -25,6 +25,9 @@
     <string name="btoAddBullet">Button</string>
     <string name="d">TextView</string>
 
+    <string name="monthName">TextView</string>
+    <string name="MonthNDL">Name</string>
+
 
 </resources>
 
