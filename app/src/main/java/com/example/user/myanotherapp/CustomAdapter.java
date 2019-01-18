@@ -38,8 +38,6 @@ class CustomAdapter extends ArrayAdapter<String> {
         LayoutInflater abdulinflator = LayoutInflater.from(getContext());
         View customView = abdulinflator.inflate(R.layout.custom_row, parent, false);
 
-
-
         String day = getItem(position);
         TextView dayDate = (TextView) customView.findViewById(R.id.CustomDate);
 

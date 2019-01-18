@@ -83,6 +83,10 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
      */
     ExampleDBHelper edbh;
 
+
+
+    Button gotoMonthly;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,6 +153,14 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
             }
         });
 
+
+        gotoMonthly=(Button)findViewById(R.id.goToMothlyLog);
+        gotoMonthly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeToMonthlyLog();
+            }
+        });
     }
 
     @Override
@@ -303,9 +315,17 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
             days.add(future);
         }
 
+
         setArrayAdapter();
 
+    }
 
+
+
+    private void changeToMonthlyLog()
+    {
+        Intent intent=new Intent(this,MonthlyLog.class);
+        startActivity(intent);
     }
 
 
