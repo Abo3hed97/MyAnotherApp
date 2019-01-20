@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/edlogo"
-        android:layout_width="373dp"
-        android:layout_height="78dp"
+        android:layout_width="562dp"
+        android:layout_height="217dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -19,101 +19,102 @@
         android:contentDescription="AppLogo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintHorizontal_bias="0.612"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.101"
         app:srcCompat="@drawable/logo" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayoutEmail"
-        android:layout_width="214dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
+        android:layout_width="510dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintHorizontal_bias="0.34"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41000003">
+        app:layout_constraintVertical_bias="0.32999998">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/textInputEditTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="E-Mail"
-            android:textColor="@color/colorAccent" />
+            android:textSize="@dimen/Frontsize_Viewxlarge1"/>
+
     </android.support.design.widget.TextInputLayout>
 
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayoutPassword"
-        android:layout_width="216dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="50dp"
+        android:layout_width="507dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/password_Login"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintHorizontal_bias="0.34"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/edlogo"
-        app:layout_constraintVertical_bias="0.35000002">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/textInputEditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:textColor="@color/colorAccent" />
+            android:textSize="@dimen/Frontsize_Viewxlarge1" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/BLogin"
         style="@style/stylebutton"
-        android:layout_width="173dp"
-        android:layout_height="42dp"
+        android:layout_width="322dp"
+        android:layout_height="83dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif"
         android:text="@string/login"
-        android:textSize="16sp"
+        android:textSize="@dimen/Frontsize_Viewxlarge1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.536"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/edlogo"
-        app:layout_constraintVertical_bias="0.658"
+        app:layout_constraintVertical_bias="0.654"
         tools:text="Login" />
 
     <TextView
         android:id="@+id/newAccount"
-        android:layout_width="201dp"
-        android:layout_height="28dp"
+        android:layout_width="319dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/register_here"
         android:textColor="#D2842D"
-        android:textSize="4pt"
+        android:textSize="10pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BLogin"
-        app:layout_constraintVertical_bias="0.060000002" />
-
+        app:layout_constraintVertical_bias="0.156" />
 
 
 
