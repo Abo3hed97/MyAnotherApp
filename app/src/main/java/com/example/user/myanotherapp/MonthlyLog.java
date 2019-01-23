@@ -1,14 +1,18 @@
 package com.example.user.myanotherapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.icu.util.LocaleData;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,6 +51,18 @@ public class MonthlyLog extends AppCompatActivity {
         ArrayList<String> f=new ArrayList<>();
         ArrayAdapter aad=new CustomAdapterMonth(this,dom);
         l.setAdapter(aad);
+        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    getWeek(position);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                changeToDailyLog();
+
+            }
+        });
 
     }
 
@@ -66,7 +82,7 @@ public class MonthlyLog extends AppCompatActivity {
         Calendar now = Calendar.getInstance();
         // Assuming that you already have this.
         int year =Calendar.YEAR;
-        int month =(Calendar.MONTH)-1;
+        int month =(Calendar.MONTH);
         int day = 1;
 
 
@@ -89,7 +105,7 @@ public class MonthlyLog extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
         int year = Calendar.YEAR;
-        int month =(Calendar.MONTH)-1;
+        int month =(Calendar.MONTH);
         int date = 1;
         calendar.set(year, month, date);
         int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -111,13 +127,63 @@ public class MonthlyLog extends AppCompatActivity {
 
 
 
+    public void getWeek(int dayNumber) throws ParseException {
+        ArrayList<String> days = DailyLogActivity.days;
+        DateFormat formatter;
+        formatter = new SimpleDateFormat("dd.MM.yyyy");
+        Date date = (Date) formatter.parse(days.get(0));
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.set(Calendar.DATE, dayNumber);
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(date);
+        Calendar calendar3 = Calendar.getInstance();
+        calendar3.setTime(date);
+        if(calendar1.before(calendar2)) {
+            calendar3.add(Calendar.DATE, -7);
+            while (calendar1.before(calendar2)) {
+
+                if (calendar1.after(calendar3)) {
+                    getData(calendar3);
+                    break;
+                } else {
+                    calendar2.add(Calendar.DATE, -7);
+                    calendar3.add(Calendar.DATE, -7);
+                }
+            }
+        }
+        if(calendar1.after(calendar2)) {
+            calendar3.add(Calendar.DATE, 7);
+            while (calendar1.after(calendar2)) {
+                if (calendar1.before(calendar3)) {
+                    getData(calendar2);
+                    break;
+                } else {
+                    calendar2.add(Calendar.DATE, 7);
+                    calendar3.add(Calendar.DATE, 7);
+                }
+            }
+        }
+    }
 
 
+    public void getData(Calendar calendar2){
+        String currentDate;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        currentDate= sdf.format(calendar2.getTime());
+        DailyLogActivity.days.clear();
+        DailyLogActivity.days.add(currentDate);
+        for(int i=1;i<7;i++)
+        {
+            calendar2.add(Calendar.DATE,1);
+            currentDate= sdf.format(calendar2.getTime());
+            DailyLogActivity.days.add(currentDate);
+        }
+    }
 
-
-
-
-
+    public void changeToDailyLog(){
+        Intent intent=new Intent(this,DailyLogActivity.class);
+        startActivity(intent);
+    }
 
 
 
