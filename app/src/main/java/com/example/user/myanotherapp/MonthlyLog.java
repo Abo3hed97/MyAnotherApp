@@ -166,18 +166,19 @@ public class MonthlyLog extends AppCompatActivity {
     }
 
 
-    public void getData(Calendar calendar2){
+    public void getData(Calendar calendar){
         String currentDate;
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        currentDate= sdf.format(calendar2.getTime());
+        currentDate= sdf.format(calendar.getTime());
         DailyLogActivity.days.clear();
         DailyLogActivity.days.add(currentDate);
         for(int i=1;i<7;i++)
         {
-            calendar2.add(Calendar.DATE,1);
-            currentDate= sdf.format(calendar2.getTime());
+            calendar.add(Calendar.DATE,1);
+            currentDate= sdf.format(calendar.getTime());
             DailyLogActivity.days.add(currentDate);
         }
+
     }
 
     public void changeToDailyLog(){
