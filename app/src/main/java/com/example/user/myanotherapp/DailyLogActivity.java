@@ -43,7 +43,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     /**
      * is an ArrayList contains the days of every Week
      */
-    ArrayList<String> days = new ArrayList<>();
+   public static ArrayList<String> days = new ArrayList<>();
     /**
      * is an istance of the Class (ListView), which references on the list of the weeks
      */
