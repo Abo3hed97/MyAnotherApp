@@ -9,28 +9,80 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * The register activity is called when user clicks on register button in the Login activity.
+ * It contains the registration form.
+ * It provides methods for creating a user, creating an SQLite database and putting user data in this database.
+ * After succesfull registration we return to the login activity.
+ */
 public class RegisterActivity extends AppCompatActivity {
+
+    /**
+     * ?
+     */
     private final AppCompatActivity activity = RegisterActivity.this;
 
-
+    /**
+     * ?
+     */
     private TextInputLayout textInputLayoutName;
+    /**
+     * ?
+     */
     private TextInputLayout textInputLayoutEmail;
+    /**
+     * ?
+     */
     private TextInputLayout textInputLayoutPassword;
+    /**
+     * ?
+     */
     private TextInputLayout textInputLayoutConfirmPassword;
 
+    /**
+     * A text field where the user can put in their name
+     */
     private TextInputEditText textInputEditTextName;
+    /**
+     * A text field where the user can put in their email
+     */
     private TextInputEditText textInputEditTextEmail;
+    /**
+     * A text field where the user can put in their password
+     */
     private TextInputEditText textInputEditTextPassword;
+    /**
+     * A text field where the user can confirm their password
+     */
     private TextInputEditText textInputEditTextConfirmPassword;
 
+    /**
+     * the register button
+     */
     private Button appCompatButtonRegister;
+    /**
+     * ?
+     */
     private TextView appCompatTextViewLoginLink;
 
+    /**
+     * we need an InputValidationObject to check if user input is nonempty and has the expected format
+     */
     private InputValidation inputValidation;
+    /**
+     * we need an ExampleDBHelperObject to have a SQLite database to put in user data
+     */
     private ExampleDBHelper databaseHelper;
+    /**
+     * If a user registers a new User Object is created
+     */
     private User user;
 
 
+    /**
+     * ?
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +103,11 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Creates the text fields to input name, email and password (twice).
+     * Creates the register button
+     * ? appCompatTextViewLoginLink ?
+     */
     private void initViews() {
 
         textInputLayoutName = (TextInputLayout) findViewById(R.id.textInputLayoutName);
@@ -71,6 +128,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * sets inputValidation, databaseHelper and user on new instances of these objects
+     */
     private void initObjects() {
         inputValidation = new InputValidation(activity);
         databaseHelper = new ExampleDBHelper(activity);
@@ -89,21 +149,27 @@ public class RegisterActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    /**
+     * checks if user input is valid.
+     * If yes: passes the information to databaseHelper and returns to login activity
+     * If no: asks the user to put in valid data
+     */
     private void postDataToSQLite() {
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextName, textInputLayoutName, "Enter Full Name")) {
+        if (!inputValidation.isInputEditTextFilled(textInputEditTextName, textInputLayoutName, "Enter full name")) {
             return;
         }
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, "Enter Valid Email")) {
+        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, "Enter valid email")) {
             return;
         }
-        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, "Enter Valid Email")) {
+        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, "Enter valid email")) {
             return;
         }
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, "Enter Password")) {
+        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, "Enter password")) {
             return;
         }
         if (!inputValidation.isInputEditTextMatches(textInputEditTextPassword, textInputEditTextConfirmPassword,
-                textInputLayoutConfirmPassword, "Password Does Not Matches")) {
+                textInputLayoutConfirmPassword, "Password does not match")) {
             return;
         }
 
@@ -117,7 +183,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
             Toast tost = new Toast(this);
-            tost.makeText(getApplicationContext(), "Registration Successful", tost.LENGTH_LONG).show();
+            tost.makeText(getApplicationContext(), "Registration successful", tost.LENGTH_LONG).show();
             emptyInputEditText();
             finish();
 
@@ -125,7 +191,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
 
             Toast tost = new Toast(this);
-            tost.makeText(getApplicationContext(), "Email Already Exists", tost.LENGTH_LONG).show();
+            tost.makeText(getApplicationContext(), "Email already exists", tost.LENGTH_LONG).show();
 
         }
 
