@@ -47,8 +47,8 @@ class CustomAdapter extends ArrayAdapter<String> {
 
 
         e=(ListView) customView.findViewById(R.id.lida);
-        e.setAdapter(b.get(position));
 
+        e.setAdapter(b.get(position));
 
 
         return customView;
