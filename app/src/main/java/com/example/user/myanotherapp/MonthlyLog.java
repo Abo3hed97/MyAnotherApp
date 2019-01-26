@@ -27,14 +27,25 @@ import java.util.Locale;
 public class MonthlyLog extends AppCompatActivity {
 
 
+    /**
+     * With this Listview we can print out the days of the specified Month
+     */
+    ListView monthdays;
+    /**
+     * we reference on the ArrayList of the days
+     */
+    ArrayList<String> days = DailyLogActivity.days;
+    /**
+     * Three Instances of the Class Claendar
+     */
+    Calendar calendar1,calendar2,calendar3;
 
-    ListView l;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monthly_log);
 
-        l=(ListView)findViewById(R.id.listofdays);
+        monthdays=(ListView)findViewById(R.id.listofdays);
         TextView mothName=(TextView) findViewById(R.id.DLMN);
 
         int monthNumber=Calendar.getInstance().get(Calendar.MONTH);
@@ -50,12 +61,12 @@ public class MonthlyLog extends AppCompatActivity {
 
         ArrayList<String> f=new ArrayList<>();
         ArrayAdapter aad=new CustomAdapterMonth(this,dom);
-        l.setAdapter(aad);
-        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        monthdays.setAdapter(aad);
+        monthdays.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    getWeek(position);
+                    getSpecifiedWeek(position);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -67,24 +78,19 @@ public class MonthlyLog extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-
+    /**
+     * With this Function we have the Ability to get all the current month's Days
+     * this would be achived,when we get the First Day of the Current Month
+     * and Then with help of forLoop we can get the other Days.
+     * @return a List with all the Days of the Current Month pouplted in it.
+     * @throws ParseException if anything gets Wrong during the Parsing Proess.
+     */
     private ArrayList<String> getAllMonthdays() throws ParseException {
-
-
-
+        //to save the Days of current Month
         ArrayList<String> daysofM = new ArrayList<>();
-        Calendar now = Calendar.getInstance();
         // Assuming that you already have this.
         int year =Calendar.YEAR;
         int month =(Calendar.MONTH);
-        int day = 1;
-
 
         for (int i = 1; i < getNumberofdaysinMonth()+1; i++) {
             // First convert to Date. This is one of the many ways.
@@ -98,97 +104,162 @@ public class MonthlyLog extends AppCompatActivity {
     }
 
 
-
-
+    /**
+     * With Help of this function,we can get the Number of days of current Month
+     * and for achiving that we need use the Function (getActualMaximum)
+     * @return number of Days of Current Month.
+     */
     public int getNumberofdaysinMonth()
     {
-
+        // calendar's instance.
         Calendar calendar = Calendar.getInstance();
         int year = Calendar.YEAR;
         int month =(Calendar.MONTH);
         int date = 1;
         calendar.set(year, month, date);
+        //get the maximum Number of days in a Month.
         int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         return days;
     }
 
 
-
+    /**
+     * With Help of this function we can get the Name of the Current Month
+     * and we use the Class (DateFormatSymbols) to achive that.
+     * @param num this is the Number of the Current Day.
+     * @return the Name of Current Month.
+     */
     String getMonthForInt(int num) {
         String month = "";
+        //An Onbject with it's Help we get an Array of Months of the Year.
         DateFormatSymbols dfs = new DateFormatSymbols();
+        // Array to Store all the Monhts of the Year.
         String[] months = dfs.getMonths();
+        //chack if the Number of Month greater or equel than 0 and lesser equel than 11
         if (num >= 0 && num <= 11 ) {
             month = months[num];
         }
+        //return the asked Month.
         return month;
     }
 
 
-
-
-    public void getWeek(int dayNumber) throws ParseException {
-        ArrayList<String> days = DailyLogActivity.days;
-        DateFormat formatter;
-        formatter = new SimpleDateFormat("dd.MM.yyyy");
+    /**
+     * With help of this function,we can get the Daily Log of the selected Day in monthly Log
+     * and this can be achivied with Help of three Days.
+     * @param selectedDay is the Selected Day of MonthlyLog.
+     * @throws ParseException when anything gets wrong during the Parsing Proecss.
+     */
+    public void getSpecifiedWeek(int selectedDay) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         Date date = (Date) formatter.parse(days.get(0));
-        Calendar calendar1 = Calendar.getInstance();
-        calendar1.set(Calendar.DATE, dayNumber);
-        Calendar calendar2 = Calendar.getInstance();
+        assignToInstance();
+        calendar1.set(Calendar.DATE, selectedDay);
         calendar2.setTime(date);
-        Calendar calendar3 = Calendar.getInstance();
         calendar3.setTime(date);
         if(calendar1.before(calendar2)) {
-            calendar3.add(Calendar.DATE, -7);
-            while (calendar1.before(calendar2)) {
-
-                if (calendar1.after(calendar3)) {
-                    getData(calendar3);
-                    break;
-                } else {
-                    calendar2.add(Calendar.DATE, -7);
-                    calendar3.add(Calendar.DATE, -7);
-                }
-            }
+           backwordUnitlfindWeek();
         }
         if(calendar1.after(calendar2)) {
-            calendar3.add(Calendar.DATE, 7);
-            while (calendar1.after(calendar2)) {
-                if (calendar1.before(calendar3)) {
-                    getData(calendar2);
-                    break;
-                } else {
-                    calendar2.add(Calendar.DATE, 7);
-                    calendar3.add(Calendar.DATE, 7);
-                }
-            }
+           forwardUnitlFindWeek();
         }
+
     }
 
-
-    public void getData(Calendar calendar){
-        String currentDate;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        currentDate= sdf.format(calendar.getTime());
+    /**
+     * With help of the function we clear the ArrayListr (days) and then
+     * assign to it the days of
+     * the Week of the Selected Day
+     * @param calendar the first Day of the specified Daily Log.
+     */
+    public void getSpecifiedDailLog(Calendar calendar){
+        String currentDate=convertFromCalToStr(calendar);
         DailyLogActivity.days.clear();
         DailyLogActivity.days.add(currentDate);
         for(int i=1;i<7;i++)
         {
             calendar.add(Calendar.DATE,1);
-            currentDate= sdf.format(calendar.getTime());
+            currentDate= convertFromCalToStr(calendar);
             DailyLogActivity.days.add(currentDate);
         }
-
     }
 
+    /**
+     * with Help of this Function we can navigate to the DailyLog.
+     */
     public void changeToDailyLog(){
         Intent intent=new Intent(this,DailyLogActivity.class);
         startActivity(intent);
     }
 
 
+    /**
+     * The Calendar1 is the Day before calendar2,such that the calendar 2 is the First Days of
+     * The ArrayList(days) and the Calendar1 is the Day before Calendar 2.
+     * we keep searching backword until the selected Day is between the Calendar2 and Calendar3,such that Calendar2 is after
+     * Calendar1 and calendar3 is before Calendar1.
+     */
+    public void backwordUnitlfindWeek(){
+
+        calendar3.add(Calendar.DATE, -7);
+        while (calendar1.before(calendar2)) {
+            if (calendar1.after(calendar3)) {
+                getSpecifiedDailLog(calendar3);
+                break;
+            } else {
+                    calendar2.add(Calendar.DATE, -7);
+                    calendar3.add(Calendar.DATE, -7);
+                }
+            }
+    }
+
+
+    /**
+     * The Calendar1 is the Day after calendar2,such that the calendar 2 is the First Days of
+     * The ArrayList(days) and the Calendar1 is the Day after Calendar 2.
+     * we keep searching forward until the selected Day is between the Calendar2 and Calendar3,such that Calendar2 is before
+     * Calendar1 and calendar3 is after Calendar1.
+     */
+    public void forwardUnitlFindWeek(){
+
+        calendar3.add(Calendar.DATE, 7);
+        while (calendar1.after(calendar2)) {
+            if (calendar1.before(calendar3)) {
+                getSpecifiedDailLog(calendar2);
+                break;
+            } else {
+                calendar2.add(Calendar.DATE, 7);
+                calendar3.add(Calendar.DATE, 7);
+            }
+        }
+
+    }
+
+    /**
+     * With Help of this Function,we can convert from Calendar to String
+     * @param day the day,wich needs to be converted to String
+     * @return the day after it got converted to String.
+     */
+    public String convertFromCalToStr(Calendar day)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        return sdf.format(day.getTime());
+
+    }
+
+    /**
+     * We assign the Calendar object to Calendar instance.
+     */
+    public void assignToInstance()
+    {
+        calendar1=Calendar.getInstance();
+        calendar2=Calendar.getInstance();
+        calendar3=Calendar.getInstance();
+    }
 
 
 
 
-}
+
+}// End of the Class
+
