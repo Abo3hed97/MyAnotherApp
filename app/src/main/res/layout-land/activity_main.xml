@@ -10,10 +10,10 @@
 
     <ImageView
         android:id="@+id/edlogo"
-        android:layout_width="267dp"
-        android:layout_height="62dp"
+        android:layout_width="281dp"
+        android:layout_height="68dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="AppLogo"
@@ -40,7 +40,7 @@
         app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41000003">
+        app:layout_constraintVertical_bias="0.38">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/textInputEditTextEmail"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:hint="E-Mail"
             android:textColor="@color/colorAccent"
-            android:textSize="6pt" />
+            android:textSize="@dimen/Frontsizetext_Viewnormal" />
     </android.support.design.widget.TextInputLayout>
 
 
@@ -67,7 +67,7 @@
         app:layout_constraintHorizontal_bias="0.98"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/edlogo"
-        app:layout_constraintVertical_bias="0.32">
+        app:layout_constraintVertical_bias="0.32999998">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/textInputEditTextPassword"
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:textColor="@color/colorAccent"
-            android:textSize="6pt" />
+            android:textSize="@dimen/Frontsizetext_Viewnormal" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -89,7 +89,7 @@
         android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif"
         android:text="@string/login"
-        android:textSize="6pt"
+        android:textSize="@dimen/Frontsizetext_Viewnormal"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
