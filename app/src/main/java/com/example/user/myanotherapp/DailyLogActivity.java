@@ -27,7 +27,7 @@ import java.util.Locale;
 
 import static java.text.DateFormat.FULL;
 
-public class DailyLogActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class DailyLogActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,navigate {
     /**
      * is the button on i press on it i go to week forther
      */
@@ -195,6 +195,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
      * to the next week from the current week
      * @throws ParseException
      */
+    @Override
     public void forwards() throws ParseException {
       addDays(6,1);
     }
@@ -207,6 +208,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
      * @throws ParseException
      *
      */
+    @Override
     public void Backwards(Calendar lastDay) throws ParseException {
        addDays(0,-7);
     }

@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-public class MonthlyLog extends AppCompatActivity {
+public class MonthlyLog extends AppCompatActivity implements navigate {
 
 
     /**
@@ -258,8 +258,14 @@ public class MonthlyLog extends AppCompatActivity {
     }
 
 
+    @Override
+    public void forwards() throws ParseException {
 
+    }
 
+    @Override
+    public void Backwards(Calendar lastDay) throws ParseException {
 
+    }
 }// End of the Class
 
