@@ -8,24 +8,24 @@
 
     <ImageView
         android:id="@+id/edlogo"
-        android:layout_width="318dp"
-        android:layout_height="67dp"
+        android:layout_width="297dp"
+        android:layout_height="59dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="AppLogo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintHorizontal_bias="0.402"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayoutName"
-        android:layout_width="183dp"
-        android:layout_height="46dp"
+        android:layout_width="169dp"
+        android:layout_height="50dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="9dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,13 +40,13 @@
             android:layout_height="60dp"
             android:hint="Name"
             android:maxLines="1"
-            android:textSize="8pt" />
+            android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayoutEmail"
-        android:layout_width="183dp"
-        android:layout_height="46dp"
+        android:layout_width="169dp"
+        android:layout_height="50dp"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -55,7 +55,7 @@
         app:layout_constraintHorizontal_bias="0.72"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998">
+        app:layout_constraintVertical_bias="0.36">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/textInputEditTextEmail"
@@ -63,43 +63,41 @@
             android:layout_height="60dp"
             android:hint="Email"
             android:maxLines="1"
-            android:textSize="@dimen/Frontsizetext_Viewnormal" />
+            android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayoutPassword"
-        android:layout_width="183dp"
-        android:layout_height="46dp"
+        android:layout_width="169dp"
+        android:layout_height="50dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="3dp"
+        android:hint="@string/password_Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName"
-        app:layout_constraintVertical_bias="0.060000002">
+        app:layout_constraintVertical_bias="0.0">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/textInputEditTextPassword"
             android:layout_width="248dp"
             android:layout_height="60dp"
-            android:hint="Password"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:textSize="@dimen/Frontsizetext_Viewnormal" />
+            android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayoutConfirmPassword"
-        android:layout_width="183dp"
-        android:layout_height="46dp"
+        android:layout_width="169dp"
+        android:layout_height="50dp"
         android:layout_marginStart="170dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.64"
+        app:layout_constraintHorizontal_bias="0.62"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail">
 
@@ -109,26 +107,26 @@
             android:layout_height="60dp"
             android:hint="Confirm Password"
             android:inputType="textPassword"
-            android:textSize="@dimen/Frontsizetext_Viewnormal" />
+            android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/appCompatButtonRegister"
         style="@style/stylebutton"
-        android:layout_width="179dp"
-        android:layout_height="47dp"
+        android:layout_width="74dp"
+        android:layout_height="29dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="REGISTER"
-        android:textSize="@dimen/Frontsizetext_Viewnormal"
+        android:textSize="4pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.42"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.842" />
+        app:layout_constraintVertical_bias="0.866" />
 
     <TextView
         android:id="@+id/appCompatTextViewLoginLink"
@@ -141,7 +139,7 @@
         android:textColor="#D2842D"
         android:textSize="4pt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.57"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatButtonRegister" />
 
