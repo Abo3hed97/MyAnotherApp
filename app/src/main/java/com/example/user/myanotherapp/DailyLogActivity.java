@@ -145,7 +145,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
             @Override
             public void onClick(View v) {
                 try {
-                    Backwards(calendar);
+                    Backwards();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -204,12 +204,11 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     /**
      * when the User click on the backword button it
      * will be lead to the prevoius week from the current week
-     * @param lastDay
      * @throws ParseException
      *
      */
     @Override
-    public void Backwards(Calendar lastDay) throws ParseException {
+    public void Backwards() throws ParseException {
        addDays(0,-7);
     }
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,7 +31,10 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
     /**
      * With this Listview we can print out the days of the specified Month
      */
-    ListView monthdays;
+    ListView monthdaysListView;
+    ArrayAdapter aad;
+
+    ArrayList<String> daysofM;
     /**
      * we reference on the ArrayList of the days
      */
@@ -39,13 +43,24 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
      * Three Instances of the Class Claendar
      */
     Calendar calendar1,calendar2,calendar3;
+    /**
+     * a Button,when it get clicked, the User will navigated to the next Month.
+     */
+    Button nextMonthButton;
+
+    /**
+     * a Button,when it get clicked, the User will be navigated to the prevoius Month.
+     */
+    Button previuosMonthButton;
+
+    int month;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monthly_log);
 
-        monthdays=(ListView)findViewById(R.id.listofdays);
+        monthdaysListView=(ListView)findViewById(R.id.listofdays);
         TextView mothName=(TextView) findViewById(R.id.DLMN);
 
         int monthNumber=Calendar.getInstance().get(Calendar.MONTH);
@@ -60,9 +75,9 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         }
 
         ArrayList<String> f=new ArrayList<>();
-        ArrayAdapter aad=new CustomAdapterMonth(this,dom);
-        monthdays.setAdapter(aad);
-        monthdays.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        aad=new CustomAdapterMonth(this,dom);
+        monthdaysListView.setAdapter(aad);
+        monthdaysListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
@@ -75,6 +90,38 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
             }
         });
 
+
+
+        nextMonthButton=(Button)findViewById(R.id.nextMonth);
+        nextMonthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    forwards();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        previuosMonthButton=(Button)findViewById(R.id.prevoiusMonth);
+        previuosMonthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Backwards();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+
+
+
+
+
+
     }
 
 
@@ -86,15 +133,15 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
      * @throws ParseException if anything gets Wrong during the Parsing Proess.
      */
     private ArrayList<String> getAllMonthdays() throws ParseException {
+        Calendar c=Calendar.getInstance();
         //to save the Days of current Month
-        ArrayList<String> daysofM = new ArrayList<>();
+         daysofM = new ArrayList<>();
         // Assuming that you already have this.
-        int year =Calendar.YEAR;
-        int month =(Calendar.MONTH);
-
+        int year=Calendar.YEAR;
+        month =c.get(Calendar.MONTH)+1;
         for (int i = 1; i < getNumberofdaysinMonth()+1; i++) {
             // First convert to Date. This is one of the many ways.
-            String dateString = String.format("%d-%d-%d", year, month, i);
+            String dateString = String.format("%d-%d-%d", c.get(Calendar.YEAR), month, i);
             Date date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
             // Then get the day of week from the Date based on specific locale.
             String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date);
@@ -113,10 +160,9 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
     {
         // calendar's instance.
         Calendar calendar = Calendar.getInstance();
-        int year = Calendar.YEAR;
-        int month =(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
         int date = 1;
-        calendar.set(year, month, date);
+        calendar.set(year, month-1, date);
         //get the maximum Number of days in a Month.
         int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         return days;
@@ -139,6 +185,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         if (num >= 0 && num <= 11 ) {
             month = months[num];
         }
+
         //return the asked Month.
         return month;
     }
@@ -260,12 +307,56 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
     @Override
     public void forwards() throws ParseException {
-
+            addDays(1);
     }
 
     @Override
-    public void Backwards(Calendar lastDay) throws ParseException {
-
+    public void Backwards() throws ParseException {
+        addDays(-1);
     }
+
+
+
+
+
+
+    public void addDays(int j) throws ParseException {
+        daysofM.clear();
+        Calendar c=Calendar.getInstance();
+        int year =c.get(Calendar.YEAR);
+        month += j;
+
+
+
+
+        for (int i = 1; i < getNumberofdaysinMonth()+1; i++) {
+            // First convert to Date. This is one of the many ways.
+            String dateString = String.format("%d-%d-%d", year, month, i);
+            Date date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
+            // Then get the day of week from the Date based on specific locale.
+            String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date);
+            daysofM.add(i+"."+dayOfWeek);
+        }
+
+        monthdaysListView.setAdapter(aad);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }// End of the Class
 

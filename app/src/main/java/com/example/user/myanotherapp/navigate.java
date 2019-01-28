@@ -5,5 +5,5 @@ import java.util.Calendar;
 
 public interface navigate {
     public void forwards() throws ParseException;
-    public void Backwards(Calendar lastDay) throws ParseException;
+    public void Backwards() throws ParseException;
 }
