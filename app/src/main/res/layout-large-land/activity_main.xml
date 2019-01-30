@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/edlogo"
         android:layout_width="437dp"
-        android:layout_height="106dp"
+        android:layout_height="147dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -33,7 +33,7 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textSize="19sp"
+        android:textSize="@dimen/Frontsize_Viewxlarge1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -55,16 +55,16 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/password_Login"
-        android:textSize="19sp"
+        android:textSize="@dimen/Frontsize_Viewxlarge1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/textInputEditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
@@ -80,7 +80,7 @@
         android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif"
         android:text="@string/login"
-        android:textSize="16sp"
+        android:textSize="@dimen/Frontsize_Viewxlarge1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -105,7 +105,7 @@
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BLogin"
-        app:layout_constraintVertical_bias="0.771" />
+        app:layout_constraintVertical_bias="0.42000002" />
 
 
 
