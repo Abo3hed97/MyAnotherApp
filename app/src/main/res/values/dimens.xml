@@ -3,6 +3,6 @@
     <dimen name="Frontsizetext_Viewnormal">8pt</dimen>
     <dimen name="Frontsizetext_View">10pt</dimen>
     <dimen name="Frontsize_Viewlarge1">10pt</dimen>
-    <dimen name="Frontsize_Viewxlarge1">12pt</dimen>
+    <dimen name="Frontsize_Viewxlarge1">14pt</dimen>
     <dimen name="Frontsize_Viewsmall">3pt</dimen>
 </resources>
