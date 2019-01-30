@@ -123,6 +123,8 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         weekDays();
 
 
+
+
         ForwardB = (Button) findViewById(R.id.ForwardButton);
         ForwardB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,10 +232,12 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         textViewDate = findViewById(R.id.date);
         textViewDate.setText(currentDate);
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        for (int i = Calendar.SUNDAY; i <= Calendar.SATURDAY; i++) {
-            cal.set(Calendar.DAY_OF_WEEK, i);
-            currentDate = sdf.format(cal.getTime());
-            days.add(currentDate);
+        if(days.isEmpty()) {
+            for (int i = Calendar.SUNDAY; i <= Calendar.SATURDAY; i++) {
+                cal.set(Calendar.DAY_OF_WEEK, i);
+                currentDate = sdf.format(cal.getTime());
+                days.add(currentDate);
+            }
         }
         weekdays = (ListView) findViewById(R.id.weekList);
         setArrayAdapter();
