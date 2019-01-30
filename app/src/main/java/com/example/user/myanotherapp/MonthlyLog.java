@@ -206,6 +206,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         calendar3.setTime(date);
         if(calendar1.before(calendar2)) {
            backwordUnitlfindWeek();
+           return;
         }
         if(calendar1.after(calendar2)) {
            forwardUnitlFindWeek();

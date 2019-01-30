@@ -2,6 +2,7 @@ package com.example.user.myanotherapp;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,19 +44,35 @@ class CustomAdapter extends ArrayAdapter<String> {
 
         String day = getItem(position);
         TextView dayDate = (TextView) customView.findViewById(R.id.CustomDate);
-
-
-        dayDate.setText(day);
-
+        if(currentDate().equals(day)) {
+            //convert from Hexdecimal Value to Integer Value.
+            int valueOfColor = Color.parseColor("#d2842d");
+            //set the Orange Color.
+            dayDate.setTextColor(valueOfColor);
+            dayDate.setText(day);
+        }
+        else {
+            dayDate.setText(day);
+        }
 
 
         e=(ListView) customView.findViewById(R.id.lida);
-
-        e.setAdapter(b.get(position));
-
+            if(position<b.size()) {
+                e.setAdapter(b.get(position));
+            }
 
         return customView;
     }
+
+
+    public String currentDate()
+    {
+        Calendar cal = Calendar.getInstance();
+        String currentDate = DateFormat.getDateInstance().format(cal.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        return currentDate = sdf.format(cal.getTime());
+    }
+
 
 
 
