@@ -21,6 +21,20 @@
         <item>appointment</item>
         <item>note</item>
     </string-array>
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
     <string name="title_activity_list_of_notes">listOfNotes</string>
     <string name="btoAddBullet">Button</string>
     <string name="d">TextView</string>

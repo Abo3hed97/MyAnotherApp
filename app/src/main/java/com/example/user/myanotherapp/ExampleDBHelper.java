@@ -19,6 +19,7 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
     //New Bullet Table
     public static final String INPUT_TABLE_NAME = "input";
     public static final String INPUT_COLUMN_ID = "_id";
+    public static final String INPUT_COLUMN_UID = "uid";
     public static final String INPUT_COLUMN_Title = "title";
     public static final String INPUT_COLUMN_Text = "text";
     public static final String INPUT_COLUMN_DateFrom = "dateFrom";
@@ -26,7 +27,9 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
     public static final String INPUT_COLUMN_TimeFrom = "timeFrom";
     public static final String INPUT_COLUMN_TimeTo = "timeTo";
     public static final String INPUT_COLUMN_Type = "type";
-
+    public static final String INPUT_COLUMN_Months = "months";
+    public static final String INPUT_COLUMN_Imp = "imp";
+    public static final String INPUT_COLUMN_Vimp = "vimp";
     //Login Table
     private static final String TABLE_USER = "user";
     private static final String COLUMN_USER_ID = "user_id";
@@ -47,14 +50,16 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
                     INPUT_COLUMN_TimeFrom + " TEXT, " +
                     INPUT_COLUMN_TimeTo + " TEXT, " +
                     INPUT_COLUMN_Type + " TEXT, " +
-                    INPUT_COLUMN_Text + " TEXT " +
-                    ")"
-           ;
+                    INPUT_COLUMN_Months + " TEXT, " +
+                    INPUT_COLUMN_Imp + " INTEGER, " +
+                    INPUT_COLUMN_Vimp + " INTEGER, " +
+                    INPUT_COLUMN_Text + " TEXT, " +
+                    INPUT_COLUMN_UID + " INTEGER, " +
+                    " FOREIGN KEY (" + INPUT_COLUMN_UID + ") REFERENCES " + TABLE_USER + "(" + COLUMN_USER_ID + "))";
 
     public ExampleDBHelper(Context context) {
         super(context, DATABASE_NAME , null, DATABASE_VERSION);
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_CREATE);
@@ -72,7 +77,8 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean insertPerson(String title,String text,String dateFrom,String dateTo,String timeFrom,String timeTo,String type)
+    public boolean insertPerson(String title,String text,String dateFrom,String dateTo,
+                                String timeFrom,String timeTo,String type,String months,int imp,int vimp)
     {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -83,6 +89,9 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
         contentValues.put(INPUT_COLUMN_TimeFrom,timeFrom);
         contentValues.put(INPUT_COLUMN_TimeTo,timeTo);
         contentValues.put(INPUT_COLUMN_Type,type);
+        contentValues.put(INPUT_COLUMN_Months,months);
+        contentValues.put(INPUT_COLUMN_Imp,imp);
+        contentValues.put(INPUT_COLUMN_Vimp,vimp);
         db.insert(INPUT_TABLE_NAME, null, contentValues);
 
         return true;

@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,40 +26,56 @@ public class New_Bullet extends FragmentActivity {
     static EditText DateEdit_To;
     static EditText TimeEdit_To;
     Spinner type;
+    Spinner months;
     TextView displayTextView;
     String spinnerType;
     DialogFragment TimeFragment = new TimePickerFragment();
     DialogFragment DateFragment = new DatePickerFragment();
     ListView mobile_list;
     ArrayList<HashMap<String, String>> dataList = new ArrayList<HashMap<String, String>>();
-
     ExampleDBHelper db;
     EditText n_title;
     EditText n_text;
-    String title,text,dateFrom,dateTo,timeFrom,timeTo,typ;
+    RadioGroup radioGroup;
+    RadioButton nImp;
+    RadioButton Imp;
+    RadioButton vImp;
+    String title, text, dateFrom, dateTo, timeFrom, timeTo, typ,monthS;
+    int imp=0;
+    int vimp=0;
     public static SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_bullet);
-        DateEdit_From =  findViewById(R.id.Date_From);
+        DateEdit_From = findViewById(R.id.Date_From);
         TimeEdit_From = findViewById(R.id.Time_From);
         DateEdit_To = findViewById(R.id.Date_To);
         TimeEdit_To = findViewById(R.id.Time_To);
+        n_title = (EditText) findViewById(R.id.title);
+        n_text = (EditText) findViewById(R.id.text);
+        nImp = findViewById(R.id.nimp);
+        Imp = findViewById(R.id.imp);
+        vImp = findViewById(R.id.vimp);
+        type = findViewById(R.id.Type);
+        months = findViewById(R.id.months);
         DateFragment = new DatePickerFragment();
+        months.setVisibility(View.INVISIBLE);
+
+
         DateEdit_From.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                showTruitonDatePickerDialog(v,DateEdit_From);
+                showTruitonDatePickerDialog(v, DateEdit_From);
 
             }
         });
         TimeEdit_From.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showTruitonTimePickerDialog(v,TimeEdit_From);
+                showTruitonTimePickerDialog(v, TimeEdit_From);
 
             }
         });
@@ -66,38 +84,38 @@ public class New_Bullet extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-                showTruitonDatePickerDialog(v,DateEdit_To);
+                showTruitonDatePickerDialog(v, DateEdit_To);
 
             }
         });
         TimeEdit_To.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showTruitonTimePickerDialog(v,TimeEdit_To);
+                showTruitonTimePickerDialog(v, TimeEdit_To);
 
             }
         });
 
 
-        type = findViewById(R.id.Type);
+
 
         ArrayAdapter<String> types = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.type));
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.type));
         types.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         type.setAdapter(types);
+
+
+        ArrayAdapter<String> month = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.months));
+        month.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        months.setAdapter(month);
         // EditText
 
-        db=new ExampleDBHelper(getApplicationContext());
+        db = new ExampleDBHelper(getApplicationContext());
         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
 
-
-        n_title=(EditText) findViewById(R.id.title);
-        n_text=(EditText) findViewById(R.id.text);
-
-
-
         Button clickButton = (Button) findViewById(R.id.save);
-        clickButton.setOnClickListener( new View.OnClickListener() {
+        clickButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -107,18 +125,15 @@ public class New_Bullet extends FragmentActivity {
                 dateTo = DateEdit_To.getText().toString();
                 timeFrom = TimeEdit_From.getText().toString();
                 timeTo = TimeEdit_To.getText().toString();
-                typ=type.getSelectedItem().toString();
+                typ = type.getSelectedItem().toString();
+                monthS = months.getSelectedItem().toString();
 
 
-
-
-                if( title.length() == 0||text.length() == 0){
+                if (title.length() == 0 || text.length() == 0) {
                     Toast.makeText(getApplicationContext(), "title or text box is empty !!!",
                             Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    db.insertPerson(title,text,dateFrom,dateTo,timeFrom,timeTo,typ);
+                } else {
+                    db.insertPerson(title, text, dateFrom, dateTo, timeFrom, timeTo, typ,monthS,imp,vimp);
                     Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_LONG).show();
                     Intent intentRegister = new Intent(getApplicationContext(), DailyLogActivity.class);
                     startActivity(intentRegister);
@@ -127,13 +142,13 @@ public class New_Bullet extends FragmentActivity {
         });
 
     }
-    public void opentestListView()
-    {
+
+    public void opentestListView() {
         Intent intent = new Intent(this, listOfNotes.class);
         startActivity(intent);
     }
 
-    public void showTruitonDatePickerDialog(View v,EditText Date) {
+    public void showTruitonDatePickerDialog(View v, EditText Date) {
 
 
         ((DatePickerFragment) DateFragment).DateEdit = Date;
@@ -142,12 +157,68 @@ public class New_Bullet extends FragmentActivity {
     }
 
 
-    public void showTruitonTimePickerDialog(View v,EditText Time) {
+    public void showTruitonTimePickerDialog(View v, EditText Time) {
 
 
         ((TimePickerFragment) TimeFragment).DateEdit = Time;
         TimeFragment.show(getSupportFragmentManager(), "timePicker");
     }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch (view.getId()) {
+            case R.id.nimp:
+                if (checked)
+                {
+                    DateEdit_From.setVisibility(View.VISIBLE);
+                    TimeEdit_From.setVisibility(View.VISIBLE);
+                    DateEdit_To.setVisibility(View.VISIBLE);
+                    TimeEdit_To.setVisibility(View.VISIBLE);
+                    n_title.setVisibility(View.VISIBLE);
+                    n_text.setVisibility(View.VISIBLE);
+                    type.setVisibility(View.VISIBLE);
+                    months.setVisibility(View.INVISIBLE);
+                    imp = 0;
+                    vimp = 0;
+
+                }
+                    break;
+            case R.id.imp:
+                if (checked)
+                {
+                    DateEdit_From.setVisibility(View.VISIBLE);
+                    TimeEdit_From.setVisibility(View.VISIBLE);
+                    DateEdit_To.setVisibility(View.VISIBLE);
+                    TimeEdit_To.setVisibility(View.VISIBLE);
+                    type.setVisibility(View.VISIBLE);
+                    n_title.setVisibility(View.VISIBLE);
+                    n_text.setVisibility(View.VISIBLE);
+                    months.setVisibility(View.VISIBLE);
+                    imp = 1;
+                    vimp=0;
+                }
+                break;
+            case R.id.vimp:
+                if (checked)
+                {
+                    DateEdit_From.setVisibility(View.VISIBLE);
+                    TimeEdit_From.setVisibility(View.VISIBLE);
+                    DateEdit_To.setVisibility(View.VISIBLE);
+                    TimeEdit_To.setVisibility(View.VISIBLE);
+                    type.setVisibility(View.VISIBLE);
+                    n_title.setVisibility(View.VISIBLE);
+                    n_text.setVisibility(View.VISIBLE);
+                    months.setVisibility(View.VISIBLE);
+                    vimp = 1;
+                    imp = 0;
+                }
+                    break;
+
+
+        }
     /*public void BokaBoka(View view) {
         spinnerType = type.getSelectedItem().toString();
         Toast toast = Toast.makeText(getApplicationContext(),
@@ -158,4 +229,5 @@ public class New_Bullet extends FragmentActivity {
 
     }*/
 
+    }
 }
