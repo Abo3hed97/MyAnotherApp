@@ -14,8 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class DatePickerFragment extends  DialogFragment implements
-        DatePickerDialog.OnDateSetListener {
+public class DatePickerFragment extends  DialogFragment implements DatePickerDialog.OnDateSetListener {
     EditText DateEdit;
     int year;
     int month;

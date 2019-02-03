@@ -39,8 +39,8 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
                 //convert from Hexdecimal Value to Integer Value.
                 int valueOfColor = Color.parseColor("#1f214b");
                 //set the Orange Color.
-                dayofMonth.setTextColor(valueOfColor);
-                dayofMonth.setText(d.get(position));
+                 dayofMonth.setTextColor(valueOfColor);
+                 dayofMonth.setText(d.get(position));
                 //  }
             }
             else{
@@ -72,8 +72,11 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
             }
             // Then get the day of week from the Date based on specific locale.
             String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date);
-            current = 30 + "." + dayOfWeek;
+            current = day + "." + dayOfWeek;
             return current;
         }
+
+
+
     }
 
