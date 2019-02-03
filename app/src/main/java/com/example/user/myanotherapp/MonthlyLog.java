@@ -55,15 +55,20 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
     int month;
 
+    TextView mothName;
+
+    int monthNumber;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monthly_log);
 
         monthdaysListView= findViewById(R.id.listofdays);
-        TextView mothName= findViewById(R.id.DLMN);
+        mothName= findViewById(R.id.DLMN);
 
-        int monthNumber=Calendar.getInstance().get(Calendar.MONTH);
+        monthNumber=Calendar.getInstance().get(Calendar.MONTH);
         String currentMonth=getMonthForInt(monthNumber);
         mothName.setText(currentMonth);
 
@@ -199,11 +204,15 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
      */
     public void getSpecifiedWeek(int selectedDay) throws ParseException {
         DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = formatter.parse(days.get(0));
+        Date date1 = formatter.parse(days.get(0));
         assignToInstance();
         calendar1.set(Calendar.DATE, selectedDay);
-        calendar2.setTime(date);
-        calendar3.setTime(date);
+        Date date2 = new SimpleDateFormat("MMMM").parse(mothName.getText().toString());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date2);
+        calendar1.set(Calendar.MONTH,cal.get(Calendar.MONTH));
+        calendar2.setTime(date1);
+        calendar3.setTime(date1);
         if(calendar1.before(calendar2)) {
            backwordUnitlfindWeek();
            return;
@@ -309,11 +318,17 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
     @Override
     public void forwards() throws ParseException {
             addDays(1);
+            monthNumber+=1;
+            String currentMonth=getMonthForInt(monthNumber);
+            mothName.setText(currentMonth);
     }
 
     @Override
     public void Backwards() throws ParseException {
         addDays(-1);
+        monthNumber-=1;
+        String currentMonth=getMonthForInt(monthNumber);
+        mothName.setText(currentMonth);
     }
 
 
