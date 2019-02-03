@@ -110,15 +110,15 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private void initViews() {
 
-        textInputLayoutName = (TextInputLayout) findViewById(R.id.textInputLayoutName);
-        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
-        textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPassword);
-        textInputLayoutConfirmPassword = (TextInputLayout) findViewById(R.id.textInputLayoutConfirmPassword);
+        textInputLayoutName = findViewById(R.id.textInputLayoutName);
+        textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
+        textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
+        textInputLayoutConfirmPassword = findViewById(R.id.textInputLayoutConfirmPassword);
 
-        textInputEditTextName = (TextInputEditText) findViewById(R.id.textInputEditTextName);
-        textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
-        textInputEditTextPassword = (TextInputEditText) findViewById(R.id.textInputEditTextPassword);
-        textInputEditTextConfirmPassword = (TextInputEditText) findViewById(R.id.textInputEditTextConfirmPassword);
+        textInputEditTextName = findViewById(R.id.textInputEditTextName);
+        textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
+        textInputEditTextPassword = findViewById(R.id.textInputEditTextPassword);
+        textInputEditTextConfirmPassword = findViewById(R.id.textInputEditTextConfirmPassword);
 
         appCompatButtonRegister = findViewById(R.id.appCompatButtonRegister);
 
@@ -183,7 +183,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
             Toast tost = new Toast(this);
-            tost.makeText(getApplicationContext(), "Registration successful", tost.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_LONG).show();
             emptyInputEditText();
             finish();
 
@@ -191,7 +191,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
 
             Toast tost = new Toast(this);
-            tost.makeText(getApplicationContext(), "Email already exists", tost.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_LONG).show();
 
         }
 

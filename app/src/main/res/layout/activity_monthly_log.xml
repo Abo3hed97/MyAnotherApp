@@ -10,13 +10,18 @@
         android:id="@+id/DLMN"
         android:layout_width="378dp"
         android:layout_height="57dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textPersonName"
         android:text="Name"
-        android:gravity="center"
-        android:textSize="35dp"
         android:textColor="@color/design_default_color_primary"
-        />
+        android:textSize="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/listofdays"
@@ -33,29 +38,34 @@
 
     <Button
         android:id="@+id/prevoiusMonth"
-        android:layout_width="81dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="96dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
         android:text="prevoius"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.439" />
+        app:layout_constraintTop_toBottomOf="@+id/nextMonth" />
 
     <Button
         android:id="@+id/nextMonth"
         android:layout_width="96dp"
         android:layout_height="34dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="50dp"
         android:text="next"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.292" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="96dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:onClick="monthlyTask"
+        android:text="Task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prevoiusMonth" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -91,13 +91,13 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_log);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        mDrawerLayout = findViewById(R.id.drawer);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        toGoAddB=(Button)findViewById(R.id.btogotoAddBullet);
+        toGoAddB= findViewById(R.id.btogotoAddBullet);
         toGoAddB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +113,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
 
 
 
-        NavigationView navigationView=(NavigationView)findViewById(R.id.navView);
+        NavigationView navigationView= findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -125,7 +125,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
 
 
 
-        ForwardB = (Button) findViewById(R.id.ForwardButton);
+        ForwardB = findViewById(R.id.ForwardButton);
         ForwardB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +142,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         });
 
 
-        BackwardB = (Button) findViewById(R.id.BackwordButton);
+        BackwardB = findViewById(R.id.BackwordButton);
         BackwardB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,7 +156,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         });
 
 
-        gotoMonthly=(Button)findViewById(R.id.goToMothlyLog);
+        gotoMonthly= findViewById(R.id.goToMothlyLog);
         gotoMonthly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -239,7 +239,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
                 days.add(currentDate);
             }
         }
-        weekdays = (ListView) findViewById(R.id.weekList);
+        weekdays = findViewById(R.id.weekList);
         setArrayAdapter();
     }
 
@@ -301,7 +301,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     public void addDays(int day,int anotherDay) throws ParseException {
         DateFormat formatter ;
         formatter= new SimpleDateFormat("dd.MM.yyyy");
-        Date date=(Date)formatter.parse(days.get(day));
+        Date date= formatter.parse(days.get(day));
         Calendar cal=Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.DATE,anotherDay);

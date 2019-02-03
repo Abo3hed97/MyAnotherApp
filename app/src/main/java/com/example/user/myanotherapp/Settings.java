@@ -21,7 +21,7 @@ public class Settings extends AppCompatActivity {
         sett.add("Change Color");
         sett.add("Change Language");
 
-        ListView s=(ListView)findViewById(R.id.ActivitySettings);
+        ListView s= findViewById(R.id.ActivitySettings);
         ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,sett);
         s.setAdapter(arrayAdapter);
 

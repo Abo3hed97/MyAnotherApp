@@ -19,10 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.List;
 
-import static com.example.user.myanotherapp.ExampleDBHelper.INPUT_COLUMN_DateFrom;
-import static com.example.user.myanotherapp.ExampleDBHelper.INPUT_COLUMN_ID;
-import static com.example.user.myanotherapp.listOfNotes.INPUT_COLUMN_Text;
-import static com.example.user.myanotherapp.listOfNotes.INPUT_COLUMN_Title;
 
 class CustomAdapter extends ArrayAdapter<String> {
 
@@ -43,7 +39,7 @@ class CustomAdapter extends ArrayAdapter<String> {
         View customView = abdulinflator.inflate(R.layout.custom_row, parent, false);
 
         String day = getItem(position);
-        TextView dayDate = (TextView) customView.findViewById(R.id.CustomDate);
+        TextView dayDate = customView.findViewById(R.id.CustomDate);
         if(currentDate().equals(day)) {
             //convert from Hexdecimal Value to Integer Value.
             int valueOfColor = Color.parseColor("#d2842d");
@@ -56,7 +52,7 @@ class CustomAdapter extends ArrayAdapter<String> {
         }
 
 
-        e=(ListView) customView.findViewById(R.id.lida);
+        e= customView.findViewById(R.id.lida);
             if(position<b.size()) {
                 e.setAdapter(b.get(position));
             }

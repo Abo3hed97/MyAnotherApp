@@ -8,9 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.user.myanotherapp.listOfNotes.INPUT_COLUMN_Title;
-
 public class ExampleDBHelper extends SQLiteOpenHelper {
 
 
@@ -72,6 +69,15 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + INPUT_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_USER);
         onCreate(db);
+    }
+    public boolean insertPerson(String title,String text,String month) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(INPUT_COLUMN_Title, title);
+        contentValues.put(INPUT_COLUMN_Text, text);
+        contentValues.put(INPUT_COLUMN_Months, month);
+        db.insert(INPUT_TABLE_NAME, null, contentValues);
+        return true;
     }
 
 
@@ -218,11 +224,8 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
 
-        if (cursorCount > 0) {
-            return true;
-        }
+        return cursorCount > 0;
 
-        return false;
     }
     //Test
     public boolean checkUser(String email, String password) {
@@ -254,11 +257,8 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
         cursor.close();
         db.close();
-        if (cursorCount > 0) {
-            return true;
-        }
+        return cursorCount > 0;
 
-        return false;
     }
 
 
@@ -271,12 +271,6 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
             Cursor cursor = this.getAllPersons();
             if (cursor.moveToFirst()) {
                 while (cursor.isAfterLast() == false) {
-
-                  /*  HashMap<String, String> map = new HashMap<String, String>();
-                    map.put(INPUT_COLUMN_ID, cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_ID)));
-                    map.put(INPUT_COLUMN_Title, cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title)));
-                    map.put(INPUT_COLUMN_Text, cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Text)));
-                    map.put(INPUT_COLUMN_DateFrom,cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom)));*/
 
                     String check = cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom));
                     if (d.get(i).equals(check)) {

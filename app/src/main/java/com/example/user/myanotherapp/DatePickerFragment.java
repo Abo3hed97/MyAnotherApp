@@ -50,7 +50,7 @@ public class DatePickerFragment extends  DialogFragment implements
        DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         Date date = null;
         try {
-            date = (Date)formatter.parse(c);
+            date = formatter.parse(c);
         } catch (ParseException e) {
             e.printStackTrace();
         }

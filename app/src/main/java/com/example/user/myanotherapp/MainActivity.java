@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         databaseHelper = new ExampleDBHelper(this);
         inputValidation = new InputValidation(this);
-        loginB=(Button) findViewById(R.id.BLogin);
+        loginB= findViewById(R.id.BLogin);
         textViewLinkRegister = findViewById(R.id.newAccount);
         Activity dailyLog=new DailyLogActivity();
         //Onclick(loginB,dailyLog);
@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
         textInputLayoutEmail =  findViewById(R.id.textInputLayoutEmail);
         textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
-        textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
-        textInputEditTextPassword = (TextInputEditText) findViewById(R.id.textInputEditTextPassword);
+        textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
+        textInputEditTextPassword = findViewById(R.id.textInputEditTextPassword);
         /*test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             Toast tost = new Toast(this);
-            tost.makeText(getApplicationContext(), "Wrong Email or Password", tost.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Wrong Email or Password", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -138,5 +138,6 @@ public class MainActivity extends AppCompatActivity {
         textInputEditTextEmail.setText(null);
         textInputEditTextPassword.setText(null);
     }
+
 
 }

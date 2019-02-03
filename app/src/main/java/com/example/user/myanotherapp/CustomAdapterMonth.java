@@ -32,7 +32,7 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
         View customView = abdulinflator.inflate(R.layout.customrowm, parent, false);
 
         // String day = getItem(position);
-        TextView dayofMonth = (TextView) customView.findViewById(R.id.domoy);
+        TextView dayofMonth = customView.findViewById(R.id.domoy);
         if (position != d.size()) {
             //String day=d.get(position);
             if (d.get(position).equals(currentDate())) {
@@ -46,7 +46,7 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
             else{
                 dayofMonth.setText(d.get(position));
             }
-            TextView tv = (TextView) customView.findViewById(R.id.listoft);
+            TextView tv = customView.findViewById(R.id.listoft);
 
 
         }

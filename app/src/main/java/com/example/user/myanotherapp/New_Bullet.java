@@ -53,8 +53,8 @@ public class New_Bullet extends FragmentActivity {
         TimeEdit_From = findViewById(R.id.Time_From);
         DateEdit_To = findViewById(R.id.Date_To);
         TimeEdit_To = findViewById(R.id.Time_To);
-        n_title = (EditText) findViewById(R.id.title);
-        n_text = (EditText) findViewById(R.id.text);
+        n_title = findViewById(R.id.title);
+        n_text = findViewById(R.id.text);
         nImp = findViewById(R.id.nimp);
         Imp = findViewById(R.id.imp);
         vImp = findViewById(R.id.vimp);
@@ -114,7 +114,7 @@ public class New_Bullet extends FragmentActivity {
         db = new ExampleDBHelper(getApplicationContext());
         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
 
-        Button clickButton = (Button) findViewById(R.id.save);
+        Button clickButton = findViewById(R.id.save);
         clickButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -143,10 +143,7 @@ public class New_Bullet extends FragmentActivity {
 
     }
 
-    public void opentestListView() {
-        Intent intent = new Intent(this, listOfNotes.class);
-        startActivity(intent);
-    }
+
 
     public void showTruitonDatePickerDialog(View v, EditText Date) {
 

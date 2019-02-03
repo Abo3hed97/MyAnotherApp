@@ -60,8 +60,8 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monthly_log);
 
-        monthdaysListView=(ListView)findViewById(R.id.listofdays);
-        TextView mothName=(TextView) findViewById(R.id.DLMN);
+        monthdaysListView= findViewById(R.id.listofdays);
+        TextView mothName= findViewById(R.id.DLMN);
 
         int monthNumber=Calendar.getInstance().get(Calendar.MONTH);
         String currentMonth=getMonthForInt(monthNumber);
@@ -92,7 +92,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
 
 
-        nextMonthButton=(Button)findViewById(R.id.nextMonth);
+        nextMonthButton= findViewById(R.id.nextMonth);
         nextMonthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +103,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
                 }
             }
         });
-        previuosMonthButton=(Button)findViewById(R.id.prevoiusMonth);
+        previuosMonthButton= findViewById(R.id.prevoiusMonth);
         previuosMonthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,7 +199,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
      */
     public void getSpecifiedWeek(int selectedDay) throws ParseException {
         DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = (Date) formatter.parse(days.get(0));
+        Date date = formatter.parse(days.get(0));
         assignToInstance();
         calendar1.set(Calendar.DATE, selectedDay);
         calendar2.setTime(date);
@@ -343,21 +343,9 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void monthlyTask(View view) {
+        Intent intent = new Intent(this, MonthlyTasks.class);
+        startActivity(intent);
+    }
 }// End of the Class
 

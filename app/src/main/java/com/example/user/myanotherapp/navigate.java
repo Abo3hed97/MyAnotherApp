@@ -4,6 +4,6 @@ import java.text.ParseException;
 import java.util.Calendar;
 
 public interface navigate {
-    public void forwards() throws ParseException;
-    public void Backwards() throws ParseException;
+    void forwards() throws ParseException;
+    void Backwards() throws ParseException;
 }
