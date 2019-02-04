@@ -19,10 +19,12 @@ import java.util.Locale;
 public class CustomAdapterMonth extends ArrayAdapter<String> {
 
     ArrayList<String> d = new ArrayList<>();
+    String[] b=new String[32];
 
-    public CustomAdapterMonth(Context context, ArrayList<String> daysoMonth) {
+    public CustomAdapterMonth(Context context, ArrayList<String> daysoMonth,String[] daysofMonth2) {
         super(context, R.layout.customrowm, daysoMonth);
         this.d = daysoMonth;
+        this.b=daysofMonth2;
     }
 
 
@@ -37,9 +39,9 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
             //String day=d.get(position);
             if (d.get(position).equals(currentDate())) {
                 //convert from Hexdecimal Value to Integer Value.
-                int valueOfColor = Color.parseColor("#1f214b");
+                int valueOfColor1 = Color.parseColor("#1f214b");
                 //set the Orange Color.
-                 dayofMonth.setTextColor(valueOfColor);
+                 dayofMonth.setTextColor(valueOfColor1);
                  dayofMonth.setText(d.get(position));
                 //  }
             }
@@ -47,6 +49,13 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
                 dayofMonth.setText(d.get(position));
             }
             TextView tv = customView.findViewById(R.id.listoft);
+            if(b[position]!=null)
+            {
+                int valueOfColor2 = Color.parseColor("#1f214b");
+
+                tv.setTextColor(valueOfColor2);
+                tv.setText(b[position]);
+            }
 
 
         }

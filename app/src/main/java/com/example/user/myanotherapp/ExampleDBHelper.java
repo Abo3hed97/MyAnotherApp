@@ -5,8 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
+import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 public class ExampleDBHelper extends SQLiteOpenHelper {
 
@@ -189,7 +195,8 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
     }
     public void deleteUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
-        // delete user record by id
+        // de
+        // dlete user record by id
         db.delete(TABLE_USER, COLUMN_USER_ID + " = ?",
                 new String[]{String.valueOf(user.getId())});
         db.close();
@@ -290,6 +297,54 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
         return b;
 
     }
+
+    public String[] getMonthData(ArrayList<String> daysofMonths){
+
+      String[] t=new String[32];
+
+        TextView mn=MonthlyLog.mothName;
+        Date date2 = null;
+        try {
+            date2 = new SimpleDateFormat("MMMM").parse(mn.getText().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date2);
+        int number=cal.get(Calendar.MONTH);
+
+
+        for (int i = 0; i < 29; i++) {
+            Cursor cursor = this.getAllPersons();
+            if (cursor.moveToFirst()) {
+                while (cursor.isAfterLast() == false) {
+
+                    String check1 = cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom));
+                    String check2=cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Imp));
+                    if (daysofMonths.get(i).equals(check1)&&(check2.equals("1"))){
+
+                        //b.get(i).add(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title)));
+                        t[i+1]=".";
+                        t[i+1]+=cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title));
+                    }
+
+                    cursor.moveToNext();
+                }
+            }
+
+
+        }
+
+
+        return t;
+
+
+
+
+
+
+    }
+
 
 
     public String delete(String s)

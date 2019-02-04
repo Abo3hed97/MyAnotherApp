@@ -53,11 +53,16 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
      */
     Button previuosMonthButton;
 
+    ExampleDBHelper dBHelper;
+
     int month;
 
-    TextView mothName;
+   static TextView mothName;
 
     int monthNumber;
+
+
+    public static ArrayList<String> dBMonthDays=new ArrayList<>();
 
 
     @Override
@@ -72,6 +77,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         String currentMonth=getMonthForInt(monthNumber);
         mothName.setText(currentMonth);
 
+        dBHelper=new ExampleDBHelper(getApplicationContext());
         ArrayList<String>dom=new ArrayList<>();
         try {
             dom=getAllMonthdays();
@@ -80,7 +86,13 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         }
 
         ArrayList<String> f=new ArrayList<>();
-        aad=new CustomAdapterMonth(this,dom);
+        ArrayList<String> ddd=new ArrayList<>();
+        getDbMonthDays();
+            dBHelper.getMonthData(dBMonthDays);
+
+
+            aad=new CustomAdapterMonth(this,dom,dBHelper.getMonthData(dBMonthDays));
+
         monthdaysListView.setAdapter(aad);
         monthdaysListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -140,7 +152,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
     private ArrayList<String> getAllMonthdays() throws ParseException {
         Calendar c=Calendar.getInstance();
         //to save the Days of current Month
-         daysofM = new ArrayList<>();
+        daysofM = new ArrayList<>();
         // Assuming that you already have this.
         int year=Calendar.YEAR;
         month =c.get(Calendar.MONTH)+1;
@@ -362,5 +374,37 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         Intent intent = new Intent(this, MonthlyTasks.class);
         startActivity(intent);
     }
+
+
+
+    public void getDbMonthDays()
+    {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE,-2);
+        String currentDate = sdf.format(cal.getTime());
+        dBMonthDays.add(currentDate);
+        for(int i=1;i<getNumberofdaysinMonth()+1;i++)
+        {
+            cal.add(Calendar.DATE,1);
+            currentDate = sdf.format(cal.getTime());
+            dBMonthDays.add(currentDate);
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }// End of the Class
 
