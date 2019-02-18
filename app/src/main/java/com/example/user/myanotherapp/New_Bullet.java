@@ -100,8 +100,8 @@ public class New_Bullet extends FragmentActivity {
 
 
         ArrayAdapter<String> types = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.type));
-        types.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, getResources().getStringArray(R.array.type));
+        types.setDropDownViewResource(R.layout.spinner_item);
         type.setAdapter(types);
 
 

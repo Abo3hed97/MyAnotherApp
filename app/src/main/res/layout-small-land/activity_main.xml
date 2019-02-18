@@ -80,14 +80,16 @@
     <Button
         android:id="@+id/BLogin"
         style="@style/stylebutton"
-        android:layout_width="60dp"
-        android:layout_height="21dp"
+        android:layout_width="54dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
+        android:background="@drawable/button_color_design"
         android:fontFamily="sans-serif"
         android:text="@string/login"
+        android:textColor="@color/white"
         android:textSize="@dimen/Frontsize_Viewsmall"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,6 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/edlogo"
         app:layout_constraintVertical_bias="0.604"
+        tools:padding="2pt"
         tools:text="Login" />
 
     <TextView
