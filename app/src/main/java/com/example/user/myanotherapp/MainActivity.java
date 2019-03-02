@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         inputValidation = new InputValidation(this);
         loginB= findViewById(R.id.BLogin);
         textViewLinkRegister = findViewById(R.id.newAccount);
-        Activity dailyLog=new DailyLogActivity();
+       // Activity dailyLog=new DailyLogActivity();
         //Onclick(loginB,dailyLog);
 
         loginB.setOnClickListener(new View.OnClickListener() {

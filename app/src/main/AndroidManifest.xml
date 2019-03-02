@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Task_View"></activity>
+        <activity android:name=".Task_View" />
         <activity android:name=".New_Task" />
         <activity android:name=".MonthlyTasks" />
         <activity android:name=".MainActivity">
@@ -34,6 +34,7 @@
         <activity android:name=".Settings" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MonthlyLog" />
+        <activity android:name=".FutureLogActivity"></activity>
     </application>
 
 </manifest>

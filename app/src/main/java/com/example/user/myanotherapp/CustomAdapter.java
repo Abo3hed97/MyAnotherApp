@@ -1,7 +1,5 @@
 package com.example.user.myanotherapp;
 
-import android.content.Context;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +12,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.List;
 
 
 class CustomAdapter extends ArrayAdapter<String> {
 
     ArrayList<ArrayAdapter<String>>b=new ArrayList<>();
-    public CustomAdapter(Context context, ArrayList<String> days,ArrayList<ArrayAdapter<String>> h) {
+    public CustomAdapter(DailyLogActivity context, ArrayList<String> days, ArrayList<ArrayAdapter<String>> h) {
         super(context, R.layout.custom_row, days);
         this.b=h;
     }
@@ -52,7 +46,7 @@ class CustomAdapter extends ArrayAdapter<String> {
         }
 
 
-        e= customView.findViewById(R.id.lida);
+            e= customView.findViewById(R.id.lida);
             if(position<b.size()) {
                 e.setAdapter(b.get(position));
             }

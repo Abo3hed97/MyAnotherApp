@@ -5,7 +5,9 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -18,47 +20,60 @@ import java.util.Locale;
 
 public class CustomAdapterMonth extends ArrayAdapter<String> {
 
-    ArrayList<String> d = new ArrayList<>();
-    String[] b=new String[32];
-
-    public CustomAdapterMonth(Context context, ArrayList<String> daysoMonth,String[] daysofMonth2) {
+    ArrayList<ArrayList<String>> importantBullets;
+    MonthlyLogClass mlc=new MonthlyLogClass();
+    public CustomAdapterMonth(Context context, ArrayList<String> daysoMonth,ArrayList<ArrayList<String>> importantBullets) {
         super(context, R.layout.customrowm, daysoMonth);
-        this.d = daysoMonth;
-        this.b=daysofMonth2;
+        this.importantBullets=importantBullets;
     }
 
-
+   static ListView importantBulletsforDay;
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater abdulinflator = LayoutInflater.from(getContext());
         View customView = abdulinflator.inflate(R.layout.customrowm, parent, false);
 
-        // String day = getItem(position);
-        TextView dayofMonth = customView.findViewById(R.id.domoy);
-        if (position != d.size()) {
+           String day = getItem(position);
+           TextView dayofMonth = customView.findViewById(R.id.domoy);
             //String day=d.get(position);
-            if (d.get(position).equals(currentDate())) {
+            if (currentDate().equals(day)) {
                 //convert from Hexdecimal Value to Integer Value.
                 int valueOfColor1 = Color.parseColor("#1f214b");
                 //set the Orange Color.
                  dayofMonth.setTextColor(valueOfColor1);
-                 dayofMonth.setText(d.get(position));
+                 dayofMonth.setText(day);
                 //  }
             }
             else{
-                dayofMonth.setText(d.get(position));
+                dayofMonth.setText(day);
             }
-            TextView tv = customView.findViewById(R.id.listoft);
-            if(b[position]!=null)
-            {
-                int valueOfColor2 = Color.parseColor("#1f214b");
 
+
+               /* int valueOfColor2 = Color.parseColor("#1f214b");
                 tv.setTextColor(valueOfColor2);
-                tv.setText(b[position]);
-            }
+                tv.setText(b[position]);*/
+             TextView firstImp=customView.findViewById(R.id.firstImportantBullet);
+             TextView secondImp=customView.findViewById(R.id.secondImportantBullet);
+             if(importantBullets.get(position).size()==1)
+             {
+                 int valueOfColor2 = Color.parseColor("#1f214b");
+                 firstImp.setTextColor(valueOfColor2);
+                 firstImp.setTextSize(20);
+                 firstImp.setText(importantBullets.get(position).get(0));
+             }
+             if(importantBullets.get(position).size()==2)
+             {
+                 int valueOfColor2 = Color.parseColor("#1f214b");
+                 firstImp.setTextColor(valueOfColor2);
+                 firstImp.setTextSize(20);
+                 firstImp.setText(importantBullets.get(position).get(0));
+                 secondImp.setTextColor(valueOfColor2);
+                 secondImp.setTextSize(20);
+                 secondImp.setText(importantBullets.get(position).get(1));
+             }
 
 
-        }
+
         return customView;
     }
 

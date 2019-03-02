@@ -4,6 +4,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -78,7 +79,9 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private User user;
 
+    TextView passwordInforamtion;
 
+    TextInputEditText password;
     /**
      * ?
      * @param savedInstanceState
@@ -101,7 +104,10 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+        passwordInforamtion=findViewById(R.id.PasswordInformationen);
+
     }
+
 
     /**
      * Creates the text fields to input name, email and password (twice).
@@ -207,4 +213,12 @@ public class RegisterActivity extends AppCompatActivity {
         textInputEditTextPassword.setText(null);
         textInputEditTextConfirmPassword.setText(null);
     }
+
+    public void show(){
+        passwordInforamtion.setVisibility(View.VISIBLE);
+    }
+    public void hide(){
+        passwordInforamtion.setVisibility(View.INVISIBLE);
+    }
+
 }

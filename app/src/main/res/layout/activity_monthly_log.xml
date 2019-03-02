@@ -99,20 +99,38 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="80sp"
-        android:layout_height="45sp"
+        android:layout_width="125dp"
+        android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_color_design"
         android:onClick="monthlyTask"
-        android:text="task"
-        android:textColor="@color/white"
+        android:text="Task"
+        android:textColor="@color/colorAccent"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/nextMonth"
         app:layout_constraintStart_toEndOf="@+id/prevoiusMonth"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         tools:padding="3pt" />
+
+    <Button
+        android:id="@+id/goToFutureLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_color_design"
+        android:text="Future Log"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.954" />
 
 
 </android.support.constraint.ConstraintLayout>
