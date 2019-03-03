@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    android:background="@drawable/pic"
     >
 
     <ImageView
@@ -36,8 +35,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="19sp"
-        android:textColorHint="@color/white"
-        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.55"
@@ -50,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="E-Mail"
-            android:textColor="@color/design_default_color_primary"
+            android:textColor="@color/colorPrimary"
             android:textSize="8pt" />
     </android.support.design.widget.TextInputLayout>
 
@@ -64,8 +61,6 @@
         android:ems="10"
         android:hint="@string/password_Login"
         android:textSize="19sp"
-        android:textColorHint="@color/white"
-        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.55"
@@ -105,20 +100,31 @@
 
     <TextView
         android:id="@+id/newAccount"
-        android:layout_width="264dp"
-        android:layout_height="52dp"
+        android:layout_width="168dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/register_here"
         android:textColor="#D2842D"
-        android:textSize="20dp"
+        android:textSize="8pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.576"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BLogin"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.067" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="goTo"
+        android:text="ONLINEDBTEST"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

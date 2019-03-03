@@ -79,7 +79,6 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private User user;
 
-    TextView passwordInforamtion;
 
     TextInputEditText password;
     /**
@@ -104,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
-        passwordInforamtion=findViewById(R.id.PasswordInformationen);
+
 
     }
 
@@ -214,11 +213,6 @@ public class RegisterActivity extends AppCompatActivity {
         textInputEditTextConfirmPassword.setText(null);
     }
 
-    public void show(){
-        passwordInforamtion.setVisibility(View.VISIBLE);
-    }
-    public void hide(){
-        passwordInforamtion.setVisibility(View.INVISIBLE);
-    }
+
 
 }

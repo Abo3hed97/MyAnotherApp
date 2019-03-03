@@ -8,6 +8,8 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Mysql.MysqlTest"></activity>
         <activity android:name=".Task_View" />
         <activity android:name=".New_Task" />
         <activity android:name=".MonthlyTasks" />

@@ -110,51 +110,31 @@
         android:layout_width="114dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_color_design"
         android:text="REGISTER"
         android:textColor="@color/white"
         android:textSize="4pt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.539"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutConfirmPassword" />
 
     <TextView
         android:id="@+id/appCompatTextViewLoginLink"
-        android:layout_width="245dp"
-        android:layout_height="55dp"
+        android:layout_width="114dp"
+        android:layout_height="10dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Already a member? Login"
         android:textColor="#D2842D"
-        android:textSize="20dp"
+        android:textSize="4pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatButtonRegister" />
-
-
-    <TextView
-        android:id="@+id/PasswordInformationen"
-        android:layout_width="173dp"
-        android:layout_height="123dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="For a secure password,use:
-                      At least 8 characters
-                      One number(opt.)
-                      One special character(opt.)
-                      Capital and lowercase letters(opt.)"
-        android:textColor="@color/design_default_color_primary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
-        app:layout_constraintStart_toStartOf="parent"
-
-        />
 
 
 </android.support.constraint.ConstraintLayout>
