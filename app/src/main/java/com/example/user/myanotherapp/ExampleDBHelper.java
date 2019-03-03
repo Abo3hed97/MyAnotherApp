@@ -8,8 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.ContactsContract;
 import android.widget.TextView;
 
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -293,57 +295,70 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
         }
 
-
         return b;
+
 
     }
 
-    public String[] getMonthData(ArrayList<String> daysofMonths){
-
-      String[] t=new String[32];
-
-        TextView mn=MonthlyLog.mothName;
-        Date date2 = null;
-        try {
-            date2 = new SimpleDateFormat("MMMM").parse(mn.getText().toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date2);
-        int number=cal.get(Calendar.MONTH);
-
-
-        for (int i = 0; i < 29; i++) {
+    public ArrayList<ArrayList<String>> getImportantBullets(ArrayList<String> daysofMonths,int daysNumber,int month){
+        ArrayList<ArrayList<String>> importantBullets=new ArrayList<>();
+        for (int i = 0; i < daysNumber+1; i++) {
+            ArrayList<String> importantBulletsforDay=new ArrayList<>();
             Cursor cursor = this.getAllPersons();
             if (cursor.moveToFirst()) {
                 while (cursor.isAfterLast() == false) {
-
                     String check1 = cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom));
                     String check2=cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Imp));
                     if (daysofMonths.get(i).equals(check1)&&(check2.equals("1"))){
-
-                        //b.get(i).add(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title)));
-                        t[i+1]=".";
-                        t[i+1]+=cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title));
+                        importantBulletsforDay.add(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title)));
                     }
-
                     cursor.moveToNext();
                 }
             }
-
-
+            importantBullets.add(importantBulletsforDay);
         }
-
-
-        return t;
-
-
-
-
-
-
+        return importantBullets;
     }
+
+
+
+
+    public String[]getVeryImportantBullets(ArrayList<String>months,int year) throws ParseException {
+        String veryImportantBullets[]= new String[12];
+        String check1;
+        int check2;
+        for (int i =0; i < months.size(); i++) {
+            Cursor cursor = this.getAllPersons();
+            if (cursor.moveToFirst()) {
+                while (cursor.isAfterLast() == false) {
+                    Calendar cal = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                    cal.setTime(sdf.parse(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))));// all done
+                    check1 = getMonthForInt(cal.get(Calendar.MONTH));
+                    check2 = cal.get(Calendar.YEAR);
+                    String check3 = cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Vimp));
+                    if (check3.equals("1") &&months.get(i).equals(check1)&&String.valueOf(year).equals(String.valueOf(check2))) {
+                        veryImportantBullets[i]=cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title));
+                    }
+                    cursor.moveToNext();
+                }
+            }
+        }
+        return veryImportantBullets;
+    }
+
+
+   /* public Calendar convertToCalendar(String input) throws ParseException {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        cal.setTime(sdf.parse(input));// all done
+        return cal;
+    }*/
+
+
+
+
+
 
 
 
@@ -351,6 +366,16 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
     {
 
         return s.replace("null","");
+    }
+
+    String getMonthForInt(int num) {
+        String month = "";
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        if (num >= 0 && num <= 11 ) {
+            month = months[num];
+        }
+        return month;
     }
 
 

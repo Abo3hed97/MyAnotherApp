@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.user.myanotherapp.Mysql.MysqlTest;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextInputLayout textInputLayoutEmail;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         inputValidation = new InputValidation(this);
         loginB= findViewById(R.id.BLogin);
         textViewLinkRegister = findViewById(R.id.newAccount);
-        Activity dailyLog=new DailyLogActivity();
+       // Activity dailyLog=new DailyLogActivity();
         //Onclick(loginB,dailyLog);
 
         loginB.setOnClickListener(new View.OnClickListener() {
@@ -140,4 +142,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void goTo(View view) {
+        Intent intent = new Intent(this, MysqlTest.class);
+        startActivity(intent);
+    }
 }

@@ -138,6 +138,8 @@ public class New_Bullet extends FragmentActivity {
                     Intent intentRegister = new Intent(getApplicationContext(), DailyLogActivity.class);
                     startActivity(intentRegister);
                 }
+
+
             }
         });
 
