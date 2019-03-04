@@ -151,7 +151,7 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/button_color_design"
             android:fontFamily="sans-serif"
-            android:text="MonthlyTask"
+            android:text="MonthlyLogl"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="14sp"

@@ -102,6 +102,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_color_design"
+        android:onClick="monthlyTask"
         android:text="task"
         android:textColor="@color/white"
         android:textSize="14sp"

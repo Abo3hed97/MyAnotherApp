@@ -284,17 +284,10 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
     }
 
 
+    public void monthlyTask(View view) {
+        Intent intent=new Intent(this,MonthlyTasks.class);
+        startActivity(intent);
 
-
-
-
-
-
-
-
-
-
-
-
+    }
 }// End of the Class
 
