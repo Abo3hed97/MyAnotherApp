@@ -1,5 +1,6 @@
 package com.example.user.myanotherapp;
 
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import java.text.DateFormat;
@@ -31,12 +32,12 @@ public class MonthlyLogClass {
         if(!MonthlyLog.daysofMonth.isEmpty()) {
             MonthlyLog.daysofMonth.clear();
         }
-        int year =Calendar.getInstance().get(Calendar.YEAR);
+
         MonthlyLog.month += j;
 
         for (int i = 1; i <getNumberofdaysinMonth()+1; i++) {
             // First convert to Date. This is one of the many ways.
-            String dateString = String.format("%d-%d-%d", year, MonthlyLog.month, i);
+            String dateString = String.format("%d-%d-%d", MonthlyLog.year, MonthlyLog.month, i);
             Date date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
             // Then get the day of week from the Date based on specific locale.
             String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date);
@@ -212,22 +213,38 @@ public class MonthlyLogClass {
     /**
      * add the Days in numeric Form
      */
-    public void getDaysInInteger(int month) {
+    public void getDaysInInteger() {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         Calendar cal=Calendar.getInstance();
-        int n=-cal.get(Calendar.DAY_OF_MONTH);
-        cal.add(Calendar.DATE, n+1);
-        cal.add(Calendar.MONTH,month);
-        String currentDate = sdf.format(cal.getTime());
-        MonthlyLog.dBMonthDays.add(currentDate);
-        for (int i = 1; i < getNumberofdaysinMonth() + 1; i++) {
-            cal.add(Calendar.DATE, 1);
-            currentDate = sdf.format(cal.getTime());
+        if(cal.get(Calendar.MONTH)+1==MonthlyLog.month) {
+            int n = -(cal.get(Calendar.DAY_OF_MONTH));
+            cal.add(Calendar.DATE, n);
+            cal.add(Calendar.DATE,1);
+            String currentDate = sdf.format(cal.getTime());
             MonthlyLog.dBMonthDays.add(currentDate);
+            for (int i = 1; i < getNumberofdaysinMonth() + 1; i++) {
+                cal.add(Calendar.DATE, 1);
+                currentDate = sdf.format(cal.getTime());
+                MonthlyLog.dBMonthDays.add(currentDate);
+                Log.i("First",currentDate);
+            }
         }
-
-
+        else{
+            int differnz=cal.get(Calendar.MONTH)+1-MonthlyLog.month;
+            int k = -(cal.get(Calendar.DAY_OF_MONTH));
+            cal.add(Calendar.DATE, k);
+            cal.add(Calendar.DATE,1);
+            cal.add(Calendar.MONTH,-differnz);
+            String currentDate = sdf.format(cal.getTime());
+            MonthlyLog.dBMonthDays.add(currentDate);
+            for (int i = 1; i < getNumberofdaysinMonth() + 1; i++) {
+                cal.add(Calendar.DATE, 1);
+                currentDate = sdf.format(cal.getTime());
+                MonthlyLog.dBMonthDays.add(currentDate);
+                Log.i("Second",currentDate);
+            }
+        }
     }
 
 

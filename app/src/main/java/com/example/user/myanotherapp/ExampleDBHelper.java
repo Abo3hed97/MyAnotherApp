@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.DateFormatSymbols;
@@ -300,18 +301,19 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<ArrayList<String>> getImportantBullets(ArrayList<String> daysofMonths,int daysNumber,int month){
+    public ArrayList<ArrayList<String>> getImportantBullets(ArrayList<String> daysofMonths) throws ParseException {
         ArrayList<ArrayList<String>> importantBullets=new ArrayList<>();
-        for (int i = 0; i < daysNumber+1; i++) {
+        for (int i = 0; i < daysofMonths.size(); i++) {
             ArrayList<String> importantBulletsforDay=new ArrayList<>();
             Cursor cursor = this.getAllPersons();
             if (cursor.moveToFirst()) {
                 while (cursor.isAfterLast() == false) {
-                    String check1 = cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom));
-                    String check2=cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Imp));
-                    if (daysofMonths.get(i).equals(check1)&&(check2.equals("1"))){
+                      boolean check1 =cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom)).equals(daysofMonths.get(i));
+                      boolean check2=cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Imp)).equals("1");
+                    if (check1&&check2){
                         importantBulletsforDay.add(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title)));
-                    }
+
+                 }
                     cursor.moveToNext();
                 }
             }

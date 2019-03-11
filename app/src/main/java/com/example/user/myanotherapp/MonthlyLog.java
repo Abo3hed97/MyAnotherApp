@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -73,7 +75,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
     Button futureLog;
 
-
+   static int year=Calendar.getInstance().get(Calendar.YEAR);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,8 +90,10 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         mothName= findViewById(R.id.DLMN);
 
        // monthNumber=Calendar.getInstance().get(Calendar.MONTH);
-        String currentMonth=mlc.getMonthForInt(month-1);
-        mothName.setText(currentMonth);
+        String currentMonth;
+
+             currentMonth = monthName(month).concat("-").concat(String.valueOf(year));
+             mothName.setText(currentMonth);
         //End
 
 
@@ -100,7 +104,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         //print out the Days of the Current Month and their important Bullets
         try {
             mlc.addDaysofNavigatedMonth(0);
-            getImportantBullets(0);
+            getImportantBullets();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -146,7 +150,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
             public void onClick(View v) {
                 try {
                     forwards();
-                    getImportantBullets(1);
+                    getImportantBullets();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -165,7 +169,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
             public void onClick(View v) {
                 try {
                     Backwards();
-                    getImportantBullets(-1);
+                    getImportantBullets();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -210,10 +214,18 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
      */
     @Override
     public void forwards() throws ParseException {
-            mlc.addDaysofNavigatedMonth(1);
-            monthNumber+=1;
-            String currentMonth=mlc.getMonthForInt(monthNumber);
-            mothName.setText(currentMonth);
+        mlc.addDaysofNavigatedMonth(1);
+            if(month==13){
+                year++;
+                month=1;
+                String cuurentMonth=monthName(month).concat("-").concat(String.valueOf(year));
+                mothName.setText(cuurentMonth);
+            }
+          else{
+                String cuurentMonth=monthName(month).concat("-").concat(String.valueOf(year));
+                mothName.setText(cuurentMonth);
+            }
+
     }
 
 
@@ -226,10 +238,24 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
     @Override
     public void Backwards() throws ParseException {
         mlc.addDaysofNavigatedMonth(-1);
-        monthdaysListView.setAdapter(adapter);
-        monthNumber-=1;
-        String currentMonth=mlc.getMonthForInt(monthNumber);
-        mothName.setText(currentMonth);
+        if(month==0){
+            year--;
+            month=12;
+            String currentMonth=monthName(month).concat("-").concat(String.valueOf(year));
+            mothName.setText(currentMonth);
+        }
+        else{
+            String currentMonth=monthName(month).concat("-").concat(String.valueOf(year));
+            mothName.setText(currentMonth);
+        }
+
+
+        /* if(month-1==0){
+             year--;
+             String currentMonth=mlc.getMonthForInt(monthNumber).concat("-").concat(String.valueOf(year));
+        }*/
+      //  String currentMonth=mlc.getMonthForInt(monthNumber).concat("-").concat(String.valueOf(year));
+       // mothName.setText(currentMonth);
     }
 
 
@@ -270,18 +296,27 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
 
 
-    public void getImportantBullets(int number)
-    {
+    public void getImportantBullets() throws ParseException {
 
         ArrayList<ArrayList<String>> importantBullets;
         ArrayAdapter<String>AdapterforImportantBullets;
         if(!dBMonthDays.isEmpty()){dBMonthDays.clear();}
-        mlc.getDaysInInteger(number);
-        importantBullets=dBHelper.getImportantBullets(dBMonthDays,mlc.getNumberofdaysinMonth(),month);
+        mlc.getDaysInInteger();
+        String data=mothName.getText().toString();
+        importantBullets=dBHelper.getImportantBullets(dBMonthDays);
         AdapterforImportantBullets=new CustomAdapterMonth(this,daysofMonth,importantBullets);
         monthdaysListView.setAdapter(AdapterforImportantBullets);
 
     }
+
+
+    public String monthName(int i){
+    String months1[]=new String[13];
+    months1 = new String[]{"","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    return months1[i];
+    }
+
+
 
 
 
