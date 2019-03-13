@@ -217,7 +217,7 @@ public class MonthlyLogClass {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         Calendar cal=Calendar.getInstance();
-        if(cal.get(Calendar.MONTH)+1==MonthlyLog.month) {
+        if(cal.get(Calendar.MONTH)+1==MonthlyLog.month&&(cal.get(Calendar.YEAR)==MonthlyLog.year)) {
             int n = -(cal.get(Calendar.DAY_OF_MONTH));
             cal.add(Calendar.DATE, n);
             cal.add(Calendar.DATE,1);
@@ -231,11 +231,14 @@ public class MonthlyLogClass {
             }
         }
         else{
-            int differnz=cal.get(Calendar.MONTH)+1-MonthlyLog.month;
+            int monthDiffernz=cal.get(Calendar.MONTH)+1-MonthlyLog.month;
+            int yearDifferenz=cal.get(Calendar.YEAR)-MonthlyLog.year;
+            Log.i(String.valueOf(monthDiffernz),String.valueOf(yearDifferenz));
             int k = -(cal.get(Calendar.DAY_OF_MONTH));
             cal.add(Calendar.DATE, k);
             cal.add(Calendar.DATE,1);
-            cal.add(Calendar.MONTH,-differnz);
+            cal.add(Calendar.MONTH,-monthDiffernz);
+            cal.add(Calendar.YEAR,-yearDifferenz);
             String currentDate = sdf.format(cal.getTime());
             MonthlyLog.dBMonthDays.add(currentDate);
             for (int i = 1; i < getNumberofdaysinMonth() + 1; i++) {

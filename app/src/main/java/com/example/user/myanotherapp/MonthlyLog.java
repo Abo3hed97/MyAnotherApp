@@ -4,6 +4,7 @@ package com.example.user.myanotherapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -241,6 +242,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         if(month==0){
             year--;
             month=12;
+            Log.i(String.valueOf(month),String.valueOf(year));
             String currentMonth=monthName(month).concat("-").concat(String.valueOf(year));
             mothName.setText(currentMonth);
         }
@@ -296,14 +298,13 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
 
 
-    public void getImportantBullets(int number)
-    {
+    public void getImportantBullets() throws ParseException {
 
         ArrayList<ArrayList<String>> importantBullets;
         ArrayAdapter<String>AdapterforImportantBullets;
         if(!dBMonthDays.isEmpty()){dBMonthDays.clear();}
-        mlc.getDaysInInteger(number);
-        importantBullets=dBHelper.getImportantBullets(dBMonthDays,mlc.getNumberofdaysinMonth(),month);
+        mlc.getDaysInInteger();
+        importantBullets=dBHelper.getImportantBullets(dBMonthDays);
         AdapterforImportantBullets=new CustomAdapterMonth(this,daysofMonth,importantBullets);
         monthdaysListView.setAdapter(AdapterforImportantBullets);
 
