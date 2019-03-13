@@ -52,11 +52,13 @@
 
     <Button
         android:id="@+id/clickButton"
-        android:layout_width="71dp"
-        android:layout_height="61dp"
+        android:layout_width="117dp"
+        android:layout_height="0dp"
         android:layout_marginStart="168dp"
         android:layout_marginTop="36dp"
-        android:background="@drawable/ic_save"
+        android:background="@drawable/button_color_design"
+        android:text="Save"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text" />
 

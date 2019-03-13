@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 
 public class InputValidation {
     private Context context;
+    public InputValidation(){}
     public InputValidation(Context context) {
         this.context = context;
     }
@@ -33,6 +34,13 @@ public class InputValidation {
             return false;
         } else {
             textInputLayout.setErrorEnabled(false);
+        }
+        return true;
+    }
+    public boolean isInputEditTextEmail(String email) {
+        String value = email;
+        if (value.isEmpty() || !(value.indexOf("@") >-1)) {
+            return false;
         }
         return true;
     }

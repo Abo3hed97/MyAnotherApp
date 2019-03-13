@@ -296,14 +296,14 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
 
 
-    public void getImportantBullets() throws ParseException {
+    public void getImportantBullets(int number)
+    {
 
         ArrayList<ArrayList<String>> importantBullets;
         ArrayAdapter<String>AdapterforImportantBullets;
         if(!dBMonthDays.isEmpty()){dBMonthDays.clear();}
-        mlc.getDaysInInteger();
-        String data=mothName.getText().toString();
-        importantBullets=dBHelper.getImportantBullets(dBMonthDays);
+        mlc.getDaysInInteger(number);
+        importantBullets=dBHelper.getImportantBullets(dBMonthDays,mlc.getNumberofdaysinMonth(),month);
         AdapterforImportantBullets=new CustomAdapterMonth(this,daysofMonth,importantBullets);
         monthdaysListView.setAdapter(AdapterforImportantBullets);
 
@@ -323,13 +323,10 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
 
 
+    public void monthlyTask(View view) {
+        Intent intent=new Intent(this,MonthlyTasks.class);
+        startActivity(intent);
 
-
-
-
-
-
-
-
+    }
 }// End of the Class
 

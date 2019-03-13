@@ -8,7 +8,7 @@
 
     <ListView
         android:id="@+id/ActivitySettings"
-        android:layout_width="254dp"
+        android:layout_width="383dp"
         android:layout_height="273dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
