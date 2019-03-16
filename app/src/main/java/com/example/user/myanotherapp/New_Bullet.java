@@ -135,8 +135,9 @@ public class New_Bullet extends FragmentActivity {
                 } else {
                     db.insertPerson(title, text, dateFrom, dateTo, timeFrom, timeTo, typ,monthS,imp,vimp);
                     Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_LONG).show();
-                    Intent intentRegister = new Intent(getApplicationContext(), DailyLogActivity.class);
-                    startActivity(intentRegister);
+                      Intent intentRegister = new Intent(getApplicationContext(), DailyLogActivity.class);
+                      startActivity(intentRegister);
+
                 }
 
 

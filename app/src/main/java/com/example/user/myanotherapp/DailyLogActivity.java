@@ -51,7 +51,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     /**
      * to Add a new Bullet
      */
-    private Button addBullet;
+
     /**
      * is an Object of the ExampleDBHelper Class
      */
@@ -77,6 +77,9 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
 
    static ArrayAdapter<String> arrayAdapter;
 
+   Button button;
+   static int num;
+   static String day11;
 
    static ArrayList<String>zusatz;
     @Override
@@ -119,6 +122,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
                     dailyLogClass.addDays(6,1);
                     getBullets();
                 } catch (ParseException e) {
+
                     e.printStackTrace();
                 }
             }
@@ -143,15 +147,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         //End
 
 
-        //to go to the NewBulletActivity and Create a new Activity
-        addBullet= findViewById(R.id.btogotoAddBullet);
-        addBullet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveToNewBulletActivity();
-            }
-        });
-        //End
+
 
 
 
@@ -241,8 +237,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     {
         ArrayList<ArrayAdapter<String>> listOfArrayAdapters=new ArrayList<>();
         for(int i=0;i<7;i++) {
-            listOfArrayAdapters.add(new ArrayAdapter(this, android.R.layout.simple_list_item_1, bullets.get(i)));
-        }
+            listOfArrayAdapters.add(new ArrayAdapter(this, android.R.layout.simple_list_item_1, bullets.get(i)));}
         return listOfArrayAdapters;
     }
 
@@ -250,7 +245,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     /**
      * Take us to newBullet Activity
      */
-    public void moveToNewBulletActivity()
+    public  void moveToNewBulletActivity()
     {
 
         Intent intent=new Intent(this,New_Bullet.class);
@@ -275,6 +270,8 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         Intent intent=new Intent(this,Settings.class);
         startActivity(intent);
     }
+
+
 
 
 
