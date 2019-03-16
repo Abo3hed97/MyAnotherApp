@@ -308,8 +308,12 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
             Cursor cursor = this.getAllPersons();
             if (cursor.moveToFirst()) {
                 while (cursor.isAfterLast() == false) {
-                      boolean check1 =cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom)).equals(daysofMonths.get(i));
-                      boolean check2=cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Imp)).equals("1");
+                      boolean check1=false;
+                    boolean check2=false;
+                      if(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))!=null){
+                          check1 =cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom)).equals(daysofMonths.get(i));}
+                      if(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))!=null){
+                       check2=cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Imp)).equals("1");}
                     if (check1&&check2){
                         importantBulletsforDay.add(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title)));
 
@@ -378,7 +382,57 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
             month = months[num];
         }
         return month;
+        }
+
+
+
+
+    public List<Bullet> loadData(String day) {
+
+        Cursor cursor = this.getAllPersons();
+        List<Bullet> bullets=new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast())
+                {
+                       if(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))!=null){
+                       Log.i("HELLLLLLLLLLLLLLLLO",cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom)));}
+                    if (cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))!=null&&cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom)).equals(day)) {
+                        bullets.add(new Bullet(
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_ID)),
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_UID)),
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title)),
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Text)),
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom)),
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateTo)),
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_TimeFrom)),
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_TimeTo)),
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Type)),
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Months)),
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Imp)),
+                                cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Vimp))
+
+                        ));
+                    }
+
+
+                    cursor.moveToNext();
+                }
+
+            }
+
+return bullets;
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

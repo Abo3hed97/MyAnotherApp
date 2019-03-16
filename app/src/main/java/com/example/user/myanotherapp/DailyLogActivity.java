@@ -70,7 +70,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
     DailyLog dailyLogClass=new DailyLog();
 
 
-    ArrayList<ArrayList<String>> bullets;
+   static ArrayList<ArrayList<String>> bullets;
 
 
    static HashMap<String,ArrayList<String>> map=new HashMap<>();

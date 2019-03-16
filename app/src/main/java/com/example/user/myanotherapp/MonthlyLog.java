@@ -75,6 +75,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
 
     Button futureLog;
+    static TextView firstImp;
 
    static int year=Calendar.getInstance().get(Calendar.YEAR);
     @Override
@@ -96,6 +97,8 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
              currentMonth = monthName(month).concat("-").concat(String.valueOf(year));
              mothName.setText(currentMonth);
         //End
+
+
 
 
 

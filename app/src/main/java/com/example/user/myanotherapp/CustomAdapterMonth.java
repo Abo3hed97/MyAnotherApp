@@ -1,7 +1,10 @@
 package com.example.user.myanotherapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -16,12 +20,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class CustomAdapterMonth extends ArrayAdapter<String> {
 
     ArrayList<ArrayList<String>> importantBullets;
     MonthlyLogClass mlc=new MonthlyLogClass();
+    List<Bullet> bullet= new ArrayList<Bullet>();
     public CustomAdapterMonth(Context context, ArrayList<String> daysoMonth,ArrayList<ArrayList<String>> importantBullets) {
         super(context, R.layout.customrowm, daysoMonth);
         this.importantBullets=importantBullets;
@@ -52,7 +58,7 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
                /* int valueOfColor2 = Color.parseColor("#1f214b");
                 tv.setTextColor(valueOfColor2);
                 tv.setText(b[position]);*/
-             TextView firstImp=customView.findViewById(R.id.firstImportantBullet);
+               TextView firstImp=customView.findViewById(R.id.firstImportantBullet);
              TextView secondImp=customView.findViewById(R.id.secondImportantBullet);
              if(importantBullets.get(position).size()==1)
              {
@@ -71,6 +77,12 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
                  secondImp.setTextSize(20);
                  secondImp.setText(importantBullets.get(position).get(1));
              }
+
+
+
+
+
+
 
 
 
@@ -99,6 +111,25 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
             current = day + "." + dayOfWeek;
             return current;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
