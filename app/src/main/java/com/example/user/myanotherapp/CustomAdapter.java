@@ -59,7 +59,7 @@ class CustomAdapter extends ArrayAdapter<String> {
             e= customView.findViewById(R.id.lida);
             if(position<b.size()) {
                 e.setAdapter(b.get(position));
-                setListViewHeightBasedOnChildren(e);
+                setListViewHeightBasedOnItems(e);
                 e.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -81,8 +81,8 @@ class CustomAdapter extends ArrayAdapter<String> {
                                 b.get(position).remove(b.get(position).getItem(pos));
                                 b.get(position).notifyDataSetChanged();
                                 e.setAdapter(b.get(position));
-                                    }
-
+                                setListViewHeightBasedOnItems(e);
+                            }
                         });
                         alertDialog.show();
                         return true;
@@ -146,10 +146,59 @@ class CustomAdapter extends ArrayAdapter<String> {
 
 
 
+    public static boolean setListViewHeightBasedOnItems(ListView listView) {
+
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter != null) {
+
+            int numberOfItems = listAdapter.getCount();
+
+            // Get total height of all items.
+            int totalItemsHeight = 0;
+            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+                View item = listAdapter.getView(itemPos, null, listView);
+                float px = 500 * (listView.getResources().getDisplayMetrics().density);
+                item.measure(View.MeasureSpec.makeMeasureSpec((int)px, View.MeasureSpec.AT_MOST), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+                totalItemsHeight += item.getMeasuredHeight();
+            }
+
+            // Get total height of all item dividers.
+            int totalDividersHeight = listView.getDividerHeight() *
+                    (numberOfItems - 1);
+            // Get padding
+            int totalPadding = listView.getPaddingTop() + listView.getPaddingBottom();
+
+            // Set list height.
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalItemsHeight + totalDividersHeight + totalPadding;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+            return true;
+
+        } else {
+            return false;
+        }
+
+    }
+
+
+
+
+
+
+
 
 
 
     }
+
+
+
+
+
+
+
+
 
 
 

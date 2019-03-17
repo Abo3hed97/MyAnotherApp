@@ -25,7 +25,7 @@ public class CustomAdapterFuture extends ArrayAdapter<String> {
     public View getView(int position, View convertView,ViewGroup parent) {
         LayoutInflater abdulinflator = LayoutInflater.from(getContext());
         View customView = abdulinflator.inflate(R.layout.customrowf, parent, false);
-
+        TextView veryImportantView=customView.findViewById(R.id.veryImportantBullet);;
         String month = monthsList.get(position);
         TextView monthOfYear = customView.findViewById(R.id.monthName);
         //convert from Hexdecimal Value to Integer Value.
@@ -35,13 +35,13 @@ public class CustomAdapterFuture extends ArrayAdapter<String> {
 
         if(position<veryImportnatBulletsList.length&&veryImportnatBulletsList[position]!=null) {
             String veryImportantBullet = veryImportnatBulletsList[position];
-            TextView veryImportantView = customView.findViewById(R.id.veryImportantBullet);
             int valueOfColor1 = Color.parseColor("#1f214b");
             //set the Orange Color.
             veryImportantView.setTextColor(valueOfColor1);
             veryImportantView.setTextSize(20);
             veryImportantView.setText(veryImportantBullet);
         }
+        else{((ViewGroup) veryImportantView.getParent()).removeView(veryImportantView);}
         return customView;
     }
 }

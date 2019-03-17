@@ -24,28 +24,29 @@
         app:layout_constraintVertical_bias="0.018"
 
         />
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+
+
     <TextView
         android:id="@+id/firstImportantBullet"
-        android:layout_width="125dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="69dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="39dp"
+        android:singleLine="false"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/secondImportantBullet"
-        android:layout_width="125dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="77dp"
+        android:singleLine="false"
         android:text="TextView" />
-    </RelativeLayout>
+
 
 </RelativeLayout>

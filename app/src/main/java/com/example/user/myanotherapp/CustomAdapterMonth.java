@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,16 +60,19 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
                /* int valueOfColor2 = Color.parseColor("#1f214b");
                 tv.setTextColor(valueOfColor2);
                 tv.setText(b[position]);*/
-               TextView firstImp=customView.findViewById(R.id.firstImportantBullet);
-             TextView secondImp=customView.findViewById(R.id.secondImportantBullet);
+          TextView firstImp=customView.findViewById(R.id.firstImportantBullet);
+          TextView secondImp=customView.findViewById(R.id.secondImportantBullet);
              if(importantBullets.get(position).size()==1)
              {
                  int valueOfColor2 = Color.parseColor("#1f214b");
                  firstImp.setTextColor(valueOfColor2);
                  firstImp.setTextSize(20);
                  firstImp.setText(importantBullets.get(position).get(0));
+                 ((ViewGroup) secondImp.getParent()).removeView(secondImp);
+                 Log.i("Height",String.valueOf(secondImp.getHeight()));
+                 Log.i("Width",String.valueOf(secondImp.getWidth()));
              }
-             if(importantBullets.get(position).size()==2)
+            else if(importantBullets.get(position).size()==2)
              {
                  int valueOfColor2 = Color.parseColor("#1f214b");
                  firstImp.setTextColor(valueOfColor2);
@@ -76,6 +81,18 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
                  secondImp.setTextColor(valueOfColor2);
                  secondImp.setTextSize(20);
                  secondImp.setText(importantBullets.get(position).get(1));
+             }
+             else{
+                 //firstImp.setHeight(0);
+                // firstImp.setWidth(0);
+                 Log.i("Height",String.valueOf(firstImp.getHeight()));
+                 Log.i("Width",String.valueOf(firstImp.getWidth()));
+                 //secondImp.setHeight(0);
+                // secondImp.setWidth(0);
+                 Log.i("Height",String.valueOf(secondImp.getHeight()));
+                 Log.i("Width",String.valueOf(secondImp.getWidth()));
+                 ((ViewGroup) firstImp.getParent()).removeView(firstImp);
+                 ((ViewGroup) secondImp.getParent()).removeView(secondImp);
              }
 
 

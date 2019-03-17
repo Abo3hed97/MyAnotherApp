@@ -339,10 +339,13 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
                 while (cursor.isAfterLast() == false) {
                     Calendar cal = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-                    cal.setTime(sdf.parse(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))));// all done
+                    if(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))!=null){
+                    cal.setTime(sdf.parse(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))));}   // all done}
                     check1 = getMonthForInt(cal.get(Calendar.MONTH));
                     check2 = cal.get(Calendar.YEAR);
-                    String check3 = cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Vimp));
+                    String check3="";
+                    if(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Imp))!=null){
+                     check3 = cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Vimp));}
                     if (check3.equals("1") &&months.get(i).equals(check1)&&String.valueOf(year).equals(String.valueOf(check2))) {
                         veryImportantBullets[i]=cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title));
                     }
