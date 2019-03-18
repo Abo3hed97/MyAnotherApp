@@ -2,6 +2,7 @@ package com.example.user.myanotherapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -15,7 +16,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+/*import org.springframework.security.crypto.bcrypt.*;*/
+
+import com.example.user.myanotherapp.Mysql.Dataimport;
 import com.example.user.myanotherapp.Mysql.MysqlTest;
+import com.example.user.myanotherapp.Mysql.UserOnline;
+
+import org.mindrot.jbcrypt.BCrypt;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,23 +41,33 @@ public class MainActivity extends AppCompatActivity {
     private InputValidation inputValidation;
     private ExampleDBHelper databaseHelper;
     private Button loginB;
+    boolean i = false;
+    Dataimport dataimport= new Dataimport();
+    List<UserOnline> user2 = new ArrayList<UserOnline>();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        dataimport.connectToDBServer();
         databaseHelper = new ExampleDBHelper(this);
         inputValidation = new InputValidation(this);
         loginB= findViewById(R.id.BLogin);
         textViewLinkRegister = findViewById(R.id.newAccount);
+
        // Activity dailyLog=new DailyLogActivity();
         //Onclick(loginB,dailyLog);
+
 
         loginB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                verifyFromSQLite();
+                //verifyFromSQLite();
+                checkUser();
 
             }
         });
@@ -117,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim()
-                , textInputEditTextPassword.getText().toString().trim())) {
+                , textInputEditTextPassword.getText().toString().trim())){
 
 
             Intent accountsIntent = new Intent(this, DailyLogActivity.class);
@@ -131,6 +152,44 @@ public class MainActivity extends AppCompatActivity {
             Toast tost = new Toast(this);
             Toast.makeText(getApplicationContext(), "Wrong Email or Password", Toast.LENGTH_LONG).show();
         }
+    }
+    public void checkUser ()
+    {
+        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, "Enter Valid Email")) {
+            return;
+        }
+        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, "Enter Valid Email")) {
+            return;
+        }
+        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, "Enter Valid Email")) {
+            return;
+        }
+
+        try {
+            for (UserOnline current:dataimport.importDataUser()) {
+                String hash_php = current.getPassword().replaceFirst("2y", "2a");
+                boolean b = BCrypt.checkpw(textInputEditTextPassword.getText().toString(), hash_php);
+                if (current.getEmail().equals(textInputEditTextEmail.getText().toString())&&b==true) {
+                    //current.getPassword().equals(textInputEditTextPassword.getText().toString())
+                    Intent accountsIntent = new Intent(this, DailyLogActivity.class);
+                    accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
+                    accountsIntent.putExtra("userid", current.getuId());
+                    emptyInputEditText();
+                    startActivity(accountsIntent);
+                     i = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(i==false)
+        {
+            Toast tost = new Toast(this);
+            Toast.makeText(getApplicationContext(), "Wrong Email or Password", Toast.LENGTH_LONG).show();
+        }
+
+
+
     }
 
     /**

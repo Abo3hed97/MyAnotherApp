@@ -1,7 +1,5 @@
 package com.example.user.myanotherapp.Mysql;
 
-import android.content.pm.PackageInstaller;
-
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
@@ -12,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Dataimport {
     private Session session;
@@ -48,9 +47,11 @@ public class Dataimport {
         return tt;
     }
 
-    public List<User> importDataUser() {
+
+    public List<UserOnline> importDataUser() {
         Connection con;
-        List<User> userDB = null;
+        List<UserOnline> userDB = null;
+
         try {
 
             Class.forName(DRIVER);
@@ -60,7 +61,7 @@ public class Dataimport {
             ResultSet rs = st.executeQuery();
             userDB = new ArrayList<>();
             while (rs.next()) {
-                userDB.add(new User(
+                userDB.add(new UserOnline(
                                 rs.getInt("userID"),
                                 rs.getString("username"),
                                 rs.getString("password"),
@@ -79,7 +80,6 @@ public class Dataimport {
         return userDB;
 
     }
-
 
     public List<Bullet> importDataBullet() {
         Connection con;

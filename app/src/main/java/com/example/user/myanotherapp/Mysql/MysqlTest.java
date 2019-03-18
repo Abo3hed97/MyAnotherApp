@@ -45,13 +45,18 @@ public class MysqlTest extends AppCompatActivity {
     public void connect(View view) {
         t.setText(d.connectToDBServer());
     }
+
+    public void export(View view) {
+        Dataexporter d = new Dataexporter();
+
+    }
 }
 
-class UserAdapter extends ArrayAdapter<User>
+class UserAdapter extends ArrayAdapter<UserOnline>
 {
     private Context mContext;
-    private List<User> user = new ArrayList<User>();
-    public UserAdapter(Context context,List<User> list)
+    private List<UserOnline> user = new ArrayList<UserOnline>();
+    public UserAdapter(Context context,List<UserOnline> list)
     {
         super(context,0,list);
         mContext = context;
@@ -64,7 +69,7 @@ class UserAdapter extends ArrayAdapter<User>
         View listItem = convertView;
         if(listItem==null)
             listItem = LayoutInflater.from(mContext).inflate(R.layout.list_view, parent, false);
-        User currentUser = user.get(position);
+        UserOnline currentUser = user.get(position);
         TextView title = listItem.findViewById(R.id.list_title);
         title.setText(currentUser.getUsername());
 

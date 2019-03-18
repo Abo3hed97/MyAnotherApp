@@ -1,12 +1,12 @@
 package com.example.user.myanotherapp.Mysql;
 
-public class User {
+public class UserOnline {
     private int uId;
     private String username;
     private String password;
     private String email;
 
-    public User()
+    public UserOnline()
     {
         this.uId = 0;
         this.username = "";
@@ -14,7 +14,7 @@ public class User {
         this.email = "";
 
     }
-    public User(int uId,String username,String password,String email)
+    public UserOnline(int uId,String username,String password,String email)
     {
         this.uId = uId;
         this.username = username;

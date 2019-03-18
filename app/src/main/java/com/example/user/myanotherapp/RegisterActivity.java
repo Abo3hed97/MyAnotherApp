@@ -10,6 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.user.myanotherapp.Mysql.Dataexporter;
+import com.example.user.myanotherapp.Mysql.UserOnline;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  * The register activity is called when user clicks on register button in the Login activity.
  * It contains the registration form.
@@ -79,6 +84,10 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private User user;
 
+    private UserOnline userOnline;
+
+    private Dataexporter dataexporter;
+
 
     TextInputEditText password;
     /**
@@ -140,6 +149,8 @@ public class RegisterActivity extends AppCompatActivity {
         inputValidation = new InputValidation(activity);
         databaseHelper = new ExampleDBHelper(activity);
         user = new User();
+        userOnline = new UserOnline();
+        dataexporter = new Dataexporter();
 
     }
     public void onClick(View v) {
@@ -179,12 +190,16 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if (!databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim())) {
+            String hashedPw=  BCrypt.hashpw(textInputEditTextPassword.getText().toString(),BCrypt.gensalt());
 
-            user.setName(textInputEditTextName.getText().toString().trim());
-            user.setEmail(textInputEditTextEmail.getText().toString().trim());
-            user.setPassword(textInputEditTextPassword.getText().toString().trim());
 
-            databaseHelper.addUser(user);
+            userOnline.setUsername(textInputEditTextName.getText().toString().trim());
+            userOnline.setEmail(textInputEditTextEmail.getText().toString().trim());
+            userOnline.setPassword(hashedPw);
+
+
+            //databaseHelper.addUser(user);
+            dataexporter.addUser(userOnline);
 
 
             Toast tost = new Toast(this);
