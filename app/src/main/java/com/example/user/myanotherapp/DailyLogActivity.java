@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.user.myanotherapp.Mysql.Dataimport;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -68,6 +70,12 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
      * an object of dailyLogClass
      */
     DailyLog dailyLogClass=new DailyLog();
+
+    Dataimport dataimport = new Dataimport();
+    Intent intent = getIntent();
+
+   // String user_id = intent.getStringExtra("userid");
+
 
 
    static ArrayList<ArrayList<String>> bullets;
@@ -220,7 +228,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
 
 
         //Assign
-        bullets = data.getData(days);
+        bullets = dataimport.getData(days);
         arrayAdapterToEveryDay = createArrayAdapterToEveryDay(bullets);
         arrayAdapter = new CustomAdapter(this, days, arrayAdapterToEveryDay);
         weekdays.setAdapter(arrayAdapter);

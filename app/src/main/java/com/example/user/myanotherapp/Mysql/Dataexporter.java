@@ -14,6 +14,7 @@ public class Dataexporter {
     private static final String DB_USER = "ak18a";
     private static final String DB_PASS = "doh2ahMa";
     private static final String URL = "jdbc:mysql://" + REMOTE_HOST +":" + LOCAL_PORT + "/";
+    Dataimport dataimport = new Dataimport();
     public void addUser (UserOnline user)
     {
         try {
@@ -22,6 +23,37 @@ public class Dataexporter {
             Statement myStmt = con.createStatement();
             String sql = "insert into User (username, password, email) values" +
                     " ('" + user.getUsername() + "', '" + user.getPassword() + "', '" + user.getEmail()+ "')";
+            myStmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public boolean checkUser(String username,String email)
+    {
+        boolean i = true;
+        for(UserOnline userOnline: dataimport.importDataUser())
+        {
+            if (userOnline.getUsername().equals(username) || userOnline.getEmail().equals(email)) {
+                i= false;
+            }
+        }
+        return i;
+
+    }
+
+    public void addBullet (Bullet bullet)
+    {
+        try {
+            Class.forName(DRIVER);
+            Connection con = DriverManager.getConnection(URL + DB, DB_USER, DB_PASS);
+            Statement myStmt = con.createStatement();
+            String sql = "insert into Bullet (content, title, dateFrom,dateTo,timeFrom,timeTo,bulletType,importance) values" +
+                    " ('" + bullet.getContent() + "', '" + bullet.getTitle() + "', '" +
+                    bullet.getDateFrom() + "', '" + bullet.getDateTo() + "', '" + bullet.getTimeFrom() + "', '"+
+                     bullet.getTimeTo() + "', '" + bullet.getBulletType() + "', '" + bullet.getImportance() + "')";
             myStmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();

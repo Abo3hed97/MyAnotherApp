@@ -189,7 +189,9 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        if (!databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim())) {
+        if (dataexporter.checkUser(textInputEditTextName.getText().toString().trim(),
+                textInputEditTextEmail.getText().toString().trim()))
+        {
             String hashedPw=  BCrypt.hashpw(textInputEditTextPassword.getText().toString(),BCrypt.gensalt());
 
 

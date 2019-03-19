@@ -1,5 +1,6 @@
 package com.example.user.myanotherapp.Mysql;
 
+import com.example.user.myanotherapp.MainActivity;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
@@ -120,6 +121,37 @@ public class Dataimport {
 
     }
 
+    public ArrayList<ArrayList<String>> getData(ArrayList<String> d) {
+        ArrayList<ArrayList<String>> b=new ArrayList<>();
+
+
+        for (int i = 0; i < d.size(); i++) {
+            ArrayList<String> k=new ArrayList<>();
+
+
+            for(Bullet bullet:importDataBullet()) {
+
+                String check = bullet.getDateFrom();
+                int user_id = bullet.getUserID();
+
+                if (d.get(i).equals(check)&& MainActivity.userID==user_id) {
+
+                    k.add(bullet.getTitle());
+                }
+
+
+            }
+            b.add(k);
+        }
+
+
+
+
+        return b;
+
+
+    }
+
+
 
 }
-

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     boolean i = false;
     Dataimport dataimport= new Dataimport();
     List<UserOnline> user2 = new ArrayList<UserOnline>();
-
+    public static int userID;
 
 
     @Override
@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean b = BCrypt.checkpw(textInputEditTextPassword.getText().toString(), hash_php);
                 if (current.getEmail().equals(textInputEditTextEmail.getText().toString())&&b==true) {
                     //current.getPassword().equals(textInputEditTextPassword.getText().toString())
+                    userID=current.getuId();
                     Intent accountsIntent = new Intent(this, DailyLogActivity.class);
                     accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
                     accountsIntent.putExtra("userid", current.getuId());
