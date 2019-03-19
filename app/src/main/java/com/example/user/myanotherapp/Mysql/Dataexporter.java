@@ -50,8 +50,8 @@ public class Dataexporter {
             Class.forName(DRIVER);
             Connection con = DriverManager.getConnection(URL + DB, DB_USER, DB_PASS);
             Statement myStmt = con.createStatement();
-            String sql = "insert into Bullet (content, title, dateFrom,dateTo,timeFrom,timeTo,bulletType,importance) values" +
-                    " ('" + bullet.getContent() + "', '" + bullet.getTitle() + "', '" +
+            String sql = "insert into Bullet (userID,content, title, dateFrom,dateTo,timeFrom,timeTo,bulletType,importance) values" +
+                    " ('" +bullet.getUserID()+"', '"+ bullet.getContent()+ "', '" + bullet.getTitle() + "', '" +
                     bullet.getDateFrom() + "', '" + bullet.getDateTo() + "', '" + bullet.getTimeFrom() + "', '"+
                      bullet.getTimeTo() + "', '" + bullet.getBulletType() + "', '" + bullet.getImportance() + "')";
             myStmt.executeUpdate(sql);

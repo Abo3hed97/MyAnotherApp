@@ -16,6 +16,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.user.myanotherapp.Mysql.Bullet;
+import com.example.user.myanotherapp.Mysql.Dataexporter;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +47,8 @@ public class New_Bullet extends FragmentActivity {
     int imp=0;
     int vimp=0;
     public static SharedPreferences pref;
+    Dataexporter dataexporter = new Dataexporter();
+    Bullet bullet = new Bullet();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +138,16 @@ public class New_Bullet extends FragmentActivity {
                     Toast.makeText(getApplicationContext(), "title or text box is empty !!!",
                             Toast.LENGTH_SHORT).show();
                 } else {
+                    /*bullet.setTitle(title);
+                    bullet.setContent(text);
+                    bullet.setDateFrom(dateFrom);
+                    bullet.setDateTo(dateTo);
+                    bullet.setTimeFrom(timeFrom);
+                    bullet.setTimeTo(timeTo);
+                    bullet.setBulletType(typ);
+                    bullet.setImportance(imp);
+                    bullet.setUserID(MainActivity.userID);
+                    dataexporter.addBullet(bullet);*/
                     db.insertPerson(title, text, dateFrom, dateTo, timeFrom, timeTo, typ,monthS,imp,vimp);
                     Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_LONG).show();
                       Intent intentRegister = new Intent(getApplicationContext(), DailyLogActivity.class);
@@ -182,7 +197,6 @@ public class New_Bullet extends FragmentActivity {
                     type.setVisibility(View.VISIBLE);
                     months.setVisibility(View.INVISIBLE);
                     imp = 0;
-                    vimp = 0;
 
                 }
                     break;
@@ -198,7 +212,7 @@ public class New_Bullet extends FragmentActivity {
                     n_text.setVisibility(View.VISIBLE);
                     months.setVisibility(View.VISIBLE);
                     imp = 1;
-                    vimp=0;
+
                 }
                 break;
             case R.id.vimp:
@@ -212,8 +226,7 @@ public class New_Bullet extends FragmentActivity {
                     n_title.setVisibility(View.VISIBLE);
                     n_text.setVisibility(View.VISIBLE);
                     months.setVisibility(View.VISIBLE);
-                    vimp = 1;
-                    imp = 0;
+                    imp = 2;
                 }
                     break;
 
