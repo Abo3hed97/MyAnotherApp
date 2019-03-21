@@ -14,7 +14,7 @@
         android:ems="10"
         android:hint="Date From"
         android:inputType="date"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Type" />
 
@@ -27,7 +27,7 @@
         android:layout_marginTop="8dp"
         android:hint="Date To"
         android:inputType="time"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Type" />
 
@@ -41,7 +41,7 @@
         android:ems="10"
         android:hint="Time To"
         android:inputType="time"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Date_To" />
 
@@ -55,7 +55,7 @@
         android:ems="10"
         android:hint="Time From"
         android:inputType="time"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Date_From" />
 

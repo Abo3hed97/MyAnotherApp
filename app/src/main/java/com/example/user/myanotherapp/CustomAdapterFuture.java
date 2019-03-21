@@ -29,7 +29,7 @@ public class CustomAdapterFuture extends ArrayAdapter<String> {
         String month = monthsList.get(position);
         TextView monthOfYear = customView.findViewById(R.id.monthName);
         //convert from Hexdecimal Value to Integer Value.
-        int valueOfColor = Color.parseColor("#d2842d");
+        int valueOfColor = Color.parseColor("#00344D");
         monthOfYear.setTextColor(valueOfColor);
         monthOfYear.setText(month);
 

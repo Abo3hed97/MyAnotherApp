@@ -7,27 +7,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:text="Title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
     <EditText
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:hint="title"
         android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
         android:paddingLeft="5dp"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     <TextView
         android:id="@+id/textView3"
@@ -47,6 +37,7 @@
         android:layout_marginTop="12dp"
         android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
         android:paddingLeft="5dp"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -54,7 +45,7 @@
         android:id="@+id/clickButton"
         android:layout_width="117dp"
         android:layout_height="0dp"
-        android:layout_marginStart="168dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/button_color_design"
         android:text="Save"
@@ -64,13 +55,11 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_width="189dp"
+        android:layout_height="41dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/month" />
 
     <TextView
@@ -80,8 +69,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="New Task"
         android:textColor="@color/colorAccent"
+        android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

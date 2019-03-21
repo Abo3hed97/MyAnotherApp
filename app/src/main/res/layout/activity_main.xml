@@ -115,16 +115,5 @@
         app:layout_constraintTop_toBottomOf="@+id/BLogin"
         app:layout_constraintVertical_bias="0.094" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="goTo"
-        android:text="ONLINEDBTEST"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>

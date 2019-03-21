@@ -13,7 +13,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
-        android:cacheColorHint="@color/colorAccent"
+        android:cacheColorHint="@color/colorPrimary"
         android:clipToPadding="false"
         android:dividerHeight="4dp"
         android:padding="5dp">

@@ -8,8 +8,10 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="143dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_color_design"
@@ -17,12 +19,14 @@
         android:text="New Task"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mobile_list" />
 
     <ListView
         android:id="@+id/mobile_list"
         android:layout_width="match_parent"
-        android:layout_height="544dp"
+        android:layout_height="415dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginTop="50dp"
@@ -34,19 +38,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthT">
+        app:layout_constraintTop_toBottomOf="@+id/monthT"
+        app:layout_constraintVertical_bias="0.0">
 
     </ListView>
 
     <TextView
         android:id="@+id/monthT"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_width="141dp"
+        android:layout_height="66dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:text="Month"
+        android:textColor="@color/colorAccent"
+        android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
