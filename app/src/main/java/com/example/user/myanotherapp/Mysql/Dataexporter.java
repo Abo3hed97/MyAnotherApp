@@ -24,22 +24,25 @@ public class Dataexporter {
             String sql = "insert into User (username, password, email) values" +
                     " ('" + user.getUsername() + "', '" + user.getPassword() + "', '" + user.getEmail()+ "')";
             myStmt.executeUpdate(sql);
-        } catch (SQLException e) {
+            con.close();
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
+
     }
     public boolean checkUser(String username,String email)
     {
         boolean i = true;
-        for(UserOnline userOnline: dataimport.importDataUser())
-        {
-            if (userOnline.getUsername().equals(username) || userOnline.getEmail().equals(email)) {
+
+            if (dataimport.importDataUser().getUsername().equals(username) ||
+                    dataimport.importDataUser().getEmail().equals(email)) {
                 i= false;
             }
-        }
+
         return i;
 
     }
@@ -51,10 +54,11 @@ public class Dataexporter {
             Connection con = DriverManager.getConnection(URL + DB, DB_USER, DB_PASS);
             Statement myStmt = con.createStatement();
             String sql = "insert into Bullet (userID,content, title, dateFrom,dateTo,timeFrom,timeTo,bulletType,importance) values" +
-                    " ('" +bullet.getUserID()+"', '"+ bullet.getContent()+ "', '" + bullet.getTitle() + "', '" +
+                    " (" +bullet.getUserID()+", '"+ bullet.getContent()+ "', '" + bullet.getTitle() + "', '" +
                     bullet.getDateFrom() + "', '" + bullet.getDateTo() + "', '" + bullet.getTimeFrom() + "', '"+
-                     bullet.getTimeTo() + "', '" + bullet.getBulletType() + "', '" + bullet.getImportance() + "')";
+                     bullet.getTimeTo() + "', '" + bullet.getBulletType() + "', " + bullet.getImportance() + ")";
             myStmt.executeUpdate(sql);
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

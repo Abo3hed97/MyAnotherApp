@@ -1,5 +1,7 @@
 package com.example.user.myanotherapp.Mysql;
 
+import android.widget.Toast;
+
 import com.example.user.myanotherapp.MainActivity;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
@@ -23,6 +25,9 @@ public class Dataimport {
     private static final String DB_USER = "ak18a";
     private static final String DB_PASS = "doh2ahMa";
     private static final String URL = "jdbc:mysql://" + REMOTE_HOST +":" + LOCAL_PORT + "/";
+    List<Bullet> bulletList = new ArrayList<Bullet>();
+    int userID = MainActivity.userID;
+    public static String conError;
 
     public String connectToDBServer(){
         String user = "ak18a";
@@ -44,24 +49,31 @@ public class Dataimport {
         }
         catch(Exception e){
             System.err.print(e);
+            conError = "Please check Your Internet connection";
         }
         return tt;
     }
 
 
-    public List<UserOnline> importDataUser() {
+    public UserOnline importDataUser() {
         Connection con;
-        List<UserOnline> userDB = null;
+        UserOnline userDB = null;
 
         try {
 
             Class.forName(DRIVER);
             con = DriverManager.getConnection(URL + DB, DB_USER, DB_PASS);
-            String query = "" + "SELECT * FROM User";
+            String query = "" + "SELECT * FROM User where email='"+MainActivity.userEmail +"'";
             PreparedStatement st = con.prepareStatement(query);
             ResultSet rs = st.executeQuery();
-            userDB = new ArrayList<>();
-            while (rs.next()) {
+            if(rs.next()){
+                userDB = new UserOnline(rs.getInt("userID"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"));
+            }
+
+         /*   while (rs.next()) {
                 userDB.add(new UserOnline(
                                 rs.getInt("userID"),
                                 rs.getString("username"),
@@ -70,7 +82,7 @@ public class Dataimport {
 
                         )
                 );
-            }
+            }*/
 
 
         } catch (ClassNotFoundException cnfEx){
@@ -89,7 +101,7 @@ public class Dataimport {
 
             Class.forName(DRIVER);
             con = DriverManager.getConnection(URL + DB, DB_USER, DB_PASS);
-            String query = "" + "SELECT * FROM Bullet";
+            String query = "" + "SELECT * FROM Bullet where userID="+userID;
             PreparedStatement st = con.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             bulletDB = new ArrayList<>();
@@ -110,6 +122,7 @@ public class Dataimport {
                         )
                 );
             }
+            con.close();con.close();
 
 
         } catch (ClassNotFoundException cnfEx){
@@ -132,9 +145,8 @@ public class Dataimport {
             for(Bullet bullet:importDataBullet()) {
 
                 String check = bullet.getDateFrom();
-                int user_id = bullet.getUserID();
 
-                if (d.get(i).equals(check)&& MainActivity.userID==user_id) {
+                if (d.get(i).equals(check)) {
 
                     k.add(bullet.getTitle());
                 }

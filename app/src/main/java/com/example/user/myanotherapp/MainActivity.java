@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     Dataimport dataimport= new Dataimport();
     List<UserOnline> user2 = new ArrayList<UserOnline>();
     public static int userID;
+    public static String userEmail;
 
 
     @Override
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         dataimport.connectToDBServer();
+        Toast tost = new Toast(this);
+        Toast.makeText(getApplicationContext(), Dataimport.conError, Toast.LENGTH_LONG).show();
         databaseHelper = new ExampleDBHelper(this);
         inputValidation = new InputValidation(this);
         loginB= findViewById(R.id.BLogin);
@@ -155,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void checkUser ()
     {
+        userEmail = textInputEditTextEmail.getText().toString();
         if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, "Enter Valid Email")) {
             return;
         }
@@ -166,27 +170,25 @@ public class MainActivity extends AppCompatActivity {
         }
 
         try {
-            for (UserOnline current:dataimport.importDataUser()) {
-                String hash_php = current.getPassword().replaceFirst("2y", "2a");
+
+                String hash_php = dataimport.importDataUser().getPassword().replaceFirst("2y", "2a");
                 boolean b = BCrypt.checkpw(textInputEditTextPassword.getText().toString(), hash_php);
-                if (current.getEmail().equals(textInputEditTextEmail.getText().toString())&&b==true) {
+                if (dataimport.importDataUser().getEmail().equals(textInputEditTextEmail.getText().toString())&&b==true) {
                     //current.getPassword().equals(textInputEditTextPassword.getText().toString())
-                    userID=current.getuId();
+                    userID=dataimport.importDataUser().getuId();
                     Intent accountsIntent = new Intent(this, DailyLogActivity.class);
-                    accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
-                    accountsIntent.putExtra("userid", current.getuId());
                     emptyInputEditText();
                     startActivity(accountsIntent);
                      i = true;
                 }
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         if(i==false)
         {
             Toast tost = new Toast(this);
-            Toast.makeText(getApplicationContext(), "Wrong Email or Password", Toast.LENGTH_LONG).show();
+            tost.makeText(getApplicationContext(), "Wrong Email or Password", Toast.LENGTH_LONG).show();
         }
 
 
