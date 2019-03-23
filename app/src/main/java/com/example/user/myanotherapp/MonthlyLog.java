@@ -17,6 +17,7 @@ import com.example.user.myanotherapp.Mysql.Dataimport;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class MonthlyLog extends AppCompatActivity implements navigate {
@@ -130,7 +131,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    mlc.navigateToSearchedDailyLog(position);
+                    mlc.navigateToSearchedDailyLog(position,getMonthNumberBasedOnMonthName(monthName(month)),year);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -335,6 +336,14 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         Intent intent=new Intent(this,MonthlyTasks.class);
         startActivity(intent);
 
+    }
+
+
+
+    public int getMonthNumberBasedOnMonthName(String monthName){
+            String months1[]=new String[13];
+            months1 = new String[]{"","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+            return Arrays.asList(months1).indexOf(monthName);
     }
 }// End of the Class
 

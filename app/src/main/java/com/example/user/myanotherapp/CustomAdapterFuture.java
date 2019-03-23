@@ -22,6 +22,8 @@ public class CustomAdapterFuture extends ArrayAdapter<String> {
     }
 
 
+
+
     @Override
     public View getView(int position, View convertView,ViewGroup parent) {
         LayoutInflater abdulinflator = LayoutInflater.from(getContext());

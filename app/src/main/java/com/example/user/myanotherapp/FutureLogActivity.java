@@ -13,11 +13,11 @@ import android.widget.TextView;
 import com.example.user.myanotherapp.Mysql.Dataimport;
 
 import java.text.DateFormatSymbols;
-import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
+
 
 
 public class FutureLogActivity extends AppCompatActivity {
@@ -30,8 +30,12 @@ public class FutureLogActivity extends AppCompatActivity {
     ArrayList<String> monthsList;
     ArrayAdapter<String> arrayAdapter;
     ExampleDBHelper exampleDBHelper=new ExampleDBHelper(this);
+    Button nextYear;
+    Button previousYear;
 
     Dataimport dataimport = new Dataimport();
+
+    String[] VeryImportantData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +52,10 @@ public class FutureLogActivity extends AppCompatActivity {
         //Set up the Months
         monthsOfYear=findViewById(R.id.listofMonthsinYear);
         monthsList=new ArrayList<String>(Arrays.asList(new DateFormatSymbols().getMonths()));
-        String veryImportantData[];
-        veryImportantData = dataimport.getVeryImportantBullets(monthNumbers(),currentYear);
-        arrayAdapter=new CustomAdapterFuture(this,monthsList,veryImportantData);
+        VeryImportantData= dataimport.getVeryImportantBullets(monthNumbers(),currentYear);
+        arrayAdapter=new CustomAdapterFuture(this,monthsList, VeryImportantData);
         monthsOfYear.setAdapter(arrayAdapter);
         //End
-
-
 
 
         monthsOfYear.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,12 +73,43 @@ public class FutureLogActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+        //go to nextYear
+        nextYear=findViewById(R.id.nextYear);
+        nextYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentYear++;
+                year.setText(String.valueOf(currentYear));
+                Arrays.fill(VeryImportantData,null);
+                VeryImportantData= dataimport.getVeryImportantBullets(monthNumbers(),currentYear);
+                decleaeadapter();
+            }
+        });
+
+
+
+        //go to Previous Year
+        previousYear=findViewById(R.id.previousYear);
+        previousYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentYear--;
+                year.setText(String.valueOf(currentYear));
+                Arrays.fill(VeryImportantData,null);
+                VeryImportantData=dataimport.getVeryImportantBullets(monthNumbers(),currentYear);
+                decleaeadapter();
+            }
+        });
     }
 
 
-    public void goToMonthlyLog(int i){
+    public void goToMonthlyLog(int selectedMonth){
         Intent intent=new Intent(this,MonthlyLog.class);
-        MonthlyLog.month=i+1;
+        MonthlyLog.year=currentYear;
+        MonthlyLog.month=selectedMonth+1;
         startActivity(intent);
 
     }
@@ -97,6 +129,14 @@ public class FutureLogActivity extends AppCompatActivity {
        }
        return monthNumbers;
     }
+
+    public void decleaeadapter(){
+        arrayAdapter=new CustomAdapterFuture(this,monthsList, VeryImportantData);
+        monthsOfYear.setAdapter(arrayAdapter);
+    }
+
+
+
 
 
 

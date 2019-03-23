@@ -68,7 +68,7 @@ public class MonthlyLogClass {
      * @param selectedDay is the Selected Day of MonthlyLog.
      * @throws ParseException when anything gets wrong during the Parsing Proecss.
      */
-    public void navigateToSearchedDailyLog(int selectedDay) throws ParseException {
+    public void navigateToSearchedDailyLog(int selectedDay,int month,int year) throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date1 = formatter.parse(DailyLogActivity.days.get(0));
         assignToInstance();
@@ -76,7 +76,10 @@ public class MonthlyLogClass {
         Date date2 = new SimpleDateFormat("MMMM").parse(MonthlyLog.mothName.getText().toString());
         Calendar cal = Calendar.getInstance();
         cal.setTime(date2);
-        calendar1.set(Calendar.MONTH, cal.get(Calendar.MONTH));
+        calendar1.set(Calendar.MONTH,month-1);
+        calendar1.set(Calendar.YEAR,year);
+        Log.i("Hellllllllllo","hELLLLLLLLLLLO");
+        Log.i(String.valueOf(calendar1.get(Calendar.MONTH)),String.valueOf(calendar1.get(Calendar.YEAR)));
         calendar2.setTime(date1);
         calendar3.setTime(date1);
         if (calendar1.before(calendar2)) {

@@ -184,7 +184,7 @@ public class Dataimport {
             }
             Log.i(String.valueOf(monthNumbers.get(i)),check2.toString());
             Log.i("Booooooooolean",String.valueOf(check2.toString().equals(String.valueOf(monthNumbers.get(i)))));
-            if(check2.toString().equals(String.valueOf(monthNumbers.get(i)))&&check1.equals("2")){
+            if(check2.toString().equals(String.valueOf(monthNumbers.get(i)))&&check1.equals("2")&&bullet.getDateFrom().substring(0,4).equals(String.valueOf(currentYear))){
                 veryImportnatBullets[i]=(bullet.getTitle());
                 Log.i("Helllllllllllllllo",bullet.getTitle());
             }
