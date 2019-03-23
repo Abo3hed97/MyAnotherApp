@@ -9,7 +9,9 @@
     <com.squareup.timessquare.CalendarPickerView
         android:id="@+id/Calendar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:cacheColorHint="@color/colorAccent">
 
 
     </com.squareup.timessquare.CalendarPickerView>

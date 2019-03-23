@@ -42,7 +42,7 @@ public class FutureLogActivity extends AppCompatActivity {
 
         //translat the calender button (animation)
         gotocalender=(Button) findViewById(R.id.goToCalendar);
-        anim= AnimationUtils.loadAnimation(this,R.anim.tran);
+        anim= AnimationUtils.loadAnimation(this,R.anim.myanim);
         gotocalender.setAnimation(anim);
 
         //Set up the Current Year

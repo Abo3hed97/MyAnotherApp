@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bckground"
     tools:context=".RegisterActivity">
 
     <ImageView
         android:id="@+id/edlogo"
-        android:layout_width="262dp"
-        android:layout_height="110dp"
+        android:layout_width="297dp"
+        android:layout_height="162dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="42dp"
         android:layout_marginEnd="8dp"
@@ -109,7 +110,7 @@
         style="@style/stylebutton"
         android:layout_width="114dp"
         android:layout_height="38dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/button_color_design"
         android:text="REGISTER"
         android:textColor="@color/white"
