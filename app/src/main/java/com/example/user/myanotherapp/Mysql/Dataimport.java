@@ -17,6 +17,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Establishes DB Connection
+ */
 
 public class Dataimport {
     private Session session;
@@ -32,6 +35,9 @@ public class Dataimport {
     int userID = MainActivity.userID;
     public static String conError;
 
+    /**
+     * Establishes DB connection to praktikum server
+     */
     public String connectToDBServer() {
         String user = "ak18a";
         String password = "u0k(1NtwKp";
@@ -55,7 +61,10 @@ public class Dataimport {
         return tt;
     }
 
-
+    /**
+     * Importing User Data from the database
+     * @return UserOnline object
+     */
     public UserOnline importDataUser() {
         Connection con;
         UserOnline userDB = null;
@@ -74,16 +83,6 @@ public class Dataimport {
                         rs.getString("email"));
             }
 
-         /*   while (rs.next()) {
-                userDB.add(new UserOnline(
-                                rs.getInt("userID"),
-                                rs.getString("username"),
-                                rs.getString("password"),
-                                rs.getString("email")
-
-                        )
-                );
-            }*/
 
 
         } catch (ClassNotFoundException cnfEx) {
@@ -94,6 +93,11 @@ public class Dataimport {
         return userDB;
 
     }
+
+    /**
+     * Importing Bullet data from the database
+     * @return List of Bullet Objects.
+     */
 
     public List<Bullet> importDataBullet() {
         Connection con;
@@ -136,6 +140,12 @@ public class Dataimport {
 
     }
 
+    /**
+     * Getting Bullet object compere the date to daysList in dailylog and show the Title in the right date in Dailylog
+     * @param d week days
+     * @return List with Bullet titles
+     */
+
     public ArrayList<ArrayList<String>> getData(ArrayList<String> d) {
         ArrayList<ArrayList<String>> b = new ArrayList<>();
         for (int i = 0; i < d.size(); i++) {
@@ -152,7 +162,15 @@ public class Dataimport {
         return b;
     }
 
-
+    /**
+     *Getting Bullet object
+     *  compere the date to MonthlyList in MonthlyLog
+     * checking if it's important Bullet
+     * and show the Title in the right date in MonthlLog
+     * @param daysofMonths List of Months Days
+     * @return List with Bullet title.
+     * @throws ParseException
+     */
     public ArrayList<ArrayList<String>> getImportantBullets(ArrayList<String> daysofMonths) throws ParseException {
         ArrayList<ArrayList<String>> importantBullets = new ArrayList<>();
         for (int i = 0; i < daysofMonths.size(); i++) {
@@ -170,36 +188,50 @@ public class Dataimport {
     }
 
 
-
-
-    public String[] getVeryImportantBullets(ArrayList<Integer> monthNumbers,int currentYear){
-    String veryImportnatBullets[]=new String[12];
-    for(int i=0;i<12;i++){
-        for(Bullet bullet:importDataBullet()){
-            String check1=String.valueOf(bullet.getImportance());
-            Log.i("Importance",String.valueOf(bullet.getImportance()));
-            StringBuilder check2=new StringBuilder(bullet.getDateFrom().substring(5,7));
-            if(check2.charAt(0)=='0'){
-                check2=check2.deleteCharAt(0);
-            }
-            Log.i(String.valueOf(monthNumbers.get(i)),check2.toString());
-            Log.i("Booooooooolean",String.valueOf(check2.toString().equals(String.valueOf(monthNumbers.get(i)))));
-            if(check2.toString().equals(String.valueOf(monthNumbers.get(i)))&&check1.equals("2")){
-                veryImportnatBullets[i]=(bullet.getTitle());
-                Log.i("Helllllllllllllllo",bullet.getTitle());
+    public String[] getVeryImportantBullets(ArrayList<Integer> monthNumbers, int currentYear) {
+        String veryImportnatBullets[] = new String[12];
+        for (int i = 0; i < 12; i++) {
+            for (Bullet bullet : importDataBullet()) {
+                String check1 = String.valueOf(bullet.getImportance());
+                Log.i("Importance", String.valueOf(bullet.getImportance()));
+                StringBuilder check2 = new StringBuilder(bullet.getDateFrom().substring(5, 7));
+                if (check2.charAt(0) == '0') {
+                    check2 = check2.deleteCharAt(0);
+                }
+                Log.i(String.valueOf(monthNumbers.get(i)), check2.toString());
+                Log.i("Booooooooolean", String.valueOf(check2.toString().equals(String.valueOf(monthNumbers.get(i)))));
+                if (check2.toString().equals(String.valueOf(monthNumbers.get(i))) && check1.equals("2")) {
+                    veryImportnatBullets[i] = (bullet.getTitle());
+                    Log.i("Helllllllllllllllo", bullet.getTitle());
+                }
             }
         }
+
+        return veryImportnatBullets;
     }
 
-       return veryImportnatBullets;
-    }
 
+    public void deletBullet(int id) {
+        Connection con;
+
+        try {
+
+            Class.forName(DRIVER);
+            con = DriverManager.getConnection(URL + DB, DB_USER, DB_PASS);
+            String query = "" + "DELET FROM Bullet where bulletID=" + id;
+            PreparedStatement st = con.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+
+
+        } catch (ClassNotFoundException cnfEx) {
+            cnfEx.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
+
+
+    }
 }
-
-
-
-
-
 
 
 
