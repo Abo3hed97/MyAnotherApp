@@ -2,6 +2,7 @@ package com.example.user.myanotherapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -12,7 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    ImageView edlogo;
+    Animation anim;
 
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
@@ -52,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        edlogo=(ImageView) findViewById(R.id.edlogo);
+        anim= AnimationUtils.loadAnimation(this,R.anim.myanim);
+        edlogo.setAnimation(anim);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         dataimport.connectToDBServer();

@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,8 @@ import org.mindrot.jbcrypt.BCrypt;
  * After succesfull registration we return to the login activity.
  */
 public class RegisterActivity extends AppCompatActivity {
+
+    Animation anim;
 
     /**
      * ?
@@ -98,6 +102,38 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        //animation textinput
+        textInputEditTextName=(TextInputEditText) findViewById(R.id.textInputEditTextName);
+        anim= AnimationUtils.loadAnimation(this,R.anim.tran1);
+        textInputEditTextName.setAnimation(anim);
+
+        textInputLayoutName=(TextInputLayout) findViewById(R.id.textInputLayoutName);
+        anim= AnimationUtils.loadAnimation(this,R.anim.tran1);
+        textInputLayoutName.setAnimation(anim);
+
+        textInputEditTextEmail=(TextInputEditText) findViewById(R.id.textInputEditTextEmail);
+        anim= AnimationUtils.loadAnimation(this,R.anim.tran1);
+        textInputEditTextEmail.setAnimation(anim);
+
+        textInputLayoutEmail=(TextInputLayout) findViewById(R.id.textInputLayoutEmail);
+        anim= AnimationUtils.loadAnimation(this,R.anim.tran1);
+        textInputLayoutEmail.setAnimation(anim);
+
+        textInputEditTextPassword=(TextInputEditText) findViewById(R.id.textInputEditTextPassword);
+        anim= AnimationUtils.loadAnimation(this,R.anim.tran1);
+        textInputEditTextPassword.setAnimation(anim);
+
+        textInputLayoutPassword=(TextInputLayout) findViewById(R.id.textInputLayoutPassword);
+        anim= AnimationUtils.loadAnimation(this,R.anim.tran3);
+        textInputLayoutPassword.setAnimation(anim);
+
+        textInputEditTextConfirmPassword=(TextInputEditText) findViewById(R.id.textInputEditTextConfirmPassword);
+        anim= AnimationUtils.loadAnimation(this,R.anim.tran1);
+        textInputEditTextConfirmPassword.setAnimation(anim);
+
+        textInputLayoutConfirmPassword=(TextInputLayout) findViewById(R.id.textInputLayoutConfirmPassword);
+        anim= AnimationUtils.loadAnimation(this,R.anim.tran3);
+        textInputLayoutConfirmPassword.setAnimation(anim);
         initViews();
         initObjects();
         appCompatButtonRegister.setOnClickListener(new View.OnClickListener() {

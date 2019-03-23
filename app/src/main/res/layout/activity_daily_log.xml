@@ -58,7 +58,7 @@
             android:layout_width="210dp"
             android:layout_height="62dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="serif"
             android:text="@string/daily_Log"
@@ -71,20 +71,23 @@
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="133dp"
-            android:layout_height="37dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="92dp"
+            android:layout_width="157dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="95dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/date_dailyLog"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/black"
             android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.567"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ListView
             android:id="@+id/weekList"
-            android:layout_width="406dp"
-            android:layout_height="250dp"
+            android:layout_width="382dp"
+            android:layout_height="232dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -93,9 +96,10 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            app:layout_constraintVertical_bias="0.491" />
 
         <Button
             android:id="@+id/ForwardButton"

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,7 +24,8 @@ import java.util.List;
 
 public class FutureLogActivity extends AppCompatActivity {
 
-
+    Button gotocalender;
+    Animation anim;
     TextView year;
     int currentYear;
     ListView monthsOfYear;
@@ -37,6 +40,10 @@ public class FutureLogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_future_log);
 
+        //translat the calender button (animation)
+        gotocalender=(Button) findViewById(R.id.goToCalendar);
+        anim= AnimationUtils.loadAnimation(this,R.anim.tran);
+        gotocalender.setAnimation(anim);
 
         //Set up the Current Year
         year=findViewById(R.id.Year);

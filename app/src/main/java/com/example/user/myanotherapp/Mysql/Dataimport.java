@@ -135,6 +135,46 @@ public class Dataimport {
         return bulletDB;
 
     }
+    public List<Bullet> importDataImportantBullet() {
+        Connection con;
+        List<Bullet> bulletDB = null;
+        try {
+
+            Class.forName(DRIVER);
+            con = DriverManager.getConnection(URL + DB, DB_USER, DB_PASS);
+            String query = "" + "SELECT * FROM Bullet where userID=" + userID+" "+"AND importance="+1;
+            PreparedStatement st = con.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            bulletDB = new ArrayList<>();
+            while (rs.next()) {
+                bulletDB.add(new Bullet(
+                                rs.getInt("bulletID"),
+                                rs.getInt("userID"),
+                                rs.getString("content"),
+                                rs.getString("title"),
+                                rs.getString("dateFrom"),
+                                rs.getString("dateTo"),
+                                rs.getString("timeFrom"),
+                                rs.getString("timeTo"),
+                                rs.getString("bulletType"),
+                                rs.getInt("importance"),
+                                rs.getInt("isMigrated"),
+                                rs.getInt("isChecked")
+                        )
+                );
+            }
+            con.close();
+            con.close();
+
+
+        } catch (ClassNotFoundException cnfEx) {
+            cnfEx.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
+        return bulletDB;
+
+    }
 
     public ArrayList<ArrayList<String>> getData(ArrayList<String> d) {
         ArrayList<ArrayList<String>> b = new ArrayList<>();
@@ -157,10 +197,10 @@ public class Dataimport {
         ArrayList<ArrayList<String>> importantBullets = new ArrayList<>();
         for (int i = 0; i < daysofMonths.size(); i++) {
             ArrayList<String> importantBulletsforDay = new ArrayList<>();
-            for (Bullet bullet : importDataBullet()) {
+            for (Bullet bullet : importDataImportantBullet()) {
                 String check1 = bullet.getDateFrom();
                 String check2 = String.valueOf(bullet.getImportance());
-                if (daysofMonths.get(i).equals(check1) && check2.equals("1")) {
+                if (daysofMonths.get(i).equals(check1)) {
                     importantBulletsforDay.add(bullet.getTitle());
                 }
             }

@@ -50,7 +50,7 @@
         android:layout_width="378dp"
         android:layout_height="57dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:gravity="center"
@@ -59,21 +59,18 @@
         android:textColor="@color/colorAccent"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/listofdays"
         android:layout_width="338dp"
-        android:layout_height="291dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        android:layout_height="279dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
 
     </ListView>
 
@@ -82,7 +79,6 @@
         android:layout_width="60sp"
         android:layout_height="47sp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
         android:background="@drawable/ic_backword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
@@ -91,8 +87,7 @@
         android:id="@+id/nextMonth"
         android:layout_width="60sp"
         android:layout_height="47sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="36dp"
         android:background="@drawable/ic_forward"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
@@ -117,19 +112,16 @@
 
     <Button
         android:id="@+id/goToFutureLog"
-        android:layout_width="116dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="120dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/button_color_design"
         android:text="Future Log"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/nextMonth"
-        app:layout_constraintHorizontal_bias="0.585"
-        app:layout_constraintStart_toEndOf="@+id/prevoiusMonth"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
 
 
 </android.support.constraint.ConstraintLayout>
