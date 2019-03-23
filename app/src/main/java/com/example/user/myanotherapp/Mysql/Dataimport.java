@@ -32,6 +32,9 @@ public class Dataimport {
     int userID = MainActivity.userID;
     public static String conError;
 
+    /**
+     * Establishes DB connection to praktikum server
+     */
     public String connectToDBServer() {
         String user = "ak18a";
         String password = "u0k(1NtwKp";
@@ -55,7 +58,10 @@ public class Dataimport {
         return tt;
     }
 
-
+    /**
+     * Importing User Data from the database
+     * @return UserOnline object
+     */
     public UserOnline importDataUser() {
         Connection con;
         UserOnline userDB = null;
@@ -74,16 +80,6 @@ public class Dataimport {
                         rs.getString("email"));
             }
 
-         /*   while (rs.next()) {
-                userDB.add(new UserOnline(
-                                rs.getInt("userID"),
-                                rs.getString("username"),
-                                rs.getString("password"),
-                                rs.getString("email")
-
-                        )
-                );
-            }*/
 
 
         } catch (ClassNotFoundException cnfEx) {
@@ -94,6 +90,11 @@ public class Dataimport {
         return userDB;
 
     }
+
+    /**
+     * Importing Bullet data from the database
+     * @return List of Bullet Objects.
+     */
 
     public List<Bullet> importDataBullet() {
         Connection con;
@@ -136,6 +137,12 @@ public class Dataimport {
 
     }
 
+    /**
+     * Getting Bullet object compere the date to daysList in dailylog and show the Title in the right date in Dailylog
+     * @param d week days
+     * @return List with Bullet titles
+     */
+
     public ArrayList<ArrayList<String>> getData(ArrayList<String> d) {
         ArrayList<ArrayList<String>> b = new ArrayList<>();
         for (int i = 0; i < d.size(); i++) {
@@ -152,7 +159,15 @@ public class Dataimport {
         return b;
     }
 
-
+    /**
+     *Getting Bullet object
+     *  compere the date to MonthlyList in MonthlyLog
+     * checking if it's important Bullet
+     * and show the Title in the right date in MonthlLog
+     * @param daysofMonths List of Months Days
+     * @return List with Bullet title.
+     * @throws ParseException
+     */
     public ArrayList<ArrayList<String>> getImportantBullets(ArrayList<String> daysofMonths) throws ParseException {
         ArrayList<ArrayList<String>> importantBullets = new ArrayList<>();
         for (int i = 0; i < daysofMonths.size(); i++) {

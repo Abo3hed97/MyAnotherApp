@@ -1,6 +1,10 @@
 package com.example.user.myanotherapp.Mysql;
 
+/**
+ * Structured like the Bullet Table from database.
+ */
 public class Bullet {
+
     private int bulletID;
     private int userID;
     private String content;
@@ -13,6 +17,10 @@ public class Bullet {
     private int importance;
     private int isMigrated ;
     private int isChecked;
+
+    /**
+     * Used to set data in Bullet Object and send it to the Database
+     */
 
     public Bullet()
     {
@@ -30,6 +38,9 @@ public class Bullet {
         this.isChecked = 0;
     }
 
+    /**
+     *Used to improt Data from database
+     */
     public Bullet(int bulletID, int userID, String content, String title, String dateFrom, String dateTo, String timeFrom, String timeTo, String bulletType, int importance, int isMigrated, int isChecked) {
         this.bulletID = bulletID;
         this.userID = userID;
