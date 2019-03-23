@@ -308,7 +308,7 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
             Cursor cursor = this.getAllPersons();
             if (cursor.moveToFirst()) {
                 while (cursor.isAfterLast() == false) {
-                      boolean check1=false;
+                    boolean check1=false;
                     boolean check2=false;
                       if(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))!=null){
                           check1 =cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom)).equals(daysofMonths.get(i));}
@@ -337,15 +337,19 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
             Cursor cursor = this.getAllPersons();
             if (cursor.moveToFirst()) {
                 while (cursor.isAfterLast() == false) {
+                    Log.i("Helllo","Hellllllllllllllo");
                     Calendar cal = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
                     if(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))!=null){
-                    cal.setTime(sdf.parse(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))));}   // all done}
-                    check1 = getMonthForInt(cal.get(Calendar.MONTH));
+                    cal.setTime(sdf.parse(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_DateFrom))));}
+                    // all done}
+                    check1 = monthName(cal.get(Calendar.MONTH));
+                    Log.i(check1,"Hellllllllllllllo");
                     check2 = cal.get(Calendar.YEAR);
+                    Log.i(String.valueOf(check2),"Hellllllllllllllo");
                     String check3="";
-                    if(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Imp))!=null){
-                     check3 = cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Vimp));}
+                    if(cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Vimp))!=null){
+                    check3 = cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Vimp));}
                     if (check3.equals("1") &&months.get(i).equals(check1)&&String.valueOf(year).equals(String.valueOf(check2))) {
                         veryImportantBullets[i]=cursor.getString(cursor.getColumnIndex(INPUT_COLUMN_Title));
                     }
@@ -377,15 +381,11 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
         return s.replace("null","");
     }
 
-    String getMonthForInt(int num) {
-        String month = "";
-        DateFormatSymbols dfs = new DateFormatSymbols();
-        String[] months = dfs.getMonths();
-        if (num >= 0 && num <= 11 ) {
-            month = months[num];
-        }
-        return month;
-        }
+    public String monthName(int i){
+        String months1[]=new String[13];
+        months1 = new String[]{"","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return months1[i];
+    }
 
 
 

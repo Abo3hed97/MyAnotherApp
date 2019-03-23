@@ -1,6 +1,7 @@
 package com.example.user.myanotherapp;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import java.util.List;
 public class CustomAdapterFuture extends ArrayAdapter<String> {
     String veryImportnatBulletsList[];
     ArrayList<String> monthsList;
-    public CustomAdapterFuture(FutureLogActivity context, ArrayList<String> months, String[] veryImpBullets) {
+    public CustomAdapterFuture(FutureLogActivity context, ArrayList<String> months, String veryImpBullets[]) {
         super(context, R.layout.customrowf, months);
         this.veryImportnatBulletsList=veryImpBullets;
         this.monthsList=months;
@@ -41,7 +42,6 @@ public class CustomAdapterFuture extends ArrayAdapter<String> {
             veryImportantView.setTextSize(20);
             veryImportantView.setText(veryImportantBullet);
         }
-        else{((ViewGroup) veryImportantView.getParent()).removeView(veryImportantView);}
         return customView;
     }
 }

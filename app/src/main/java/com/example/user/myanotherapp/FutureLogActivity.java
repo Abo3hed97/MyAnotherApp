@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.user.myanotherapp.Mysql.Dataimport;
 
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
@@ -27,6 +30,8 @@ public class FutureLogActivity extends AppCompatActivity {
     ArrayList<String> monthsList;
     ArrayAdapter<String> arrayAdapter;
     ExampleDBHelper exampleDBHelper=new ExampleDBHelper(this);
+
+    Dataimport dataimport = new Dataimport();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +48,8 @@ public class FutureLogActivity extends AppCompatActivity {
         //Set up the Months
         monthsOfYear=findViewById(R.id.listofMonthsinYear);
         monthsList=new ArrayList<String>(Arrays.asList(new DateFormatSymbols().getMonths()));
-        String[] veryImportantData= null;
-        try {
-            veryImportantData = exampleDBHelper.getVeryImportantBullets(monthsList,currentYear);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        String veryImportantData[];
+        veryImportantData = dataimport.getVeryImportantBullets(monthNumbers(),currentYear);
         arrayAdapter=new CustomAdapterFuture(this,monthsList,veryImportantData);
         monthsOfYear.setAdapter(arrayAdapter);
         //End
@@ -60,6 +61,14 @@ public class FutureLogActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 goToMonthlyLog(position);
+            }
+        });
+
+        Button button=findViewById(R.id.goToCalendar);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToCalendar();
             }
         });
 
@@ -75,7 +84,19 @@ public class FutureLogActivity extends AppCompatActivity {
 
 
 
+    public void  goToCalendar(){
+        Intent intent=new Intent(this,CalendarActivity.class);
+        startActivity(intent);
+    }
 
+
+    public ArrayList<Integer> monthNumbers(){
+       ArrayList<Integer> monthNumbers=new ArrayList<>();
+       for(int i=0;i<12;i++){
+           monthNumbers.add(i+1);
+       }
+       return monthNumbers;
+    }
 
 
 

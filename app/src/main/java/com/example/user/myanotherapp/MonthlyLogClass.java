@@ -1,17 +1,13 @@
 package com.example.user.myanotherapp;
 
 import android.util.Log;
-import android.widget.ArrayAdapter;
-
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
 public class MonthlyLogClass {
 
 
@@ -67,15 +63,13 @@ public class MonthlyLogClass {
 
 
 
-    /**
-     * With help of this function,we can get the Daily Log of the selected Day in monthly Log
+    /*get the Daily Log of the selected Day in monthly Log
      * and this can be achivied with Help of three Days.
-     *
      * @param selectedDay is the Selected Day of MonthlyLog.
      * @throws ParseException when anything gets wrong during the Parsing Proecss.
      */
     public void navigateToSearchedDailyLog(int selectedDay) throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date1 = formatter.parse(DailyLogActivity.days.get(0));
         assignToInstance();
         calendar1.set(Calendar.DATE, selectedDay);
@@ -175,7 +169,7 @@ public class MonthlyLogClass {
      * @return the day after it got converted to String.
      */
     public String convertFromCalToStr(Calendar day) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(day.getTime());
 
     }
@@ -215,7 +209,7 @@ public class MonthlyLogClass {
      */
     public void getDaysInInteger() {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal=Calendar.getInstance();
         if(cal.get(Calendar.MONTH)+1==MonthlyLog.month&&(cal.get(Calendar.YEAR)==MonthlyLog.year)) {
             int n = -(cal.get(Calendar.DAY_OF_MONTH));

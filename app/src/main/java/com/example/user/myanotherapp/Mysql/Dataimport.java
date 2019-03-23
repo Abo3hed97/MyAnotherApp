@@ -1,6 +1,8 @@
 package com.example.user.myanotherapp.Mysql;
 
-import android.widget.Toast;
+
+import android.database.Cursor;
+import android.util.Log;
 
 import com.example.user.myanotherapp.MainActivity;
 import com.jcraft.jsch.JSch;
@@ -11,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,19 +27,18 @@ public class Dataimport {
     private static final String DB = "ak18a";
     private static final String DB_USER = "ak18a";
     private static final String DB_PASS = "doh2ahMa";
-    private static final String URL = "jdbc:mysql://" + REMOTE_HOST +":" + LOCAL_PORT + "/";
+    private static final String URL = "jdbc:mysql://" + REMOTE_HOST + ":" + LOCAL_PORT + "/";
     List<Bullet> bulletList = new ArrayList<Bullet>();
     int userID = MainActivity.userID;
     public static String conError;
 
-    public String connectToDBServer(){
+    public String connectToDBServer() {
         String user = "ak18a";
         String password = "u0k(1NtwKp";
         String host = "pcai042.informatik.uni-leipzig.de";
         String tt = null;
-        int port=22;
-        try
-        {
+        int port = 22;
+        try {
             JSch jsch = new JSch();
             session = jsch.getSession(user, host, port);
             session.setPassword(password);
@@ -46,8 +48,7 @@ public class Dataimport {
             tt = "Establshing conncation";
             int assinged_port = session.setPortForwardingL(LOCAL_PORT, REMOTE_HOST, REMOTE_PORT);
             //System.out.println("localhost:"+assinged_port+" -> "+rhost+":"+rport);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.err.print(e);
             conError = "Please check Your Internet connection";
         }
@@ -63,10 +64,10 @@ public class Dataimport {
 
             Class.forName(DRIVER);
             con = DriverManager.getConnection(URL + DB, DB_USER, DB_PASS);
-            String query = "" + "SELECT * FROM User where email='"+MainActivity.userEmail +"'";
+            String query = "" + "SELECT * FROM User where email='" + MainActivity.userEmail + "'";
             PreparedStatement st = con.prepareStatement(query);
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 userDB = new UserOnline(rs.getInt("userID"),
                         rs.getString("username"),
                         rs.getString("password"),
@@ -85,9 +86,9 @@ public class Dataimport {
             }*/
 
 
-        } catch (ClassNotFoundException cnfEx){
+        } catch (ClassNotFoundException cnfEx) {
             cnfEx.printStackTrace();
-        } catch (SQLException sqlEx){
+        } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
         return userDB;
@@ -101,7 +102,7 @@ public class Dataimport {
 
             Class.forName(DRIVER);
             con = DriverManager.getConnection(URL + DB, DB_USER, DB_PASS);
-            String query = "" + "SELECT * FROM Bullet where userID="+userID;
+            String query = "" + "SELECT * FROM Bullet where userID=" + userID;
             PreparedStatement st = con.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             bulletDB = new ArrayList<>();
@@ -122,12 +123,13 @@ public class Dataimport {
                         )
                 );
             }
-            con.close();con.close();
+            con.close();
+            con.close();
 
 
-        } catch (ClassNotFoundException cnfEx){
+        } catch (ClassNotFoundException cnfEx) {
             cnfEx.printStackTrace();
-        } catch (SQLException sqlEx){
+        } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
         return bulletDB;
@@ -135,35 +137,71 @@ public class Dataimport {
     }
 
     public ArrayList<ArrayList<String>> getData(ArrayList<String> d) {
-        ArrayList<ArrayList<String>> b=new ArrayList<>();
-
-
+        ArrayList<ArrayList<String>> b = new ArrayList<>();
         for (int i = 0; i < d.size(); i++) {
-            ArrayList<String> k=new ArrayList<>();
-
-
-            for(Bullet bullet:importDataBullet()) {
-
+            ArrayList<String> k = new ArrayList<>();
+            for (Bullet bullet : importDataBullet()) {
                 String check = bullet.getDateFrom();
-
                 if (d.get(i).equals(check)) {
 
                     k.add(bullet.getTitle());
                 }
-
-
             }
             b.add(k);
         }
-
-
-
-
         return b;
+    }
 
 
+    public ArrayList<ArrayList<String>> getImportantBullets(ArrayList<String> daysofMonths) throws ParseException {
+        ArrayList<ArrayList<String>> importantBullets = new ArrayList<>();
+        for (int i = 0; i < daysofMonths.size(); i++) {
+            ArrayList<String> importantBulletsforDay = new ArrayList<>();
+            for (Bullet bullet : importDataBullet()) {
+                String check1 = bullet.getDateFrom();
+                String check2 = String.valueOf(bullet.getImportance());
+                if (daysofMonths.get(i).equals(check1) && check2.equals("1")) {
+                    importantBulletsforDay.add(bullet.getTitle());
+                }
+            }
+            importantBullets.add(importantBulletsforDay);
+        }
+        return importantBullets;
     }
 
 
 
+
+    public String[] getVeryImportantBullets(ArrayList<Integer> monthNumbers,int currentYear){
+    String veryImportnatBullets[]=new String[12];
+    for(int i=0;i<12;i++){
+        for(Bullet bullet:importDataBullet()){
+            String check1=String.valueOf(bullet.getImportance());
+            Log.i("Importance",String.valueOf(bullet.getImportance()));
+            StringBuilder check2=new StringBuilder(bullet.getDateFrom().substring(5,7));
+            if(check2.charAt(0)=='0'){
+                check2=check2.deleteCharAt(0);
+            }
+            Log.i(String.valueOf(monthNumbers.get(i)),check2.toString());
+            Log.i("Booooooooolean",String.valueOf(check2.toString().equals(String.valueOf(monthNumbers.get(i)))));
+            if(check2.toString().equals(String.valueOf(monthNumbers.get(i)))&&check1.equals("2")){
+                veryImportnatBullets[i]=(bullet.getTitle());
+                Log.i("Helllllllllllllllo",bullet.getTitle());
+            }
+        }
+    }
+
+       return veryImportnatBullets;
+    }
+
 }
+
+
+
+
+
+
+
+
+
+

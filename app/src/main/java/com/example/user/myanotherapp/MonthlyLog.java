@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.user.myanotherapp.Mysql.Dataimport;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -77,6 +79,9 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
     Button futureLog;
     static TextView firstImp;
 
+
+    Dataimport dataimport = new Dataimport();
+
    static int year=Calendar.getInstance().get(Calendar.YEAR);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +98,8 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
        // monthNumber=Calendar.getInstance().get(Calendar.MONTH);
         String currentMonth;
-
-             currentMonth = monthName(month).concat("-").concat(String.valueOf(year));
-             mothName.setText(currentMonth);
+        currentMonth = monthName(month).concat("-").concat(String.valueOf(year));
+        mothName.setText(currentMonth);
         //End
 
 
@@ -307,7 +311,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
         ArrayAdapter<String>AdapterforImportantBullets;
         if(!dBMonthDays.isEmpty()){dBMonthDays.clear();}
         mlc.getDaysInInteger();
-        importantBullets=dBHelper.getImportantBullets(dBMonthDays);
+        importantBullets=dataimport.getImportantBullets(dBMonthDays);
         AdapterforImportantBullets=new CustomAdapterMonth(this,daysofMonth,importantBullets);
         monthdaysListView.setAdapter(AdapterforImportantBullets);
 
