@@ -1,11 +1,17 @@
 package com.example.user.myanotherapp.Mysql;
 
+/**
+ * Structured like the User Table from database.
+ */
 public class UserOnline {
     private int uId;
     private String username;
     private String password;
     private String email;
 
+    /**
+     * User to export user data to database
+     */
     public UserOnline()
     {
         this.uId = 0;
@@ -14,6 +20,10 @@ public class UserOnline {
         this.email = "";
 
     }
+
+    /**
+     * Userd for importing user data from database
+     */
     public UserOnline(int uId,String username,String password,String email)
     {
         this.uId = uId;
