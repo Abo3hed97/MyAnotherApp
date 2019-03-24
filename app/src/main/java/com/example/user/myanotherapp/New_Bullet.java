@@ -9,43 +9,59 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.myanotherapp.Mysql.Bullet;
 import com.example.user.myanotherapp.Mysql.Dataexporter;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-
+/**
+ * Used to make a new Bullet
+ */
 public class New_Bullet extends FragmentActivity {
+    /**
+     * EditText to get Date from user
+     */
     static EditText DateEdit_From;
-    static EditText TimeEdit_From;
     static EditText DateEdit_To;
+    /**
+     * EditText to get Time from user
+     */
+    static EditText TimeEdit_From;
     static EditText TimeEdit_To;
+    /**
+     * Type of Bullet
+     */
     Spinner type;
-    Spinner months;
-    TextView displayTextView;
-    String spinnerType;
+    /**
+     * new TimePickerFragment object
+     */
     DialogFragment TimeFragment = new TimePickerFragment();
+    /**
+     * new DatePickerFragment object
+     */
     DialogFragment DateFragment = new DatePickerFragment();
-    ListView mobile_list;
-    ArrayList<HashMap<String, String>> dataList = new ArrayList<HashMap<String, String>>();
     ExampleDBHelper db;
+    /**
+     * EditText to get Title from user
+     */
     EditText n_title;
+    /**
+     * EditText to get text from user
+     */
     EditText n_text;
-    RadioGroup radioGroup;
+    /**
+     * RadioButton to get the importance
+     */
     RadioButton nImp;
     RadioButton Imp;
     RadioButton vImp;
-    String title, text, dateFrom, dateTo, timeFrom, timeTo, typ,monthS;
+    /**
+     * Saving the user input in Strings
+     */
+    String title, text, dateFrom, dateTo, timeFrom, timeTo, typ;
     int imp=0;
-    int vimp=0;
     public static SharedPreferences pref;
     Dataexporter dataexporter = new Dataexporter();
     Bullet bullet = new Bullet();
@@ -64,9 +80,10 @@ public class New_Bullet extends FragmentActivity {
         Imp = findViewById(R.id.imp);
         vImp = findViewById(R.id.vimp);
         type = findViewById(R.id.Type);
-        months = findViewById(R.id.months);
         DateFragment = new DatePickerFragment();
-        months.setVisibility(View.INVISIBLE);
+        /**
+         * On click showing DatePickerDialog
+         */
 
 
         DateEdit_From.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +94,9 @@ public class New_Bullet extends FragmentActivity {
 
             }
         });
+        /**
+         * on click showing TimePickerDialog
+         */
         TimeEdit_From.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +104,9 @@ public class New_Bullet extends FragmentActivity {
 
             }
         });
+        /**
+         * On click showing DatePickerDialog
+         */
 
         DateEdit_To.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +116,9 @@ public class New_Bullet extends FragmentActivity {
 
             }
         });
+        /**
+         * on click showing TimePickerDialog
+         */
         TimeEdit_To.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,26 +126,24 @@ public class New_Bullet extends FragmentActivity {
 
             }
         });
-
-
-
-
+        /**
+         * Setting the Sinner item
+         */
         ArrayAdapter<String> types = new ArrayAdapter<String>(this,
                 R.layout.spinner_item, getResources().getStringArray(R.array.type));
         types.setDropDownViewResource(R.layout.spinner_item);
         type.setAdapter(types);
 
 
-        ArrayAdapter<String> month = new ArrayAdapter<>
-                (this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.months));
-        month.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        months.setAdapter(month);
         // EditText
 
         db = new ExampleDBHelper(getApplicationContext());
         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
 
         Button clickButton = findViewById(R.id.save);
+        /**
+         * On click get the user input and save it to the database
+         */
         clickButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -131,13 +155,29 @@ public class New_Bullet extends FragmentActivity {
                 timeFrom = TimeEdit_From.getText().toString();
                 timeTo = TimeEdit_To.getText().toString();
                 typ = type.getSelectedItem().toString();
-                monthS = months.getSelectedItem().toString();
+                if (dateTo.length() == 0)
+                {
+                    dateTo = dateFrom;
+
+                }
+                if (timeFrom.length() == 0 || timeTo.length() == 0)
+                {
+                    timeFrom = "00:00:00";
+                    timeTo = "00:00:00";
+                }
 
 
                 if (title.length() == 0 || text.length() == 0) {
                     Toast.makeText(getApplicationContext(), "title or text box is empty !!!",
                             Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else if(dateFrom.length()==0)
+                {
+                    Toast.makeText(getApplicationContext(), "Date From can't be empty",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                else {
                     bullet.setTitle(title);
                     bullet.setContent(text);
                     bullet.setDateFrom(dateFrom);
@@ -179,11 +219,10 @@ public class New_Bullet extends FragmentActivity {
         TimeFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
+
     public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
 
-        // Check which radio button was clicked
         switch (view.getId()) {
             case R.id.nimp:
                 if (checked)
@@ -195,7 +234,6 @@ public class New_Bullet extends FragmentActivity {
                     n_title.setVisibility(View.VISIBLE);
                     n_text.setVisibility(View.VISIBLE);
                     type.setVisibility(View.VISIBLE);
-                    months.setVisibility(View.INVISIBLE);
                     imp = 0;
 
                 }
@@ -210,7 +248,6 @@ public class New_Bullet extends FragmentActivity {
                     type.setVisibility(View.VISIBLE);
                     n_title.setVisibility(View.VISIBLE);
                     n_text.setVisibility(View.VISIBLE);
-                    months.setVisibility(View.VISIBLE);
                     imp = 1;
 
                 }
@@ -225,22 +262,12 @@ public class New_Bullet extends FragmentActivity {
                     type.setVisibility(View.VISIBLE);
                     n_title.setVisibility(View.VISIBLE);
                     n_text.setVisibility(View.VISIBLE);
-                    months.setVisibility(View.VISIBLE);
                     imp = 2;
                 }
                     break;
 
 
         }
-    /*public void BokaBoka(View view) {
-        spinnerType = type.getSelectedItem().toString();
-        Toast toast = Toast.makeText(getApplicationContext(),
-                DateEdit_From.getText(),
-                Toast.LENGTH_LONG);
-
-        toast.show();
-
-    }*/
 
     }
 }

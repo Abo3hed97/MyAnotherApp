@@ -225,9 +225,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        if (dataexporter.checkUser(textInputEditTextName.getText().toString().trim(),
-                textInputEditTextEmail.getText().toString().trim()))
-        {
+
             String hashedPw=  BCrypt.hashpw(textInputEditTextPassword.getText().toString(),BCrypt.gensalt());
 
 
@@ -246,12 +244,7 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
 
 
-        } else {
 
-            Toast tost = new Toast(this);
-            Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_LONG).show();
-
-        }
 
 
     }

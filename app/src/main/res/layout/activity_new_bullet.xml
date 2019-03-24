@@ -155,16 +155,5 @@
             android:textColor="@color/white" />
     </RadioGroup>
 
-    <Spinner
-        android:id="@+id/months"
-        android:layout_width="154dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/radio"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>
