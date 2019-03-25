@@ -65,7 +65,7 @@ public class FutureLogActivity extends AppCompatActivity {
             }
         });
 
-        Button button=findViewById(R.id.goToCalendar);
+        Button button=findViewById(R.id.goToCalendarFromFutureLog);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

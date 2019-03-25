@@ -189,7 +189,7 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
 
         //navigate to Future Log
-        futureLog=findViewById(R.id.goToFutureLog);
+        futureLog=findViewById(R.id.goToFutureLogFromMonthlyLog);
         futureLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -31,6 +31,9 @@ public class Dataimport {
     List<Bullet> bulletList = new ArrayList<Bullet>();
     int userID = MainActivity.userID;
     public static String conError;
+    static List<Bullet> bulletDB;
+    static List<Bullet> importantBulletDB;
+    static List<Bullet> veryImportantBulletDB;
 
     /**
      * Establishes DB connection to praktikum server
@@ -96,9 +99,9 @@ public class Dataimport {
      * @return List of Bullet Objects.
      */
 
-    public List<Bullet> importDataBullet() {
+    public void importDataBullet() {
         Connection con;
-        List<Bullet> bulletDB = null;
+        bulletDB = null;
         try {
 
             Class.forName(DRIVER);
@@ -133,7 +136,6 @@ public class Dataimport {
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
-        return bulletDB;
 
     }
 
@@ -144,13 +146,13 @@ public class Dataimport {
      */
 
     public ArrayList<ArrayList<String>> getData(ArrayList<String> d) {
+        importDataBullet();
         ArrayList<ArrayList<String>> b = new ArrayList<>();
         for (int i = 0; i < d.size(); i++) {
             ArrayList<String> k = new ArrayList<>();
-            for (Bullet bullet : importDataBullet()) {
+            for (Bullet bullet : bulletDB) {
                 String check = bullet.getDateFrom();
                 if (d.get(i).equals(check)) {
-
                     k.add(bullet.getTitle());
                 }
             }
@@ -169,13 +171,13 @@ public class Dataimport {
      * @throws ParseException
      */
     public ArrayList<ArrayList<String>> getImportantBullets(ArrayList<String> daysofMonths) throws ParseException {
+        importantBulletDb();
         ArrayList<ArrayList<String>> importantBullets = new ArrayList<>();
         for (int i = 0; i < daysofMonths.size(); i++) {
             ArrayList<String> importantBulletsforDay = new ArrayList<>();
-            for (Bullet bullet : importDataBullet()) {
-                String check1 = bullet.getDateFrom();
-                String check2 = String.valueOf(bullet.getImportance());
-                if (daysofMonths.get(i).equals(check1) && check2.equals("1")) {
+            for (Bullet bullet : importantBulletDB) {
+                String check = bullet.getDateFrom();
+                if (daysofMonths.get(i).equals(check)) {
                     importantBulletsforDay.add(bullet.getTitle());
                 }
             }
@@ -188,10 +190,10 @@ public class Dataimport {
 
 
     public String[] getVeryImportantBullets(ArrayList<Integer> monthNumbers,int currentYear){
+    veryImportantBullets();
     String veryImportnatBullets[]=new String[12];
     for(int i=0;i<12;i++){
-        for(Bullet bullet:importDataBullet()){
-            String check1=String.valueOf(bullet.getImportance());
+        for(Bullet bullet:veryImportantBulletDB){
             Log.i("Importance",String.valueOf(bullet.getImportance()));
             StringBuilder check2=new StringBuilder(bullet.getDateFrom().substring(5,7));
             if(check2.charAt(0)=='0'){
@@ -199,24 +201,49 @@ public class Dataimport {
             }
             Log.i(String.valueOf(monthNumbers.get(i)),check2.toString());
             Log.i("Booooooooolean",String.valueOf(check2.toString().equals(String.valueOf(monthNumbers.get(i)))));
-            if(check2.toString().equals(String.valueOf(monthNumbers.get(i)))&&check1.equals("2")&&bullet.getDateFrom().substring(0,4).equals(String.valueOf(currentYear))){
+            if(check2.toString().equals(String.valueOf(monthNumbers.get(i)))&&bullet.getDateFrom().substring(0,4).equals(String.valueOf(currentYear))){
                 veryImportnatBullets[i]=(bullet.getTitle());
                 Log.i("Helllllllllllllllo",bullet.getTitle());
             }
         }
     }
-
        return veryImportnatBullets;
     }
 
+
+
+
+    public void importantBulletDb(){
+       importantBulletDB=null;
+       importantBulletDB=new ArrayList<>();
+       importDataBullet();
+       for(Bullet bullet:bulletDB){
+           if(bullet.getImportance()==1){
+               importantBulletDB.add(bullet);
+           }
+       }
+    }
+
+
+
+ public void veryImportantBullets(){
+    veryImportantBulletDB=null;
+    veryImportantBulletDB=new ArrayList<>();
+    importDataBullet();
+    for(Bullet bullet:bulletDB){
+        if(bullet.getImportance()==2){
+            veryImportantBulletDB.add(bullet);
+        }
+    }
+ }
+
+
+
+
+
+
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
