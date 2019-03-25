@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bckground"
     tools:context=".MonthlyLog">
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -68,6 +69,7 @@
         android:layout_width="328dp"
         android:layout_height="356dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/bckground"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
