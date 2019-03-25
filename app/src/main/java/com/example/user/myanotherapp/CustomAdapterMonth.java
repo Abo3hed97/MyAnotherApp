@@ -47,7 +47,7 @@ public class CustomAdapterMonth extends ArrayAdapter<String> {
             //String day=d.get(position);
             if (currentDate().equals(day)) {
                 //convert from Hexdecimal Value to Integer Value.
-                int valueOfColor1 = Color.parseColor("#1f214b");
+                int valueOfColor1 = Color.parseColor("#D2842D");
                 //set the Orange Color.
                  dayofMonth.setTextColor(valueOfColor1);
                  dayofMonth.setText(day);

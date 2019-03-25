@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@drawable/bckground"
     tools:context=".MainActivity"
     >
 
@@ -46,7 +47,7 @@
             android:id="@+id/textInputEditTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="E-Mail"
+            android:hint="Username"
             android:textColor="@color/colorPrimary"
             android:textSize="8pt" />
     </android.support.design.widget.TextInputLayout>

@@ -1,82 +1,111 @@
 package com.example.user.myanotherapp;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-/*import org.springframework.security.crypto.bcrypt.*;*/
-
 import com.example.user.myanotherapp.Mysql.Dataimport;
-import com.example.user.myanotherapp.Mysql.MysqlTest;
-import com.example.user.myanotherapp.Mysql.UserOnline;
+
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Start Activity (Login page)
+ */
 public class MainActivity extends AppCompatActivity {
-
-    private TextInputLayout textInputLayoutEmail;
-    private TextInputLayout textInputLayoutPassword;
-
-    private TextInputEditText textInputEditTextEmail;
-    private TextInputEditText textInputEditTextPassword;
-
-    private TextView textViewLinkRegister;
-
-    private InputValidation inputValidation;
-    private ExampleDBHelper databaseHelper;
-    private Button loginB;
-    boolean i = false;
-    Dataimport dataimport= new Dataimport();
-    List<UserOnline> user2 = new ArrayList<UserOnline>();
+    /**
+     * To save the userID and us it in Dataimport class
+     */
     public static int userID;
-    public static String userEmail;
-
+    /**
+     * To save the username and us it in Dataimport class
+     */
+    public static String userName;
+    /**
+     * used in check method if it's true the username and password are true
+     */
+    boolean i = false;
+    /**
+     * new Dataimport object
+     */
+    Dataimport dataimport= new Dataimport();
+    /**
+     * used to show an error message if the Username not valid
+     */
+    private TextInputLayout textInputLayoutEmail;
+    /**
+     * used to show an error message if the password is wrong
+     */
+    private TextInputLayout textInputLayoutPassword;
+    /**
+     * used to get the username from user
+     */
+    private TextInputEditText textInputEditTextEmail;
+    /**
+     * used to get the password from user
+     */
+    private TextInputEditText textInputEditTextPassword;
+    /**
+     * linke to register page
+     */
+    private TextView textViewLinkRegister;
+    /**
+     * New InputValidation object
+     */
+    private InputValidation inputValidation;
+    /**
+     * new ExampleDBHelper object
+     */
+    private ExampleDBHelper databaseHelper;
+    /**
+     * Login Button
+     */
+    private Button loginB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /**
+         * allowing the app to connect to the internet using JDBC
+         */
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        /**
+         * Connecting to uni Server
+         */
         dataimport.connectToDBServer();
-        Toast tost = new Toast(this);
-        Toast.makeText(getApplicationContext(), Dataimport.conError, Toast.LENGTH_LONG).show();
         databaseHelper = new ExampleDBHelper(this);
         inputValidation = new InputValidation(this);
         loginB= findViewById(R.id.BLogin);
         textViewLinkRegister = findViewById(R.id.newAccount);
-
-       // Activity dailyLog=new DailyLogActivity();
-        //Onclick(loginB,dailyLog);
-
+        /**
+         * clicking the Login Button
+         */
 
         loginB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //verifyFromSQLite();
                 checkUser();
 
             }
         });
+        /**
+         * clicking the textViewLingRegister
+         */
         textViewLinkRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
+                 * new Intent to go to register page
+                 */
                 Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intentRegister);
             }
@@ -86,49 +115,11 @@ public class MainActivity extends AppCompatActivity {
         textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
         textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
         textInputEditTextPassword = findViewById(R.id.textInputEditTextPassword);
-        /*test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                opentest();
-
-            }
-        });*/
-
     }
 
-   /* public void Onclick(Button b, final Activity activity)
-    {
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDailyLog(activity);
-            }
-        });
-    }
-
-    public void openDailyLog(Activity activity)
-    {
-        Intent intent=new Intent(this,activity.getClass());
-        startActivity(intent);
-    }*/
-
-   /* public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.BLogin:
-                verifyFromSQLite();
-                break;
-            case R.id.newAccount:
-                // Navigate to RegisterActivity
-                Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intentRegister);
-                break;
-        }
-    }*/
-
-
-
-
-
+    /**
+     * Used to check if the username and password is valid from Offline database
+     */
     private void verifyFromSQLite() {
         if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, "Enter Valid Email")) {
             return;
@@ -156,13 +147,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Wrong Email or Password", Toast.LENGTH_LONG).show();
         }
     }
+
+    /**
+     * Used to check if the username and password is valid from online database
+     */
     public void checkUser ()
     {
-        userEmail = textInputEditTextEmail.getText().toString();
+        userName = textInputEditTextEmail.getText().toString();
         if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, "Enter Valid Email")) {
-            return;
-        }
-        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, "Enter Valid Email")) {
             return;
         }
         if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, "Enter Valid Email")) {
@@ -173,8 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String hash_php = dataimport.importDataUser().getPassword().replaceFirst("2y", "2a");
                 boolean b = BCrypt.checkpw(textInputEditTextPassword.getText().toString(), hash_php);
-                if (dataimport.importDataUser().getEmail().equals(textInputEditTextEmail.getText().toString())&&b==true) {
-                    //current.getPassword().equals(textInputEditTextPassword.getText().toString())
+                if (dataimport.importDataUser().getUsername().equals(textInputEditTextEmail.getText().toString())&&b==true) {
                     userID=dataimport.importDataUser().getuId();
                     Intent accountsIntent = new Intent(this, DailyLogActivity.class);
                     emptyInputEditText();
@@ -204,8 +195,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void goTo(View view) {
-        Intent intent = new Intent(this, MysqlTest.class);
-        startActivity(intent);
-    }
+
 }

@@ -17,9 +17,11 @@
     <string name="settingsF">ListView</string>
     <string name="ActivitySettings">ListView</string>
     <string-array name="type">
-        <item>event</item>
         <item>appointment</item>
-        <item>note</item>
+        <item>Deadline</item>
+        <item>Event</item>
+        <item>Note</item>
+        <item>Task</item>
     </string-array>
     <string-array name="months">
         <item>January</item>

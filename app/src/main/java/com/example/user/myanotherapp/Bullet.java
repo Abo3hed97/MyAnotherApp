@@ -1,5 +1,8 @@
 package com.example.user.myanotherapp;
 
+/**
+ * Bullet Class that works with the Ofline database.
+ */
 public class Bullet {
     private String id;
     private String uid;

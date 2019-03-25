@@ -38,7 +38,7 @@ public class MysqlTest extends AppCompatActivity {
     }
 
     public void getdata(View view) {
-        BulletAdapter user1 = new BulletAdapter(this, d.bulletList);
+        BulletAdapter user1 = new BulletAdapter(this, d.importDataBullet());
         listView.setAdapter(user1);
     }
 

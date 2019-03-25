@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,6 +23,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 public class MonthlyLog extends AppCompatActivity implements navigate {
+    //Animation button monthly log
+    Button button3;
+    Animation anim;
     /**
      * With this ListView we can print out the days of the specified Month
      */
@@ -88,6 +93,9 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monthly_log);
+        button3=(Button) findViewById(R.id.button3);
+        anim= AnimationUtils.loadAnimation(this,R.anim.tran3);
+        button3.setAnimation(anim);
 
          if(month==0){
              month=Calendar.getInstance().get(Calendar.MONTH) + 1;

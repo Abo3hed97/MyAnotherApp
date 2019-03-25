@@ -17,12 +17,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+/**
+ * Local Database
+ */
 public class ExampleDBHelper extends SQLiteOpenHelper {
 
 
     public static final String DATABASE_NAME = "SQLiteExample.db";
     private static final int DATABASE_VERSION = 1;
-    //New Bullet Table
+    /**
+     * Bullet Table
+     */
     public static final String INPUT_TABLE_NAME = "input";
     public static final String INPUT_COLUMN_ID = "_id";
     public static final String INPUT_COLUMN_UID = "uid";
@@ -36,16 +42,24 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
     public static final String INPUT_COLUMN_Months = "months";
     public static final String INPUT_COLUMN_Imp = "imp";
     public static final String INPUT_COLUMN_Vimp = "vimp";
-    //Login Table
+    /**
+     * User Table Columns
+     */
     private static final String TABLE_USER = "user";
     private static final String COLUMN_USER_ID = "user_id";
     private static final String COLUMN_USER_NAME = "user_name";
     private static final String COLUMN_USER_EMAIL = "user_email";
     private static final String COLUMN_USER_PASSWORD = "user_password";
+    /**
+     * Creating User Table with sqlite
+     */
 
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
             + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")";
+    /**
+     * Creating Bullet Table with sqlite
+     */
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + INPUT_TABLE_NAME + "(" +
@@ -66,11 +80,23 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
     public ExampleDBHelper(Context context) {
         super(context, DATABASE_NAME , null, DATABASE_VERSION);
     }
+
+    /**
+     * Executing the sql statement with sqlite
+     * @param db object from SQLITEDATABASE Class
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_CREATE);
         db.execSQL(CREATE_USER_TABLE);
     }
+
+    /**
+     * On Upgrade droping the Table and create them again
+     * @param db object from SQLITEDATABASE Class
+     * @param oldVersion old version id
+     * @param newVersion new version id
+     */
 
 
     @Override
@@ -79,6 +105,15 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_USER);
         onCreate(db);
     }
+
+    /**
+     * Inserting data to Bullet Table
+     * Used in monthly Task to insert title text and month
+     * @param title
+     * @param text
+     * @param month
+     * @return
+     */
     public boolean insertPerson(String title,String text,String month) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -90,8 +125,21 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
     }
 
 
-
-
+    /**
+     * Inserting data to Bullet Table
+     * Used In new Bullet to inserd data to all Columns
+     * @param title
+     * @param text
+     * @param dateFrom
+     * @param dateTo
+     * @param timeFrom
+     * @param timeTo
+     * @param type
+     * @param months
+     * @param imp
+     * @param vimp
+     * @return
+     */
     public boolean insertPerson(String title,String text,String dateFrom,String dateTo,
                                 String timeFrom,String timeTo,String type,String months,int imp,int vimp)
     {
@@ -113,7 +161,10 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
     }
 
-
+    /**
+     * getting data from Bullet Table.
+     * @return
+     */
     public Cursor getAllPersons() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery( "SELECT * FROM " + INPUT_TABLE_NAME, null );
@@ -121,13 +172,10 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
     }
 
 
-    public Cursor getPerson(String id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery( "SELECT * FROM " + INPUT_TABLE_NAME + " WHERE " +
-                INPUT_COLUMN_ID + "=?", new String[] { id } );
-        return res;
-    }
-
+    /**
+     * deleting a Bullet from database
+     * @param id
+     */
 
     public void deleteSingleContact(String id){
 
@@ -237,7 +285,13 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
         return cursorCount > 0;
 
     }
-    //Test
+
+    /**
+     * checking if the user already exists
+     * @param email
+     * @param password
+     * @return
+     */
     public boolean checkUser(String email, String password) {
 
         // array of columns to fetch
@@ -270,6 +324,11 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
         return cursorCount > 0;
 
     }
+    /**
+     * Getting Bullet object compere the date to daysList in dailylog and show the Title in the right date in Dailylog
+     * @param d week days
+     * @return List with Bullet titles
+     */
 
 
     public ArrayList<ArrayList<String>> getData(ArrayList<String> d) {
@@ -300,6 +359,15 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
 
     }
+    /**
+     *Getting Bullet object
+     * compere the date to MonthlyList in MonthlyLog
+     * checking if it's important Bullet
+     * and show the Title in the right date in MonthlLog
+     * @param daysofMonths List of Months Days
+     * @return List with Bullet title.
+     * @throws ParseException
+     */
 
     public ArrayList<ArrayList<String>> getImportantBullets(ArrayList<String> daysofMonths) throws ParseException {
         ArrayList<ArrayList<String>> importantBullets=new ArrayList<>();
@@ -325,6 +393,13 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
         }
         return importantBullets;
     }
+    /**
+     * Getting Bullet object
+     * compere the date to FutureLogList in FutureLog
+     * checking if it's Vimportant Bullet
+     * and show the Title in the right date in FurureLog
+     * @return Arry wit vinprtant Bullets title
+     */
 
 
 
@@ -361,25 +436,6 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
     }
 
 
-   /* public Calendar convertToCalendar(String input) throws ParseException {
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        cal.setTime(sdf.parse(input));// all done
-        return cal;
-    }*/
-
-
-
-
-
-
-
-
-    public String delete(String s)
-    {
-
-        return s.replace("null","");
-    }
 
     public String monthName(int i){
         String months1[]=new String[13];
@@ -425,19 +481,6 @@ public class ExampleDBHelper extends SQLiteOpenHelper {
 
 return bullets;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

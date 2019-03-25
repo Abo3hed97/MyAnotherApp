@@ -56,7 +56,6 @@ public class Dataimport {
             //System.out.println("localhost:"+assinged_port+" -> "+rhost+":"+rport);
         } catch (Exception e) {
             System.err.print(e);
-            conError = "Please check Your Internet connection";
         }
         return tt;
     }
@@ -73,7 +72,7 @@ public class Dataimport {
 
             Class.forName(DRIVER);
             con = DriverManager.getConnection(URL + DB, DB_USER, DB_PASS);
-            String query = "" + "SELECT * FROM User where email='" + MainActivity.userEmail + "'";
+            String query = "" + "SELECT * FROM User where username='" + MainActivity.userName + "'";
             PreparedStatement st = con.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -163,7 +162,7 @@ public class Dataimport {
 
     /**
      *Getting Bullet object
-     *  compere the date to MonthlyList in MonthlyLog
+     * compere the date to MonthlyList in MonthlyLog
      * checking if it's important Bullet
      * and show the Title in the right date in MonthlLog
      * @param daysofMonths List of Months Days
@@ -185,6 +184,16 @@ public class Dataimport {
         }
         return importantBullets;
     }
+
+    /**
+     * Getting Bullet object
+     * compere the date to FutureLogList in FutureLog
+     * checking if it's Vimportant Bullet
+     * and show the Title in the right date in FurureLog
+     * @param monthNumbers 12
+     * @param currentYear
+     * @return Arry wit vinprtant Bullets title
+     */
 
 
 
@@ -209,6 +218,11 @@ public class Dataimport {
     }
        return veryImportnatBullets;
     }
+
+    /**
+     * used to delet Bullet
+     * @param id getting Bullet id and deleted from database
+     */
 
 
 

@@ -46,18 +46,7 @@ public class Dataexporter {
      * checking if the user (username and password ) already exists
      * and returning true if the user not exists.
      */
-    public boolean checkUser(String username,String email)
-    {
-        boolean i = true;
 
-            if (dataimport.importDataUser().getUsername().equals(username) ||
-                    dataimport.importDataUser().getEmail().equals(email)) {
-                i= false;
-            }
-
-        return i;
-
-    }
     /**
      * Inserting the data from Bullet object to the database.
      */
