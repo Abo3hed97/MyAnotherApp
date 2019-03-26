@@ -83,6 +83,9 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
 
 
     Button futureLog;
+    Button dailyLog;
+    Button calendar;
+
     static TextView firstImp;
 
 
@@ -206,12 +209,27 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
             }
         });
 
+        dailyLog=findViewById(R.id.goToDailyLogFromMonthlyLog);
+        dailyLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToDailyLog();
+            }
+        });
+        calendar=findViewById(R.id.goToCalendarFroMonthlyLog);
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToCalendar();
+            }
+        });
 
 
 
 
 
-    }//Ed
+
+    }//End
 
 
 
@@ -353,5 +371,22 @@ public class MonthlyLog extends AppCompatActivity implements navigate {
             months1 = new String[]{"","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
             return Arrays.asList(months1).indexOf(monthName);
     }
+
+
+
+    public void moveToDailyLog(){
+        Intent intent=new Intent(this,DailyLogActivity.class);
+        startActivity(intent);
+    }
+
+    public void moveToCalendar(){
+        Intent intent=new Intent(this,CalendarActivity.class);
+        startActivity(intent);
+    }
+
+
+
+
+
 }// End of the Class
 
