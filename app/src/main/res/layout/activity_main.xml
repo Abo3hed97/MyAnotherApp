@@ -101,7 +101,7 @@
 
     <TextView
         android:id="@+id/newAccount"
-        android:layout_width="147dp"
+        android:layout_width="178dp"
         android:layout_height="51dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -111,10 +111,10 @@
         android:textSize="6pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BLogin"
-        app:layout_constraintVertical_bias="0.094" />
+        app:layout_constraintVertical_bias="0.109" />
 
 
 </android.support.constraint.ConstraintLayout>

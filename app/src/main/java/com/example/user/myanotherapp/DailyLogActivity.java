@@ -90,6 +90,9 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
    static String day11;
 
    static ArrayList<String>zusatz;
+
+   Button futureLog;
+   Button calendar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,7 +163,7 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
 
 
         //to go to the Monthly Log
-        monthlyLog=findViewById(R.id.goToMothlyLog);
+        monthlyLog=findViewById(R.id.goToMonthlyLogFromDailyLog);
         monthlyLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,6 +171,24 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
             }
         });
         //End
+
+
+
+        futureLog=findViewById(R.id.goToFutureLogFromDailyLog);
+        futureLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToFutureLog();
+            }
+        });
+
+        calendar=findViewById(R.id.goToCalendarFromDailyLog);
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToCalendar();
+            }
+        });
 
     }//End of the Method
 
@@ -278,6 +299,20 @@ public class DailyLogActivity extends AppCompatActivity implements NavigationVie
         Intent intent=new Intent(this,Settings.class);
         startActivity(intent);
     }
+
+
+
+    public void goToFutureLog(){
+        Intent intent=new Intent(this,FutureLogActivity.class);
+        startActivity(intent);
+    }
+
+
+    public void goToCalendar(){
+        Intent intent=new Intent(this,CalendarActivity.class);
+        startActivity(intent);
+    }
+
 
 
 

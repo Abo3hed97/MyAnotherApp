@@ -57,38 +57,36 @@
         <TextView
             android:id="@+id/textView7"
             android:layout_width="210dp"
-            android:layout_height="62dp"
+            android:layout_height="55dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="serif"
             android:text="@string/daily_Log"
             android:textColor="@color/colorAccent"
             android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.61"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="157dp"
-            android:layout_height="44dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="95dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="8dp"
             android:text="@string/date_dailyLog"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.567"
+            app:layout_constraintHorizontal_bias="0.482"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ListView
             android:id="@+id/weekList"
-            android:layout_width="382dp"
-            android:layout_height="232dp"
+            android:layout_width="332dp"
+            android:layout_height="423dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -97,59 +95,91 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.509"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
-            app:layout_constraintVertical_bias="0.491" />
+            app:layout_constraintVertical_bias="0.392" />
 
         <Button
             android:id="@+id/ForwardButton"
-            style="@style/stylebutton"
-            android:layout_width="60sp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="32dp"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/ic_forward"
-            android:fontFamily="sans-serif"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.479" />
 
         <Button
             android:id="@+id/BackwordButton"
-            style="@style/stylebutton"
-            android:layout_width="60sp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="36dp"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/ic_backword"
-            android:fontFamily="sans-serif"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.479" />
 
 
         <Button
-            android:id="@+id/goToMothlyLog"
-            style="@style/stylebutton"
-            android:layout_width="wrap_content"
-            android:layout_height="59dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="8dp"
+            android:id="@+id/goToFutureLogFromDailyLog"
+            android:layout_width="121dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="128dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/button_color_design"
             android:fontFamily="sans-serif"
-            android:text="MonthlyLog"
-            android:textAllCaps="false"
+            android:text="Future Log"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/ForwardButton"
-            app:layout_constraintStart_toEndOf="@+id/BackwordButton"
-            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+
+        <Button
+            android:id="@+id/goToMonthlyLogFromDailyLog"
+            android:layout_width="134dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="280dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_color_design"
+            android:fontFamily="sans-serif"
+            android:text="Monthly Log"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/goToCalendarFromDailyLog"
+            android:layout_width="97dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_color_design"
+            android:fontFamily="sans-serif"
+            android:text="Calendar"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 
